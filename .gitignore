@@ -1,0 +1,9 @@
+# Node / Dependencies (if any)
+node_modules/
+
+# Logs
+*.log
+
+# OS generated
+.DS_Store
+Thumbs.db

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <rect width="192" height="192" rx="40" fill="#0f172a"/>
+  <circle cx="96" cy="96" r="70" fill="url(#grad)" />
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#16a34a" />
+      <stop offset="100%" stop-color="#10b981" />
+    </linearGradient>
+  </defs>
+  <!-- Leaf Icon -->
+  <path d="M125 65 C95 65, 65 95, 65 125 C95 125, 125 95, 125 65 Z" fill="#ffffff" />
+  <path d="M65 125 Q95 95 125 65" stroke="#166534" stroke-width="6" fill="none" stroke-linecap="round" />
+</svg>
