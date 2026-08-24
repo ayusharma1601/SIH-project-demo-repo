@@ -1,6 +1,6 @@
 /**
  * CarbonSaathi Application State & Logic
- * Mission LiFE Aligned Personal Carbon & Fitness Tracker (Auth First + Verification + PWA)
+ * Mission LiFE Aligned Personal Carbon & Fitness Tracker (Minimalist UI)
  */
 
 // Default Initial User Config
@@ -28,9 +28,9 @@ const DEFAULT_ACCOUNTS = [
     { email: 'rahul@example.com', password: 'Password123', name: 'Rahul Sharma', circle: 'DU North Campus' }
 ];
 
-// Global State (Enforce Login First on App Launch)
+// Global State
 const appState = {
-    isAuthenticated: false, // Always prompt login first before launching dashboard
+    isAuthenticated: false,
     authMode: 'signin',
     accounts: loadAccountsFromLocalStorage(),
     user: loadUserFromLocalStorage(),
@@ -87,11 +87,11 @@ const appState = {
             daysLeft: 3,
             joined: true,
             userDept: "Computer Science",
-            reward: "500 Green PTS + Free Cafeteria Coffee Pass"
+            reward: "500 Green PTS + Free Cafeteria Pass"
         },
         {
             id: 'c2',
-            title: "DMRC Metro Commuter Drive: North Campus vs South Campus",
+            title: "DMRC Metro Drive: North Campus vs South Campus",
             deptA: "DU North Campus",
             deptB: "DU South Campus",
             progressA: 820,
@@ -99,7 +99,7 @@ const appState = {
             target: 1200,
             daysLeft: 5,
             joined: false,
-            reward: "20% Metro Pass Voucher + Mission LiFE Badge"
+            reward: "20% Metro Voucher + Mission LiFE Badge"
         }
     ],
 
@@ -149,9 +149,9 @@ function loadStreamFromLocalStorage() {
         if (saved) return JSON.parse(saved);
     } catch(e) {}
     return [
-        { id: 1, mode: "walking", distance: "2.4 km", co2Saved: "0.34 kg", time: "10 mins ago", confidence: "98% High", verified: true, label: "Library to Hostel Walk" },
-        { id: 2, mode: "metro", distance: "8.5 km", co2Saved: "1.08 kg", time: "2 hours ago", confidence: "DMRC Verified", verified: true, label: "Hauz Khas to Rajiv Chowk" },
-        { id: 3, mode: "shared_auto", distance: "3.0 km", co2Saved: "0.34 kg", time: "Yesterday, 6:30 PM", confidence: "94% High", verified: true, label: "Metro Stn to Gate #3" }
+        { id: 1, mode: "walking", distance: "2.4 km", co2Saved: "0.34 kg", time: "10 mins ago", verified: true, label: "Library to Hostel Walk" },
+        { id: 2, mode: "metro", distance: "8.5 km", co2Saved: "1.08 kg", time: "2 hours ago", verified: true, label: "Hauz Khas to Rajiv Chowk" },
+        { id: 3, mode: "shared_auto", distance: "3.0 km", co2Saved: "0.34 kg", time: "Yesterday, 6:30 PM", verified: true, label: "Metro Stn to Gate #3" }
     ];
 }
 
@@ -178,11 +178,9 @@ function saveCashoutHistoryToLocalStorage() {
     } catch(e) {}
 }
 
-// Chart Instances
 let weeklyCarbonChart = null;
 let modeSplitChart = null;
 
-// Initialize App on DOM Load
 document.addEventListener("DOMContentLoaded", () => {
     lucide.createIcons();
     renderAppViewState();
@@ -192,7 +190,6 @@ document.addEventListener("DOMContentLoaded", () => {
     setupPwaInstallPrompt();
 });
 
-// Render Main App View based on Auth Session
 function renderAppViewState() {
     const authView = document.getElementById('view-auth');
     const appView = document.getElementById('view-app');
@@ -219,7 +216,6 @@ function renderAppViewState() {
     lucide.createIcons();
 }
 
-// Live Input Validation Rules
 function isValidEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email.toLowerCase());
@@ -232,12 +228,10 @@ function validateEmailFieldLive() {
 
     if (val && !isValidEmail(val)) {
         input.classList.add('border-rose-500');
-        input.classList.remove('border-slate-700', 'border-emerald-500');
         errText.classList.remove('hidden');
         return false;
     } else {
         input.classList.remove('border-rose-500');
-        if (val) input.classList.add('border-emerald-500');
         errText.classList.add('hidden');
         return true;
     }
@@ -256,31 +250,17 @@ function validatePasswordFieldLive() {
     }
 
     container.classList.remove('hidden');
-    
-    let strength = 0;
-    if (val.length >= 6) strength += 1;
-    if (/[A-Z]/.test(val) || /[0-9]/.test(val)) strength += 1;
-    if (/[^A-Za-z0-9]/.test(val) && val.length >= 8) strength += 1;
-
     if (val.length < 6) {
         bar.className = "h-full bg-rose-500 w-1/3 transition-all duration-300";
-        text.textContent = "Too short (min 6 chars)";
-        text.className = "text-[10px] text-rose-400 font-semibold";
+        text.textContent = "Min 6 chars";
         return false;
-    } else if (strength === 1) {
-        bar.className = "h-full bg-amber-500 w-2/3 transition-all duration-300";
-        text.textContent = "Moderate password strength";
-        text.className = "text-[10px] text-amber-400 font-semibold";
-        return true;
     } else {
-        bar.className = "h-full bg-emerald-500 w-full transition-all duration-300";
+        bar.className = "h-full bg-[#ff7d00] w-full transition-all duration-300";
         text.textContent = "Strong password!";
-        text.className = "text-[10px] text-emerald-400 font-semibold";
         return true;
     }
 }
 
-// Auth Alert Banner Helper
 function showAuthAlert(msg) {
     const box = document.getElementById('auth-alert-box');
     const msgEl = document.getElementById('auth-alert-msg');
@@ -289,11 +269,9 @@ function showAuthAlert(msg) {
 }
 
 function hideAuthAlert() {
-    const box = document.getElementById('auth-alert-box');
-    box.classList.add('hidden');
+    document.getElementById('auth-alert-box').classList.add('hidden');
 }
 
-// Auth Tab Switching (Sign In vs Sign Up)
 function switchAuthTab(mode) {
     appState.authMode = mode;
     hideAuthAlert();
@@ -303,26 +281,22 @@ function switchAuthTab(mode) {
     const nameField = document.getElementById('field-name-container');
     const circleField = document.getElementById('field-circle-container');
     const btnText = document.getElementById('auth-btn-text');
-    const pwContainer = document.getElementById('password-strength-container');
 
     if (mode === 'signin') {
-        signinBtn.className = "w-1/2 py-2.5 rounded-lg font-bold transition text-emerald-400 bg-slate-800";
-        signupBtn.className = "w-1/2 py-2.5 rounded-lg font-bold transition text-slate-400";
+        signinBtn.className = "w-1/2 py-2 rounded-md font-bold transition text-[#ff7d00] bg-[#1a1a20]";
+        signupBtn.className = "w-1/2 py-2 rounded-md font-bold transition text-gray-400";
         nameField.classList.add('hidden');
         circleField.classList.add('hidden');
-        pwContainer.classList.add('hidden');
         btnText.textContent = "Sign In to CarbonSaathi";
     } else {
-        signupBtn.className = "w-1/2 py-2.5 rounded-lg font-bold transition text-emerald-400 bg-slate-800";
-        signinBtn.className = "w-1/2 py-2.5 rounded-lg font-bold transition text-slate-400";
+        signupBtn.className = "w-1/2 py-2 rounded-md font-bold transition text-[#ff7d00] bg-[#1a1a20]";
+        signinBtn.className = "w-1/2 py-2 rounded-md font-bold transition text-gray-400";
         nameField.classList.remove('hidden');
         circleField.classList.remove('hidden');
         btnText.textContent = "Create Account & Start Tracking";
-        validatePasswordFieldLive();
     }
 }
 
-// Form Auth Submission with Strict Email & Password Verification
 function handleFormAuthSubmit(e) {
     e.preventDefault();
     hideAuthAlert();
@@ -332,34 +306,25 @@ function handleFormAuthSubmit(e) {
     const name = document.getElementById('auth-name').value.trim();
     const circle = document.getElementById('auth-circle').value.trim();
 
-    // 1. Email Format Verification
     if (!isValidEmail(email)) {
-        showAuthAlert("Invalid email address! Please enter a valid format (e.g. user@domain.com)");
-        validateEmailFieldLive();
+        showAuthAlert("Invalid email format!");
         return;
     }
 
-    // 2. Sign Up Flow Verification
     if (appState.authMode === 'signup') {
         if (password.length < 6) {
-            showAuthAlert("Password too weak! Must be at least 6 characters long.");
+            showAuthAlert("Password must be at least 6 chars.");
             return;
         }
 
         const existingAcc = appState.accounts.find(a => a.email.toLowerCase() === email);
         if (existingAcc) {
-            showAuthAlert(`Account with ${email} already exists! Please sign in.`);
+            showAuthAlert(`Account with ${email} already exists!`);
             switchAuthTab('signin');
             return;
         }
 
-        // Create new account record
-        const newAcc = {
-            email: email,
-            password: password,
-            name: name || email.split('@')[0],
-            circle: circle || 'IIT Delhi Campus'
-        };
+        const newAcc = { email, password, name: name || email.split('@')[0], circle: circle || 'IIT Delhi Campus' };
         appState.accounts.push(newAcc);
         saveAccountsToLocalStorage();
 
@@ -371,23 +336,18 @@ function handleFormAuthSubmit(e) {
 
         appState.isAuthenticated = true;
         renderAppViewState();
-        showToast(`Account created successfully! Welcome, ${newAcc.name} 🎉`, "success");
-    } 
-    // 3. Sign In Flow Verification
-    else {
+        showToast(`Welcome to CarbonSaathi, ${newAcc.name}! 🎉`, "success");
+    } else {
         const account = appState.accounts.find(a => a.email.toLowerCase() === email);
-        
         if (!account) {
-            showAuthAlert(`No account found with ${email}. Please create an account.`);
+            showAuthAlert(`No account found for ${email}. Please sign up.`);
             return;
         }
-
         if (account.password !== password) {
-            showAuthAlert("Incorrect password! Please verify your credentials and try again.");
+            showAuthAlert("Incorrect password!");
             return;
         }
 
-        // Credentials Verified!
         appState.user.email = account.email;
         appState.user.realName = account.name;
         if (account.circle) appState.user.circleName = account.circle;
@@ -395,11 +355,10 @@ function handleFormAuthSubmit(e) {
 
         appState.isAuthenticated = true;
         renderAppViewState();
-        showToast(`Verified! Welcome back, ${account.name} 👋`, "success");
+        showToast(`Welcome back, ${account.name}! 👋`, "success");
     }
 }
 
-// Quick SSO Handler (Google / DigiLocker)
 function handleQuickAuth(name, email) {
     appState.user.email = email;
     appState.user.realName = name;
@@ -408,17 +367,15 @@ function handleQuickAuth(name, email) {
 
     appState.isAuthenticated = true;
     renderAppViewState();
-    showToast(`Verified & logged in via SSO as ${name}! 🚀`, "success");
+    showToast(`Logged in via SSO as ${name}! 🚀`, "success");
 }
 
-// Logout Handler
 function handleUserLogout() {
     appState.isAuthenticated = false;
     renderAppViewState();
-    showToast("Signed out. Please sign in to access your dashboard.", "info");
+    showToast("Signed out.", "info");
 }
 
-// Update Personalized UI Elements
 function updatePersonalizedUI() {
     const u = appState.user;
     const activeName = u.isPrivacyOn ? u.pseudonym : u.realName;
@@ -448,14 +405,13 @@ function updatePersonalizedUI() {
     const fuelSavedLiters = (totalMonthCo2 / 2.4).toFixed(1);
     
     document.getElementById('footprint-co2-display').textContent = `${totalMonthCo2} kg CO2`;
-    document.getElementById('footprint-trees-display').textContent = `${treesPlanted} Trees Planted`;
-    document.getElementById('footprint-fuel-display').textContent = `${fuelSavedLiters} Liters Fuel Saved`;
+    document.getElementById('footprint-trees-display').textContent = `${treesPlanted} Trees`;
+    document.getElementById('footprint-fuel-display').textContent = `${fuelSavedLiters} L`;
 
     appState.activeLeaderboardCat = u.circleCategory || "college";
     switchLeaderboardCategory(appState.activeLeaderboardCat);
 }
 
-// Point Cashout Calculator & Converter
 function updateCashoutCalculation() {
     const slider = document.getElementById('cashout-range');
     if (!slider) return;
@@ -464,7 +420,7 @@ function updateCashoutCalculation() {
     const inrRupees = (points / 10.0).toFixed(2);
 
     document.getElementById('cashout-pts-display').textContent = `${points} PTS`;
-    document.getElementById('cashout-inr-display').textContent = `₹${inrRupees} INR`;
+    document.getElementById('cashout-inr-display').textContent = `₹${inrRupees}`;
     document.getElementById('btn-cashout-rupees').textContent = `₹${inrRupees}`;
 }
 
@@ -474,18 +430,17 @@ function togglePayoutInputs() {
     const inputEl = document.getElementById('payout-address-input');
 
     if (selected === 'upi') {
-        labelEl.textContent = "Enter your VPA / UPI ID (e.g. yourname@upi or mobile@paytm)";
+        labelEl.textContent = "Enter your VPA / UPI ID";
         inputEl.placeholder = "aysha@okicici";
     } else if (selected === 'dmrc') {
-        labelEl.textContent = "Enter DMRC Metro Smart Card Serial Number (10-digits)";
+        labelEl.textContent = "Enter DMRC Smart Card Serial Number";
         inputEl.placeholder = "9284019482";
     } else if (selected === 'amazon') {
-        labelEl.textContent = "Enter Mobile Number registered with Amazon Pay";
+        labelEl.textContent = "Enter Amazon Pay Mobile Number";
         inputEl.placeholder = "+91 98765 43210";
     }
 }
 
-// Execute Cashout / Point Withdrawal Transaction
 function executePointCashout() {
     const slider = document.getElementById('cashout-range');
     const pointsToWithdraw = parseInt(slider.value);
@@ -493,18 +448,18 @@ function executePointCashout() {
     const destinationAddress = addressInput.value.trim();
 
     if (!destinationAddress) {
-        showToast("Please enter your UPI ID or Card/Mobile destination address!", "warning");
+        showToast("Please enter destination address!", "warning");
         return;
     }
 
     if (appState.user.greenPoints < pointsToWithdraw) {
-        showToast(`Insufficient Green Points! You have ${appState.user.greenPoints} PTS. Log trips to earn more!`, "warning");
+        showToast("Insufficient Green Points!", "warning");
         return;
     }
 
     const selectedMethod = document.querySelector('input[name="payout-method"]:checked')?.value || 'upi';
     const inrAmount = `₹${(pointsToWithdraw / 10.0).toFixed(2)}`;
-    const methodNames = { upi: 'UPI (GPay/Paytm)', dmrc: 'DMRC Metro Card', amazon: 'Amazon Pay' };
+    const methodNames = { upi: 'UPI', dmrc: 'DMRC Card', amazon: 'Amazon Pay' };
     
     appState.user.greenPoints -= pointsToWithdraw;
     saveUserToLocalStorage();
@@ -512,7 +467,7 @@ function executePointCashout() {
 
     const newTx = {
         id: `tx-${Date.now()}`,
-        method: methodNames[selectedMethod] || 'UPI Transfer',
+        method: methodNames[selectedMethod] || 'UPI',
         address: destinationAddress,
         amountRupees: inrAmount,
         pointsSpent: pointsToWithdraw,
@@ -525,44 +480,36 @@ function executePointCashout() {
     saveCashoutHistoryToLocalStorage();
     renderCashoutHistory();
 
-    confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 }
-    });
-
-    showToast(`Instant Cashout Success! ${inrAmount} transferred to ${destinationAddress} 🎉`, "success");
+    confetti({ particleCount: 80, spread: 60 });
+    showToast(`Transferred ${inrAmount} to ${destinationAddress} 🎉`, "success");
 }
 
-// Render Transaction History Ledger
 function renderCashoutHistory() {
     const container = document.getElementById('cashout-history-list');
     if (!container) return;
 
     if (appState.cashoutHistory.length === 0) {
-        container.innerHTML = `<div class="text-xs text-slate-500 text-center py-4">No cashout transactions yet. Log trips & convert points to cash!</div>`;
+        container.innerHTML = `<div class="text-xs text-gray-500 text-center py-3">No cashouts yet.</div>`;
         return;
     }
 
     container.innerHTML = appState.cashoutHistory.map(tx => `
-        <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between text-xs">
+        <div class="p-2.5 rounded-lg bg-[#0e0e11] border border-[#24242c] flex items-center justify-between text-xs font-mono-num">
             <div>
-                <div class="font-bold text-white flex items-center gap-1.5">
+                <div class="font-bold text-white flex items-center gap-1">
                     <span>${tx.amountRupees}</span>
-                    <span class="text-[10px] text-emerald-400 font-semibold bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20">${tx.status}</span>
+                    <span class="text-[9px] text-[#ff7d00] bg-[#ff7d00]/10 px-1 py-0.2 rounded border border-[#ff7d00]/20">${tx.status}</span>
                 </div>
-                <div class="text-slate-400 mt-0.5 text-[11px]">${tx.method} • ${tx.address}</div>
-                <div class="text-[10px] text-slate-500 font-mono mt-0.5">${tx.utr}</div>
+                <div class="text-gray-400 text-[10px]">${tx.method} • ${tx.address}</div>
             </div>
             <div class="text-right">
                 <div class="font-bold text-amber-400">-${tx.pointsSpent} PTS</div>
-                <div class="text-[10px] text-slate-500">${tx.time}</div>
+                <div class="text-[9px] text-gray-500">${tx.time}</div>
             </div>
         </div>
     `).join('');
 }
 
-// Profile Customizer Modal Controls
 function openProfileModal() {
     const u = appState.user;
     document.getElementById('prof-name').value = u.realName;
@@ -581,7 +528,6 @@ function closeProfileModal() {
 
 function saveProfileSettings(event) {
     event.preventDefault();
-    
     appState.user.realName = document.getElementById('prof-name').value.trim();
     appState.user.pseudonym = document.getElementById('prof-pseudonym').value.trim();
     appState.user.circleCategory = document.getElementById('prof-circle-cat').value;
@@ -592,120 +538,69 @@ function saveProfileSettings(event) {
     saveUserToLocalStorage();
     updatePersonalizedUI();
     closeProfileModal();
-
-    showToast("Profile personalized & saved to local storage! ✨", "success");
+    showToast("Profile saved!", "success");
 }
 
-function resetToDefaultProfile() {
-    if (confirm("Reset profile and goals to defaults?")) {
-        appState.user = { ...DEFAULT_USER_CONFIG };
-        saveUserToLocalStorage();
-        updatePersonalizedUI();
-        closeProfileModal();
-        showToast("Profile reset to defaults.", "info");
-    }
-}
-
-// PWA: Service Worker Registration
 function registerServiceWorker() {
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('./sw.js')
-                .then((registration) => {
-                    console.log('[PWA] ServiceWorker registered with scope:', registration.scope);
-                })
-                .catch((error) => {
-                    console.warn('[PWA] ServiceWorker registration failed:', error);
-                });
+            navigator.serviceWorker.register('./sw.js').catch(() => {});
         });
     }
 }
 
-// PWA: Network Online/Offline Status Indicator
 function setupNetworkListeners() {
     const badge = document.getElementById('network-status-badge');
     if (!badge) return;
 
     function updateStatus() {
         if (navigator.onLine) {
-            badge.className = "px-2 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-[10px] font-semibold flex items-center gap-1";
-            badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span><span class="hidden sm:inline">Online</span>`;
+            badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Network: Online`;
         } else {
-            badge.className = "px-2 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/30 text-[10px] font-semibold flex items-center gap-1";
-            badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-amber-400"></span><span class="hidden sm:inline">Offline Mode</span>`;
-            showToast("You are offline. CarbonSaathi trip logger remains fully active!", "info");
+            badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-amber-400"></span> Network: Offline`;
         }
     }
-
     window.addEventListener('online', updateStatus);
     window.addEventListener('offline', updateStatus);
     updateStatus();
 }
 
-// PWA: Listen for 'beforeinstallprompt'
 function setupPwaInstallPrompt() {
     window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
         appState.deferredPwaPrompt = e;
-
         const installBtn = document.getElementById('pwa-install-btn');
-        if (installBtn) {
-            installBtn.classList.remove('hidden');
-            installBtn.classList.add('flex');
-        }
-    });
-
-    window.addEventListener('appinstalled', () => {
-        const installBtn = document.getElementById('pwa-install-btn');
-        if (installBtn) installBtn.classList.add('hidden');
-        showToast("CarbonSaathi installed successfully on your device! 📱", "success");
+        if (installBtn) installBtn.classList.remove('hidden');
     });
 }
 
 function triggerPwaInstall() {
-    const promptEvent = appState.deferredPwaPrompt;
-    if (!promptEvent) return;
-
-    promptEvent.prompt();
-    promptEvent.userChoice.then((choiceResult) => {
-        appState.deferredPwaPrompt = null;
-        const installBtn = document.getElementById('pwa-install-btn');
-        if (installBtn) installBtn.classList.add('hidden');
-    });
+    if (appState.deferredPwaPrompt) {
+        appState.deferredPwaPrompt.prompt();
+    }
 }
 
-// Navigation Tab Switcher
 function switchTab(tabId) {
     document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
-    document.querySelectorAll('.nav-btn, .mobile-nav-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
 
     const targetTab = document.getElementById(`tab-${tabId}`);
     if (targetTab) targetTab.classList.remove('hidden');
 
     const desktopBtn = document.getElementById(`nav-${tabId}`);
-    const mobileBtn = document.getElementById(`mobile-nav-${tabId}`);
     if (desktopBtn) desktopBtn.classList.add('active');
-    if (mobileBtn) mobileBtn.classList.add('active');
 
     lucide.createIcons();
 }
 
-// Toggle DPDP Act 2023 Pseudonym Privacy Mode
 function togglePrivacyMode() {
     appState.user.isPrivacyOn = !appState.user.isPrivacyOn;
     saveUserToLocalStorage();
     updatePersonalizedUI();
-
-    if (appState.user.isPrivacyOn) {
-        showToast("DPDP Act Privacy Mode ON: Displaying Pseudonym in Leaderboards", "info");
-    } else {
-        showToast("Privacy Mode OFF: Displaying Real Name", "warning");
-    }
-
     renderLeaderboard();
 }
 
-// Render Dashboard Charts with Chart.js
+// Chart.js Configuration with Vibrant Orange & Electric Purple Palette
 function initDashboardCharts() {
     const ctxWeekly = document.getElementById('chart-weekly-carbon')?.getContext('2d');
     if (ctxWeekly) {
@@ -715,16 +610,16 @@ function initDashboardCharts() {
                 labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
                 datasets: [
                     {
-                        label: 'Your Commute CO2 (kg)',
+                        label: 'Your CO2 Saved (kg)',
                         data: [0.3, 0.4, 0.2, 0.5, 0.3, 0.1, 0.2],
-                        backgroundColor: '#22c55e',
-                        borderRadius: 6
+                        backgroundColor: '#ff7d00',
+                        borderRadius: 4
                     },
                     {
-                        label: 'Petrol Car Baseline (kg)',
+                        label: 'Petrol Baseline (kg)',
                         data: [2.1, 2.5, 1.8, 2.8, 2.2, 1.2, 1.5],
-                        backgroundColor: 'rgba(239, 68, 68, 0.3)',
-                        borderRadius: 6
+                        backgroundColor: 'rgba(168, 85, 247, 0.3)',
+                        borderRadius: 4
                     }
                 ]
             },
@@ -732,11 +627,11 @@ function initDashboardCharts() {
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                    legend: { labels: { color: '#94a3b8', font: { size: 11 } } }
+                    legend: { labels: { color: '#9ca3af', font: { size: 10 } } }
                 },
                 scales: {
-                    x: { ticks: { color: '#64748b' }, grid: { display: false } },
-                    y: { ticks: { color: '#64748b' }, grid: { color: 'rgba(51, 65, 85, 0.4)' } }
+                    x: { ticks: { color: '#6b7280' }, grid: { display: false } },
+                    y: { ticks: { color: '#6b7280' }, grid: { color: '#24242c' } }
                 }
             }
         });
@@ -747,65 +642,56 @@ function initDashboardCharts() {
         modeSplitChart = new Chart(ctxSplit, {
             type: 'doughnut',
             data: {
-                labels: ['Walking', 'Metro', 'E-Rickshaw', 'Petrol Car'],
+                labels: ['Walking', 'Metro', 'E-Rick', 'Car'],
                 datasets: [{
                     data: [40, 35, 15, 10],
-                    backgroundColor: ['#22c55e', '#3b82f6', '#2dd4bf', '#f59e0b'],
+                    backgroundColor: ['#ff7d00', '#a855f7', '#34d399', '#f43f5e'],
                     borderWidth: 0
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false }
-                },
-                cutout: '72%'
+                plugins: { legend: { display: false } },
+                cutout: '75%'
             }
         });
     }
 }
 
-// Render Sensor Log Stream
 function renderSensorStream() {
     const listEl = document.getElementById('sensor-log-list');
     if (!listEl) return;
 
     listEl.innerHTML = appState.sensorStream.map(item => `
-        <div class="flex items-center justify-between p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-slate-700 transition text-xs">
-            <div class="flex items-center space-x-3">
-                <div class="w-9 h-9 rounded-lg bg-slate-800 flex items-center justify-center text-lg">
+        <div class="flex items-center justify-between p-2.5 rounded-lg bg-[#0e0e11] border border-[#24242c] text-xs">
+            <div class="flex items-center space-x-2.5">
+                <div class="w-7 h-7 rounded bg-[#1c1c22] flex items-center justify-center text-sm">
                     ${appState.emissionFactors[item.mode]?.emoji || '🚗'}
                 </div>
                 <div>
-                    <div class="font-bold text-white flex items-center gap-1.5">
+                    <div class="font-bold text-white flex items-center gap-1">
                         <span>${item.label}</span>
-                        ${item.verified ? '<span class="text-[10px] text-emerald-400 font-semibold bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20">Verified</span>' : ''}
                     </div>
-                    <div class="text-slate-400 mt-0.5">${item.distance} • ${item.time}</div>
+                    <div class="text-gray-500 text-[10px]">${item.distance} • ${item.time}</div>
                 </div>
             </div>
             <div class="text-right">
-                <div class="font-extrabold text-emerald-400 text-sm">+${item.co2Saved}</div>
-                <div class="text-[10px] text-slate-500">CO2 Prevented</div>
+                <div class="font-extrabold text-[#ff7d00] font-mono-num">+${item.co2Saved}</div>
             </div>
         </div>
     `).join('');
 }
 
-// Mode selection in Simulator
 function selectMode(modeKey) {
     appState.selectedMode = modeKey;
-    
     document.querySelectorAll('.mode-card').forEach(card => {
         card.classList.remove('active');
         if (card.dataset.mode === modeKey) card.classList.add('active');
     });
-
     updateTripCalculation();
 }
 
-// Live calculation update in Simulator
 function updateTripCalculation() {
     const slider = document.getElementById('trip-distance');
     if (!slider) return;
@@ -816,9 +702,7 @@ function updateTripCalculation() {
 
     const modeInfo = appState.emissionFactors[appState.selectedMode];
     const modeEF = modeInfo.gCO2;
-    const baselineEF = 142; // gCO2/km for petrol car
-    
-    const savingRatePerKm = baselineEF - modeEF;
+    const savingRatePerKm = 142 - modeEF;
     const totalCO2SavedKg = (savingRatePerKm * distance) / 1000.0;
     const caloriesBurned = Math.round(modeInfo.calPerKm * distance);
     const pointsEarned = Math.round(totalCO2SavedKg * 100) + (modeEF === 0 ? 20 : 10);
@@ -830,7 +714,6 @@ function updateTripCalculation() {
     document.getElementById('calc-points').textContent = `+${pointsEarned} PTS`;
 }
 
-// Log Simulated Trip Action
 function logSimulatedTrip() {
     const slider = document.getElementById('trip-distance');
     const labelInput = document.getElementById('trip-label');
@@ -856,45 +739,30 @@ function logSimulatedTrip() {
         distance: `${distance.toFixed(1)} km`,
         co2Saved: `${co2SavedKg} kg`,
         time: "Just now",
-        confidence: "Sensor Verified",
         verified: true,
         label: labelInput.value || modeInfo.label
     });
     saveStreamToLocalStorage();
     renderSensorStream();
 
-    confetti({
-        particleCount: 80,
-        spread: 60,
-        origin: { y: 0.7 }
-    });
-
-    showToast(`Trip logged! Saved ${co2SavedKg} kg CO2 & earned +${pointsEarned} PTS 🎉`, "success");
+    confetti({ particleCount: 70, spread: 50 });
+    showToast(`Trip logged! +${co2SavedKg} kg CO2 & +${pointsEarned} PTS 🎉`, "success");
 }
 
-// Switch Leaderboard Category Tab
 function switchLeaderboardCategory(cat) {
     appState.activeLeaderboardCat = cat;
-    
     document.querySelectorAll('.lb-cat-btn').forEach(btn => btn.classList.remove('active'));
     document.getElementById(`lb-tab-${cat}`)?.classList.add('active');
 
-    const titles = { 
-        college: `${appState.user.circleName} (College Circle)`, 
-        office: `${appState.user.circleName} (Corporate Circle)`, 
-        society: `${appState.user.circleName} (Society Circle)` 
-    };
-    document.getElementById('lb-category-title').textContent = titles[cat] || `${appState.user.circleName} Circle`;
-
+    const titles = { college: `${appState.user.circleName} Circle`, office: `${appState.user.circleName} Circle`, society: `${appState.user.circleName} Circle` };
+    document.getElementById('lb-category-title').textContent = titles[cat] || appState.user.circleName;
     renderLeaderboard();
 }
 
-// Render Leaderboard Table & Podium
 function renderLeaderboard() {
     const list = appState.leaderboards[appState.activeLeaderboardCat] || [];
     const podiumContainer = document.getElementById('podium-cards-container');
     const tableBody = document.getElementById('leaderboard-table-body');
-
     if (!tableBody) return;
 
     const userDisplayName = appState.user.isPrivacyOn ? appState.user.pseudonym : appState.user.realName;
@@ -903,149 +771,82 @@ function renderLeaderboard() {
         podiumContainer.innerHTML = [list[1], list[0], list[2]].map((item, idx) => {
             const ranks = [2, 1, 3];
             const actualRank = ranks[idx];
-            const badgeColors = actualRank === 1 ? 'border-amber-500/50 bg-amber-500/10' : actualRank === 2 ? 'border-slate-400/50 bg-slate-400/10' : 'border-amber-700/50 bg-amber-700/10';
-            const nameToDisplay = item.isUser ? `${userDisplayName} (${appState.user.circleName})` : item.name;
+            const nameToDisplay = item.isUser ? `${userDisplayName}` : item.name;
 
             return `
-                <div class="glass-card p-5 rounded-2xl border ${badgeColors} flex flex-col items-center text-center relative overflow-hidden">
-                    <div class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center text-2xl mb-2 border border-slate-700 shadow-md">
-                        ${item.avatar}
-                    </div>
-                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Rank #${actualRank}</span>
-                    <h4 class="font-extrabold text-white text-base mt-0.5">${nameToDisplay}</h4>
-                    <p class="text-xs text-slate-400 mt-1">${item.mode}</p>
-                    <div class="mt-3 pt-3 border-t border-slate-800/80 w-full flex justify-around text-xs">
-                        <div>
-                            <span class="text-slate-400 text-[10px] uppercase block">Saved CO2</span>
-                            <span class="font-bold text-emerald-400">${item.isUser ? (appState.user.co2SavedTodayKg * 4).toFixed(1) : item.co2} kg</span>
-                        </div>
-                        <div>
-                            <span class="text-slate-400 text-[10px] uppercase block">Eco Streak</span>
-                            <span class="font-bold text-amber-400">🔥 ${item.isUser ? appState.user.streakDays : item.streak} days</span>
-                        </div>
-                    </div>
+                <div class="min-card p-4 bg-[#16161a] border-b-2 ${actualRank === 1 ? 'border-[#ff7d00]' : 'border-[#24242c]'} text-center space-y-2">
+                    <span class="text-[10px] font-mono-num font-bold text-gray-400">RANK #${actualRank}</span>
+                    <h4 class="font-bold text-white text-sm truncate">${nameToDisplay}</h4>
+                    <div class="text-xs text-[#ff7d00] font-mono-num font-extrabold">${item.isUser ? (appState.user.co2SavedTodayKg * 4).toFixed(1) : item.co2} kg CO2</div>
                 </div>
             `;
         }).join('');
     }
 
     tableBody.innerHTML = list.map(item => {
-        const displayName = item.isUser ? `${userDisplayName} (${appState.user.circleName})` : item.name;
-        const userRowBg = item.isUser ? 'bg-brand-500/10 font-bold border-l-4 border-l-brand-500' : 'hover:bg-slate-800/40';
+        const displayName = item.isUser ? `${userDisplayName}` : item.name;
+        const userRowBg = item.isUser ? 'bg-[#ff7d00]/10 font-bold border-l-2 border-l-[#ff7d00]' : 'hover:bg-[#1a1a20]';
 
         return `
             <tr class="${userRowBg} transition">
-                <td class="px-6 py-4 font-bold ${item.rank <= 3 ? 'text-amber-400' : 'text-slate-400'}">#${item.rank}</td>
-                <td class="px-6 py-4 flex items-center space-x-2">
-                    <span>${item.avatar}</span>
-                    <span class="text-white">${displayName} ${item.isUser ? '<span class="text-[10px] bg-brand-500/20 text-brand-300 px-1.5 py-0.5 rounded border border-brand-500/30">YOU</span>' : ''}</span>
-                </td>
-                <td class="px-6 py-4 text-xs text-slate-400">${item.mode}</td>
-                <td class="px-6 py-4 text-right font-black text-emerald-400">${item.isUser ? (appState.user.co2SavedTodayKg * 4.2).toFixed(1) : item.co2} kg</td>
-                <td class="px-6 py-4 text-right font-semibold text-amber-400">🔥 ${item.isUser ? appState.user.streakDays : item.streak}d</td>
+                <td class="px-5 py-3 font-bold font-mono-num ${item.rank <= 3 ? 'text-[#ff7d00]' : 'text-gray-400'}">#${item.rank}</td>
+                <td class="px-5 py-3 text-white">${displayName} ${item.isUser ? '<span class="text-[9px] bg-[#ff7d00]/20 text-[#ff7d00] px-1 py-0.2 rounded">YOU</span>' : ''}</td>
+                <td class="px-5 py-3 text-gray-400">${item.mode}</td>
+                <td class="px-5 py-3 text-right font-mono-num font-bold text-[#ff7d00]">${item.isUser ? (appState.user.co2SavedTodayKg * 4.2).toFixed(1) : item.co2} kg</td>
+                <td class="px-5 py-3 text-right font-mono-num text-amber-400">🔥 ${item.isUser ? appState.user.streakDays : item.streak}d</td>
             </tr>
         `;
     }).join('');
 }
 
-// Render Team Challenges
 function renderChallenges() {
     const container = document.getElementById('challenges-container');
     if (!container) return;
 
-    container.innerHTML = appState.challenges.map(item => {
-        const pctA = Math.round((item.progressA / item.target) * 100);
-        const pctB = Math.round((item.progressB / item.target) * 100);
-
-        return `
-            <div class="glass-card p-6 rounded-2xl border border-slate-800 bg-slate-800/40 space-y-5">
-                <div class="flex items-start justify-between">
-                    <div>
-                        <span class="px-2.5 py-1 rounded-full bg-rose-500/10 text-rose-400 border border-rose-500/20 text-[11px] font-bold">⚔️ Active Department War</span>
-                        <h3 class="text-lg font-bold text-white mt-2">${item.title}</h3>
-                    </div>
-                    <span class="text-xs text-slate-400 font-mono">${item.daysLeft} days left</span>
+    container.innerHTML = appState.challenges.map(item => `
+        <div class="min-card p-5 bg-[#16161a] space-y-4">
+            <div class="flex justify-between items-start">
+                <h3 class="text-sm font-bold text-white">${item.title}</h3>
+                <span class="text-[10px] text-gray-400 font-mono">${item.daysLeft}d left</span>
+            </div>
+            <div class="space-y-2 text-xs">
+                <div class="flex justify-between text-gray-300">
+                    <span>${item.deptA}</span>
+                    <span class="font-mono-num text-[#ff7d00]">${item.progressA} kg</span>
                 </div>
-
-                <div class="space-y-3">
-                    <div>
-                        <div class="flex justify-between text-xs font-semibold mb-1">
-                            <span class="text-emerald-400">${item.deptA} (${item.progressA} kg)</span>
-                            <span class="text-slate-400">${pctA}% of Target</span>
-                        </div>
-                        <div class="w-full h-2.5 bg-slate-900 rounded-full overflow-hidden">
-                            <div class="h-full bg-emerald-500 rounded-full" style="width: ${pctA}%"></div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="flex justify-between text-xs font-semibold mb-1">
-                            <span class="text-blue-400">${item.deptB} (${item.progressB} kg)</span>
-                            <span class="text-slate-400">${pctB}% of Target</span>
-                        </div>
-                        <div class="w-full h-2.5 bg-slate-900 rounded-full overflow-hidden">
-                            <div class="h-full bg-blue-500 rounded-full" style="width: ${pctB}%"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="pt-2 border-t border-slate-800 flex items-center justify-between text-xs">
-                    <span class="text-slate-400">Reward Pool: <strong class="text-amber-400">${item.reward}</strong></span>
-                    ${item.joined 
-                        ? '<span class="px-3 py-1.5 rounded-lg bg-brand-500/20 text-brand-300 font-bold border border-brand-500/30">Joined for ' + item.userDept + '</span>'
-                        : `<button onclick="joinChallenge('${item.id}')" class="px-4 py-1.5 rounded-lg bg-brand-600 hover:bg-brand-500 text-white font-bold transition">Join Battle</button>`}
+                <div class="w-full h-1.5 bg-[#0e0e11] rounded-full overflow-hidden">
+                    <div class="h-full bg-[#ff7d00]" style="width: ${Math.round((item.progressA / item.target) * 100)}%"></div>
                 </div>
             </div>
-        `;
-    }).join('');
+        </div>
+    `).join('');
 }
 
-function joinChallenge(challengeId) {
-    const c = appState.challenges.find(x => x.id === challengeId);
-    if (c) {
-        c.joined = true;
-        renderChallenges();
-        showToast(`Joined challenge for ${c.deptA}!`, "success");
-    }
-}
-
-// Render Vouchers
 function renderVouchers() {
     const grid = document.getElementById('vouchers-grid');
     if (!grid) return;
 
     grid.innerHTML = appState.vouchers.map(item => `
-        <div class="glass-card p-5 rounded-2xl border border-slate-800 bg-slate-800/40 flex flex-col justify-between space-y-4">
+        <div class="min-card p-4 bg-[#16161a] flex flex-col justify-between space-y-3">
             <div>
-                <div class="w-12 h-12 rounded-2xl bg-slate-900 border border-slate-700 flex items-center justify-center text-2xl mb-3 shadow-inner">
-                    ${item.icon}
-                </div>
-                <h4 class="font-extrabold text-white text-base">${item.title}</h4>
-                <p class="text-xs text-slate-400 mt-1">Partner: <strong class="text-slate-300">${item.partner}</strong></p>
+                <span class="text-xl">${item.icon}</span>
+                <h4 class="font-bold text-white text-xs mt-1">${item.title}</h4>
+                <p class="text-[10px] text-gray-400 mt-0.5">${item.partner}</p>
             </div>
-
-            <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between">
-                <div class="flex items-center space-x-1 text-brand-400 font-bold text-sm">
-                    <i data-lucide="coins" class="w-4 h-4"></i>
-                    <span>${item.pts} PTS</span>
-                </div>
-                <button onclick="claimVoucher('${item.id}')" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white text-xs font-bold transition">
-                    Claim Code
-                </button>
+            <div class="flex justify-between items-center pt-2 border-t border-[#24242c]">
+                <span class="text-xs font-bold text-[#ff7d00] font-mono-num">${item.pts} PTS</span>
+                <button onclick="claimVoucher('${item.id}')" class="px-2.5 py-1 rounded bg-[#1c1c22] border border-[#2a2a34] text-xs text-white font-bold">Claim</button>
             </div>
         </div>
     `).join('');
-
-    lucide.createIcons();
 }
 
-// Claim Voucher QR Modal
 function claimVoucher(voucherId) {
     const v = appState.vouchers.find(x => x.id == voucherId);
     if (!v) return;
 
     if (appState.user.greenPoints < v.pts) {
-        showToast(`Not enough points! You need ${v.pts} PTS. Log trips to earn more!`, "warning");
+        showToast("Not enough points!", "warning");
         return;
     }
 
@@ -1054,41 +855,21 @@ function claimVoucher(voucherId) {
     updatePersonalizedUI();
 
     document.getElementById('modal-voucher-title').textContent = v.title;
-    document.getElementById('modal-voucher-subtitle').textContent = `Claimed for ${appState.user.realName} from ${v.partner}`;
+    document.getElementById('modal-voucher-subtitle').textContent = `Claimed from ${v.partner}`;
     document.getElementById('modal-voucher-code').textContent = v.code;
-    
     document.getElementById('voucher-modal').classList.remove('hidden');
-    
-    confetti({ particleCount: 50, spread: 50 });
 }
 
 function closeVoucherModal() {
     document.getElementById('voucher-modal').classList.add('hidden');
 }
 
-// Judge Modal
-function openJudgeModal() {
-    document.getElementById('judge-modal').classList.remove('hidden');
-}
-
-function closeJudgeModal() {
-    document.getElementById('judge-modal').classList.add('hidden');
-}
-
-// Recap Card Customizer Logic
 function changeRecapTheme(theme) {
     const card = document.getElementById('social-recap-card');
     if (!card) return;
-
-    card.className = "w-full max-w-md p-6 rounded-3xl shadow-2xl space-y-6 relative overflow-hidden border-2 transition-all duration-300 ";
-
-    if (theme === 'emerald') {
-        card.className += "bg-gradient-to-br from-emerald-950 via-slate-900 to-teal-950 border-brand-500/30";
-    } else if (theme === 'cyber') {
-        card.className += "bg-gradient-to-br from-slate-950 via-cyan-950 to-slate-900 border-cyan-500/30";
-    } else if (theme === 'sunset') {
-        card.className += "bg-gradient-to-br from-amber-950 via-slate-900 to-rose-950 border-amber-500/30";
-    }
+    if (theme === 'emerald') card.className = "w-full max-w-md p-6 rounded-2xl bg-[#141418] border-2 border-[#ff7d00]/40 shadow-2xl space-y-5 relative overflow-hidden";
+    else if (theme === 'cyber') card.className = "w-full max-w-md p-6 rounded-2xl bg-[#141418] border-2 border-[#a855f7]/40 shadow-2xl space-y-5 relative overflow-hidden";
+    else card.className = "w-full max-w-md p-6 rounded-2xl bg-[#141418] border-2 border-amber-500/40 shadow-2xl space-y-5 relative overflow-hidden";
 }
 
 function updateRecapQuote() {
@@ -1099,50 +880,40 @@ function updateRecapQuote() {
 
 function downloadRecapCard() {
     const card = document.getElementById('social-recap-card');
-    if (!card || typeof html2canvas === 'undefined') {
-        showToast("Generating card screenshot...", "info");
-        return;
-    }
-
+    if (!card || typeof html2canvas === 'undefined') return;
     html2canvas(card, { backgroundColor: null }).then(canvas => {
         const link = document.createElement('a');
         link.download = `CarbonSaathi-Recap-${Date.now()}.png`;
         link.href = canvas.toDataURL('image/png');
         link.click();
-        showToast("Recap graphic downloaded to your device! 📸", "success");
+        showToast("Recap downloaded! 📸", "success");
     });
 }
 
 function copyRecapText() {
     const quote = document.getElementById('recap-quote-input')?.value || "";
     const activeName = appState.user.isPrivacyOn ? appState.user.pseudonym : appState.user.realName;
-    const textToCopy = `🌿 ${activeName}'s Weekly CarbonSaathi Impact:\n• Circle: ${appState.user.circleName}\n• CO2 Prevented: ${(appState.user.co2SavedTodayKg * 4.2).toFixed(1)} kg\n• Calories Burned: ${appState.user.caloriesToday * 5} kcal\n"${quote}"\nJoin Mission LiFE!`;
-    
+    const textToCopy = `🌿 ${activeName}'s Impact: Saved ${(appState.user.co2SavedTodayKg * 4.2).toFixed(1)} kg CO2! "${quote}" #CarbonSaathi`;
     navigator.clipboard.writeText(textToCopy);
-    showToast("Personalized summary copied to clipboard! 🚀", "success");
+    showToast("Summary copied!", "success");
 }
 
-// Custom Toast System
 function showToast(message, type = "info") {
     const container = document.getElementById('toast-container');
     if (!container) return;
 
     const toast = document.createElement('div');
     const bgColors = {
-        success: 'bg-emerald-900/90 border-emerald-500/50 text-emerald-200',
-        warning: 'bg-amber-900/90 border-amber-500/50 text-amber-200',
-        info: 'bg-slate-800/90 border-slate-600/50 text-slate-200'
+        success: 'bg-[#141418] border-[#ff7d00] text-gray-100',
+        warning: 'bg-[#141418] border-amber-500 text-amber-200',
+        info: 'bg-[#141418] border-[#24242c] text-gray-200'
     };
 
-    toast.className = `px-4 py-3 rounded-xl border backdrop-blur-md shadow-2xl text-xs font-semibold flex items-center space-x-2 pointer-events-auto transition-all transform translate-y-2 opacity-0 ${bgColors[type] || bgColors.info}`;
+    toast.className = `px-3.5 py-2.5 rounded-lg border backdrop-blur-md shadow-2xl text-xs font-bold transition-all transform translate-y-2 opacity-0 ${bgColors[type] || bgColors.info}`;
     toast.innerHTML = `<span>${message}</span>`;
 
     container.appendChild(toast);
-
-    setTimeout(() => {
-        toast.classList.remove('translate-y-2', 'opacity-0');
-    }, 10);
-
+    setTimeout(() => toast.classList.remove('translate-y-2', 'opacity-0'), 10);
     setTimeout(() => {
         toast.classList.add('opacity-0', 'translate-y-2');
         setTimeout(() => toast.remove(), 300);
