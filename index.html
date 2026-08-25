@@ -73,16 +73,47 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-[#050505] text-gray-100 min-h-full flex flex-col font-sans selection:bg-[#ff7d00] selection:text-black">
+<body class="bg-[#000000] text-gray-100 min-h-full flex flex-col font-sans selection:bg-[#ff7d00] selection:text-black">
+
+    <!-- ================= GROWING TREE LOADING BUFFER SCREEN ================= -->
+    <div id="tree-loader" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black text-white transition-opacity duration-500">
+        <div class="relative w-32 h-32 flex items-center justify-center">
+            <!-- Growing Tree Animated SVG -->
+            <svg class="w-28 h-28" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Ground Line -->
+                <path d="M20 90 H80" stroke="#333338" stroke-width="4" stroke-linecap="round" />
+                
+                <!-- Tree Trunk -->
+                <path class="tree-trunk" d="M50 90 V45" stroke="#ff7d00" stroke-width="5" stroke-linecap="round" />
+                
+                <!-- Left & Right Branches -->
+                <path class="tree-branch" d="M50 65 Q35 55 30 45" stroke="#ff7d00" stroke-width="4" stroke-linecap="round" />
+                <path class="tree-branch" d="M50 55 Q65 45 70 35" stroke="#ff7d00" stroke-width="4" stroke-linecap="round" />
+                
+                <!-- Flourishing Green Canopy Leaves -->
+                <g class="tree-leaves">
+                    <circle cx="50" cy="30" r="16" fill="#10b981" />
+                    <circle cx="35" cy="40" r="12" fill="#059669" />
+                    <circle cx="65" cy="35" r="13" fill="#34d399" />
+                    <circle cx="50" cy="22" r="11" fill="#6ee7b7" />
+                </g>
+            </svg>
+        </div>
+
+        <div class="mt-4 text-center space-y-1">
+            <h3 class="text-sm font-extrabold text-white tracking-wider uppercase">Carbon<span class="text-[#ff7d00]">Saathi</span></h3>
+            <p class="text-xs text-gray-400 font-mono">Growing your carbon savings...</p>
+        </div>
+    </div>
 
     <!-- ================= VIEW 1: AUTHENTICATION / LOGIN SCREEN ================= -->
-    <section id="view-auth" class="min-h-screen flex items-center justify-center p-4 relative overflow-hidden bg-[#09090b]">
+    <section id="view-auth" class="min-h-screen flex items-center justify-center p-4 relative overflow-hidden bg-[#000000]">
         
         <!-- Subtle Ambient Background Glows -->
         <div class="absolute -top-32 -left-32 w-96 h-96 bg-[#ff7d00]/10 rounded-full blur-3xl pointer-events-none"></div>
         <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-[#a855f7]/10 rounded-full blur-3xl pointer-events-none"></div>
 
-        <div class="max-w-md w-full min-card p-6 sm:p-8 border border-[#24242c] bg-[#141418] shadow-2xl relative z-10 space-y-6">
+        <div class="max-w-md w-full min-card p-6 sm:p-8 border border-[#27272c] bg-[#161619] shadow-2xl relative z-10 space-y-6">
             
             <!-- App Branding Header -->
             <div class="text-center space-y-2">
@@ -94,8 +125,8 @@
             </div>
 
             <!-- Login / Sign Up Tab Toggle -->
-            <div class="flex p-1 bg-[#0a0a0c] rounded-lg border border-[#24242c] text-xs">
-                <button onclick="switchAuthTab('signin')" id="auth-tab-signin" class="w-1/2 py-2 rounded-md font-bold transition text-[#ff7d00] bg-[#1a1a20]">Sign In</button>
+            <div class="flex p-1 bg-[#0a0a0c] rounded-lg border border-[#27272c] text-xs">
+                <button onclick="switchAuthTab('signin')" id="auth-tab-signin" class="w-1/2 py-2 rounded-md font-bold transition text-[#ff7d00] bg-[#222226]">Sign In</button>
                 <button onclick="switchAuthTab('signup')" id="auth-tab-signup" class="w-1/2 py-2 rounded-md font-bold transition text-gray-400">Create Account</button>
             </div>
 
@@ -178,11 +209,11 @@
         <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden md:hidden transition-opacity duration-300 opacity-0"></div>
 
         <!-- Collapsible Left Vertical Sidebar -->
-        <aside id="app-sidebar" class="fixed md:static inset-y-0 left-0 z-50 w-64 bg-[#141418] border-r border-[#24242c] flex-shrink-0 flex flex-col justify-between transition-all duration-300 -translate-x-full md:translate-x-0">
+        <aside id="app-sidebar" class="fixed md:static inset-y-0 left-0 z-50 w-64 bg-[#000000] border-r border-[#242429] flex-shrink-0 flex flex-col justify-between transition-all duration-300 -translate-x-full md:translate-x-0">
             
             <div>
                 <!-- Brand Header -->
-                <div class="p-4 sm:p-5 border-b border-[#24242c] flex items-center justify-between">
+                <div class="p-4 sm:p-5 border-b border-[#242429] flex items-center justify-between bg-[#121214]">
                     <div class="flex items-center space-x-3 cursor-pointer overflow-hidden" onclick="switchTab('dashboard')">
                         <div class="w-9 h-9 rounded-lg bg-[#ff7d00] text-black flex items-center justify-center font-extrabold text-lg flex-shrink-0 shadow-md shadow-[#ff7d00]/20">
                             ⚡
@@ -194,14 +225,14 @@
                     </div>
 
                     <!-- Collapse / Close Button -->
-                    <button onclick="toggleSidebar()" class="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-[#24242c] transition" title="Toggle Sidebar Navigation">
+                    <button onclick="toggleSidebar()" class="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-[#222226] transition" title="Toggle Sidebar Navigation">
                         <i data-lucide="chevron-left" id="sidebar-toggle-icon" class="w-5 h-5"></i>
                     </button>
                 </div>
 
                 <!-- Quick Collapsed Toggle Bar for Desktop Mini Mode -->
-                <div class="hidden md:flex justify-center py-2 border-b border-[#24242c]/50">
-                    <button onclick="toggleSidebarDesktop()" class="text-xs text-gray-400 hover:text-[#ff7d00] flex items-center gap-1.5 px-2 py-1 rounded hover:bg-[#1a1a20] transition">
+                <div class="hidden md:flex justify-center py-2 border-b border-[#242429]/60 bg-[#0a0a0c]">
+                    <button onclick="toggleSidebarDesktop()" class="text-xs text-gray-400 hover:text-[#ff7d00] flex items-center gap-1.5 px-2 py-1 rounded hover:bg-[#1c1c20] transition">
                         <i data-lucide="panel-left-close" id="desktop-collapse-icon" class="w-4 h-4"></i>
                         <span class="sidebar-text text-[11px] font-medium">Collapse Menu</span>
                     </button>

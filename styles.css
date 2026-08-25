@@ -117,6 +117,46 @@ body {
 
 #app-sidebar.sidebar-collapsed #desktop-collapse-icon {
     transform: rotate(180deg);
+}
+
+/* ================= TREE GROWING LOADING ANIMATION ================= */
+.tree-loader-overlay {
+    background: #000000;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.tree-trunk {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: growTrunk 2s ease-in-out forwards infinite;
+}
+
+.tree-branch {
+    stroke-dasharray: 60;
+    stroke-dashoffset: 60;
+    animation: growBranch 2s ease-in-out 0.4s forwards infinite;
+}
+
+.tree-leaves {
+    transform: scale(0);
+    transform-origin: center;
+    animation: bloomLeaves 2s ease-in-out 0.8s forwards infinite;
+}
+
+@keyframes growTrunk {
+    0% { stroke-dashoffset: 100; }
+    50%, 100% { stroke-dashoffset: 0; }
+}
+
+@keyframes growBranch {
+    0%, 25% { stroke-dashoffset: 60; }
+    65%, 100% { stroke-dashoffset: 0; }
+}
+
+@keyframes bloomLeaves {
+    0%, 50% { transform: scale(0); opacity: 0; }
+    75% { transform: scale(1.15); opacity: 1; }
+    85%, 100% { transform: scale(1); opacity: 1; }
 }    border: 1px solid var(--border-subtle);
     transition: all 0.2s ease;
 }

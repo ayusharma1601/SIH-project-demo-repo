@@ -189,6 +189,15 @@ document.addEventListener("DOMContentLoaded", () => {
     registerServiceWorker();
     setupNetworkListeners();
     setupPwaInstallPrompt();
+
+    // Growing Tree Loading Screen Buffer Timer
+    setTimeout(() => {
+        const loader = document.getElementById('tree-loader');
+        if (loader) {
+            loader.style.opacity = '0';
+            setTimeout(() => loader.style.display = 'none', 500);
+        }
+    }, 1500);
 });
 
 function initPolarstepsMap() {
