@@ -250,13 +250,46 @@ function validatePasswordFieldLive() {
     }
 
     container.classList.remove('hidden');
+    
     if (val.length < 6) {
-        bar.className = "h-full bg-rose-500 w-1/3 transition-all duration-300";
-        text.textContent = "Min 6 chars";
+        bar.className = "h-full bg-rose-500 w-1/4 transition-all duration-300";
+        text.textContent = "Too short (min 6 chars)";
+        text.className = "text-[10px] text-rose-400 font-semibold";
         return false;
+    }
+
+    // Common weak patterns check (e.g., 12345678, password, qwerty, repeated chars)
+    const commonWeakPatterns = [/^(12345|123456|1234567|12345678|123456789|012345|qwerty|password|abcdef|111111|000000)$/i];
+    const isSequentialOrRepetitive = commonWeakPatterns.some(pattern => pattern.test(val)) || /^(\w)\1+$/.test(val);
+
+    if (isSequentialOrRepetitive) {
+        bar.className = "h-full bg-rose-500 w-1/4 transition-all duration-300";
+        text.textContent = "Weak: Avoid simple patterns like '12345678'";
+        text.className = "text-[10px] text-rose-400 font-semibold";
+        return false;
+    }
+
+    // Score calculation based on complexity criteria
+    let score = 0;
+    if (val.length >= 8) score += 1;
+    if (/[a-z]/.test(val) && /[A-Z]/.test(val)) score += 1; // Mixed case
+    if (/\d/.test(val)) score += 1; // Has digit
+    if (/[^A-Za-z0-9]/.test(val)) score += 1; // Has special char
+
+    if (score <= 1) {
+        bar.className = "h-full bg-amber-500 w-2/4 transition-all duration-300";
+        text.textContent = "Weak: Add letters & symbols (e.g. Pass@123)";
+        text.className = "text-[10px] text-amber-400 font-semibold";
+        return false;
+    } else if (score === 2) {
+        bar.className = "h-full bg-amber-400 w-3/4 transition-all duration-300";
+        text.textContent = "Moderate strength";
+        text.className = "text-[10px] text-amber-300 font-semibold";
+        return true;
     } else {
-        bar.className = "h-full bg-[#ff7d00] w-full transition-all duration-300";
-        text.textContent = "Strong password!";
+        bar.className = "h-full bg-emerald-500 w-full transition-all duration-300";
+        text.textContent = "Strong password! 🔒";
+        text.className = "text-[10px] text-emerald-400 font-semibold";
         return true;
     }
 }
