@@ -1,34 +1,36 @@
-/* CarbonSaathi - Frosted Glassmorphism Emerald & Sage Nature Theme */
+/* CarbonSaathi - Olive & Collard Leaf Green Theme with Dark Brown Accents */
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
 :root {
-    --bg-main: #020805; /* Deeper Black Emerald for max contrast */
-    --bg-card: rgba(8, 22, 16, 0.75); /* Deep Emerald Glass Container */
-    --bg-card-hover: rgba(14, 34, 25, 0.9);
-    --border-subtle: rgba(52, 211, 153, 0.25); /* Emerald Glass Wireframe Border */
-    --border-accent: rgba(16, 185, 129, 0.5);
+    --bg-main: #0b1206; /* Dark Olive Earth Outer */
+    --bg-card: rgba(18, 36, 22, 0.78); /* Collard Leaf Green Glass Widget */
+    --bg-card-hover: rgba(26, 48, 30, 0.9);
+    --border-subtle: rgba(120, 160, 90, 0.28); /* Olive Sage Wireframe Border */
+    --border-accent: rgba(92, 58, 33, 0.6); /* Dark Brown Accent Border */
     
-    --bark-primary: #a05a2c; /* Rich Tree Bark Brown */
-    --bark-hover: #8b4513;
-    --bark-glow: rgba(160, 90, 44, 0.25);
+    --dark-brown: #5c3a21; /* Rich Dark Bark Brown */
+    --dark-brown-hover: #4a2e1a;
+    --dark-brown-glow: rgba(92, 58, 33, 0.3);
 
-    --emerald-primary: #10b981;
-    --emerald-hover: #059669;
+    --collard-green: #2d5a38; /* Collard Leaf Green */
+    --collard-green-hover: #23472c;
 
-    --orange-primary: #a05a2c; /* Map orange to Tree Bark Brown */
-    --orange-hover: #8b4513;
-    --orange-glow: rgba(160, 90, 44, 0.25);
+    --olive-accent: #84a956; /* Olive Green Accent */
 
-    --purple-primary: #34d399;
-    --purple-glow: rgba(52, 211, 153, 0.2);
+    --orange-primary: #5c3a21; /* Remap orange to Dark Brown */
+    --orange-hover: #4a2e1a;
+    --orange-glow: rgba(92, 58, 33, 0.3);
 
-    --text-primary: #ecfdf5; /* Crisp Sage White */
-    --text-secondary: #a7f3d0; /* Mint Sage */
-    --text-muted: #6ee7b7;
+    --purple-primary: #84a956; /* Remap purple to Olive Green */
+    --purple-glow: rgba(132, 169, 86, 0.25);
+
+    --text-primary: #f4f8f0; /* Soft Olive White */
+    --text-secondary: #c2d6ad; /* Light Olive Sage */
+    --text-muted: #95b378;
 }
 
 body {
-    background: radial-gradient(circle at 30% 20%, #051810 0%, #020805 60%, #000402 100%);
+    background: radial-gradient(circle at 30% 20%, #1c2c12 0%, #0b1206 65%, #050803 100%);
     background-attachment: fixed;
     color: var(--text-primary);
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -39,41 +41,41 @@ h1, h2, h3, .heading-condensed {
     font-family: 'Oswald', 'Inter', sans-serif;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    color: #f0fdf4;
+    color: #f4f8f0;
 }
 
-/* Frosted Emerald Glass Card Styling */
+/* Frosted Collard Leaf Green Glass Card Styling */
 .min-card, .glass-card {
-    background: rgba(10, 26, 19, 0.55) !important;
+    background: rgba(16, 34, 20, 0.78) !important;
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
-    border: 1px solid rgba(52, 211, 153, 0.25) !important;
-    border-top: 1px solid rgba(52, 211, 153, 0.45) !important; /* Specular top glass edge highlight */
+    border: 1px solid rgba(132, 169, 86, 0.25) !important;
+    border-top: 1px solid rgba(132, 169, 86, 0.45) !important; /* Specular top glass edge highlight */
     border-radius: 18px !important;
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .min-card:hover, .glass-card:hover {
-    background: rgba(14, 34, 25, 0.7) !important;
-    border-color: rgba(52, 211, 153, 0.55) !important;
-    box-shadow: 0 12px 40px 0 rgba(16, 185, 129, 0.25), inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+    background: rgba(22, 44, 26, 0.9) !important;
+    border-color: rgba(132, 169, 86, 0.55) !important;
+    box-shadow: 0 12px 40px 0 rgba(92, 58, 33, 0.25), inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
 }
 
 /* Timeline Step Cards Glass Finish */
 .step-item-card {
-    background: rgba(15, 38, 28, 0.6) !important;
+    background: rgba(20, 42, 26, 0.7) !important;
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(52, 211, 153, 0.25) !important;
-    border-top: 1px solid rgba(52, 211, 153, 0.4) !important;
+    border: 1px solid rgba(132, 169, 86, 0.25) !important;
+    border-top: 1px solid rgba(132, 169, 86, 0.4) !important;
     box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.4), inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
     transition: all 0.3s ease;
 }
 
 .step-item-card:hover {
-    background: rgba(20, 48, 36, 0.8) !important;
-    border-color: rgba(52, 211, 153, 0.5) !important;
+    background: rgba(28, 54, 34, 0.85) !important;
+    border-color: rgba(132, 169, 86, 0.5) !important;
 }
 
 /* Accent Borders & Glows */

@@ -26,24 +26,38 @@
             theme: {
                 extend: {
                     colors: {
-                        emeraldTheme: {
-                            DEFAULT: '#10b981',
-                            950: '#020805',
-                            900: '#04120c',
-                            850: '#081610',
-                            800: '#0d241a',
-                            750: '#123224',
-                            700: '#1b4d37',
-                            600: '#059669',
-                            500: '#10b981',
-                            400: '#34d399',
-                            300: '#6ee7b7',
-                            200: '#a7f3d0',
-                            100: '#ecfdf5'
+                        darkbrown: {
+                            DEFAULT: '#5c3a21',
+                            900: '#3d2514',
+                            800: '#4a2e1a',
+                            700: '#5c3a21',
+                            600: '#73492a',
+                            500: '#8c5934'
+                        },
+                        oliveTheme: {
+                            DEFAULT: '#84a956',
+                            950: '#050803',
+                            900: '#0b1206',
+                            850: '#121e0b',
+                            800: '#1c2c12',
+                            750: '#273c1a',
+                            700: '#385425',
+                            600: '#557e38',
+                            500: '#84a956',
+                            400: '#9ec46d',
+                            300: '#c2d6ad'
+                        },
+                        collard: {
+                            DEFAULT: '#2d5a38',
+                            900: '#102216',
+                            850: '#162a1c',
+                            800: '#1e3826',
+                            700: '#2d5a38',
+                            600: '#3a7348'
                         },
                         amberAccent: {
-                            500: '#10b981',
-                            600: '#059669'
+                            500: '#5c3a21',
+                            600: '#4a2e1a'
                         }
                     }
                 }
@@ -346,19 +360,19 @@
                 <section id="tab-dashboard" class="tab-content block space-y-6">
                     
                     <!-- Header Title Banner -->
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-[#24242c]">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-[#84a956]/20">
                         <div>
                             <div class="flex items-center space-x-2">
-                                <h1 class="text-2xl font-extrabold text-white flex items-center gap-2">
+                                <h1 class="text-2xl font-extrabold text-[#f4f8f0] flex items-center gap-2">
                                     <span>🇮🇳</span>
                                     <span>Eco Journey & Commute Tracker</span>
                                 </h1>
-                                <span id="badge-streak" class="px-2 py-0.5 text-[10px] font-bold rounded bg-amber-500/10 text-[#ff7d00] border border-[#ff7d00]/30">🔥 12 Day Streak</span>
+                                <span id="badge-streak" class="px-2.5 py-0.5 text-[10px] font-bold rounded bg-[#5c3a21]/30 text-[#c2d6ad] border border-[#5c3a21]/60">🔥 12 Day Streak</span>
                             </div>
-                            <p class="text-xs text-gray-400 mt-1">Circle: <strong class="text-gray-200" id="circle-tag-display">IIT Delhi Campus</strong> • Live GPS Path Tracking</p>
+                            <p class="text-xs text-[#c2d6ad] mt-1">Circle: <strong class="text-white" id="circle-tag-display">IIT Delhi Campus</strong> • Live GPS Path Tracking</p>
                         </div>
                         <div class="flex items-center gap-2">
-                            <span class="text-xs text-gray-400">Total Saved Today: <strong class="text-[#ff7d00] font-mono-num" id="hero-co2-display">3.85 kg CO2</strong></span>
+                            <span class="text-xs text-[#c2d6ad]">Total Saved Today: <strong class="text-[#84a956] font-mono-num" id="hero-co2-display">3.85 kg CO2</strong></span>
                         </div>
                     </div>
 
@@ -384,12 +398,12 @@
 
                     <!-- Polarsteps Chronological Timeline "Steps Feed" -->
                     <div class="min-card p-5 bg-[#141418] border border-[#24242c] space-y-4">
-                        <div class="flex items-center justify-between border-b border-[#24242c] pb-3">
+                        <div class="flex items-center justify-between border-b border-[#84a956]/20 pb-3">
                             <h3 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
-                                <i data-lucide="footprints" class="w-4 h-4 text-[#ff7d00]"></i>
+                                <i data-lucide="footprints" class="w-4 h-4 text-[#84a956]"></i>
                                 Journey Steps Timeline
                             </h3>
-                            <button onclick="switchTab('simulator')" class="px-3 py-1 rounded bg-[#ff7d00] hover:bg-[#e67000] text-black font-bold text-xs flex items-center gap-1 transition">
+                            <button onclick="switchTab('simulator')" class="px-3 py-1 rounded bg-[#5c3a21] hover:bg-[#4a2e1a] text-white font-bold text-xs flex items-center gap-1 transition shadow-md shadow-[#5c3a21]/30">
                                 <i data-lucide="plus" class="w-3.5 h-3.5"></i>
                                 <span>Add New Step Pin</span>
                             </button>
