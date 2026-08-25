@@ -8,13 +8,16 @@
     --border-subtle: rgba(52, 211, 153, 0.25); /* Emerald Glass Wireframe Border */
     --border-accent: rgba(16, 185, 129, 0.5);
     
+    --bark-primary: #a05a2c; /* Rich Tree Bark Brown */
+    --bark-hover: #8b4513;
+    --bark-glow: rgba(160, 90, 44, 0.25);
+
     --emerald-primary: #10b981;
     --emerald-hover: #059669;
-    --emerald-glow: rgba(16, 185, 129, 0.25);
 
-    --orange-primary: #10b981;
-    --orange-hover: #059669;
-    --orange-glow: rgba(16, 185, 129, 0.25);
+    --orange-primary: #a05a2c; /* Map orange to Tree Bark Brown */
+    --orange-hover: #8b4513;
+    --orange-glow: rgba(160, 90, 44, 0.25);
 
     --purple-primary: #34d399;
     --purple-glow: rgba(52, 211, 153, 0.2);
@@ -135,17 +138,19 @@ h1, h2, h3, .heading-condensed {
 
 /* ================= TREE GROWING LOADING ANIMATION ================= */
 .tree-loader-overlay {
-    background: #000000;
+    background: #020805;
     transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
 .tree-trunk {
+    stroke: #a05a2c !important; /* Tree Bark Brown Trunk */
     stroke-dasharray: 100;
     stroke-dashoffset: 100;
     animation: growTrunk 2s ease-in-out forwards infinite;
 }
 
 .tree-branch {
+    stroke: #8b4513 !important; /* Branch Brown */
     stroke-dasharray: 60;
     stroke-dashoffset: 60;
     animation: growBranch 2s ease-in-out 0.4s forwards infinite;
