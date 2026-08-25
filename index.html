@@ -21,12 +21,29 @@
             theme: {
                 extend: {
                     colors: {
+                        pitchblack: {
+                            DEFAULT: '#000000',
+                            950: '#020203',
+                            900: '#050505',
+                            850: '#0a0a0b',
+                            800: '#0d0d0f'
+                        },
+                        charcoal: {
+                            DEFAULT: '#18181b',
+                            950: '#121214',
+                            900: '#161619',
+                            850: '#1c1c20',
+                            800: '#222226',
+                            750: '#27272c',
+                            700: '#323238',
+                            600: '#3f3f46'
+                        },
                         obsidian: {
                             950: '#09090b',
-                            900: '#0e0e11',
-                            850: '#141418',
-                            800: '#18181c',
-                            750: '#202026',
+                            900: '#050505',
+                            850: '#0d0d0f',
+                            800: '#161619',
+                            750: '#222226',
                             700: '#282832'
                         },
                         amberAccent: {
@@ -56,7 +73,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-[#0e0e11] text-gray-100 min-h-full flex flex-col font-sans selection:bg-[#ff7d00] selection:text-black">
+<body class="bg-[#050505] text-gray-100 min-h-full flex flex-col font-sans selection:bg-[#ff7d00] selection:text-black">
 
     <!-- ================= VIEW 1: AUTHENTICATION / LOGIN SCREEN ================= -->
     <section id="view-auth" class="min-h-screen flex items-center justify-center p-4 relative overflow-hidden bg-[#09090b]">

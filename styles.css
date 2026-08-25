@@ -2,11 +2,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700;800&display=swap');
 
 :root {
-    --bg-main: #0e0e11;
-    --bg-card: #16161a;
-    --bg-card-hover: #1c1c22;
-    --border-subtle: #24242c;
-    --border-accent: #32323e;
+    --bg-main: #050505; /* Pitch Black */
+    --bg-card: #161619; /* Deep Charcoal Gray */
+    --bg-card-hover: #1c1c20; /* Charcoal Hover */
+    --border-subtle: #242429; /* Charcoal Border */
+    --border-accent: #32323a;
     
     --orange-primary: #ff7d00;
     --orange-hover: #e67000;
