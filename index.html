@@ -26,36 +26,24 @@
             theme: {
                 extend: {
                     colors: {
-                        slatecharcoal: {
-                            DEFAULT: '#18181e',
-                            950: '#121216',
-                            900: '#18181e',
-                            850: '#1e1e24',
-                            800: '#24242c',
-                            750: '#2c2c36',
-                            700: '#34343d',
-                            600: '#484854'
-                        },
-                        pitchblack: {
-                            DEFAULT: '#000000',
-                            950: '#020203',
-                            900: '#121216',
-                            850: '#18181e',
-                            800: '#1e1e24'
-                        },
-                        charcoal: {
-                            DEFAULT: '#1e1e24',
-                            950: '#121216',
-                            900: '#18181e',
-                            850: '#1e1e24',
-                            800: '#24242c',
-                            750: '#2c2c36',
-                            700: '#34343d',
-                            600: '#484854'
+                        emeraldTheme: {
+                            DEFAULT: '#10b981',
+                            950: '#020805',
+                            900: '#04120c',
+                            850: '#081610',
+                            800: '#0d241a',
+                            750: '#123224',
+                            700: '#1b4d37',
+                            600: '#059669',
+                            500: '#10b981',
+                            400: '#34d399',
+                            300: '#6ee7b7',
+                            200: '#a7f3d0',
+                            100: '#ecfdf5'
                         },
                         amberAccent: {
-                            500: '#ff7d00',
-                            600: '#e67000'
+                            500: '#10b981',
+                            600: '#059669'
                         }
                     }
                 }
@@ -217,30 +205,30 @@
         <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden md:hidden transition-opacity duration-300 opacity-0"></div>
 
         <!-- Collapsible Left Vertical Sidebar -->
-        <aside id="app-sidebar" class="fixed md:static inset-y-0 left-0 z-50 w-64 bg-[#000000] border-r border-[#242429] flex-shrink-0 flex flex-col justify-between transition-all duration-300 -translate-x-full md:translate-x-0">
+        <aside id="app-sidebar" class="fixed md:static inset-y-0 left-0 z-50 w-64 bg-[#061610]/95 backdrop-blur-xl border-r border-[#34d399]/20 flex-shrink-0 flex flex-col justify-between transition-all duration-300 -translate-x-full md:translate-x-0">
             
             <div>
                 <!-- Brand Header -->
-                <div class="p-4 sm:p-5 border-b border-[#242429] flex items-center justify-between bg-[#121214]">
+                <div class="p-4 sm:p-5 border-b border-[#34d399]/20 flex items-center justify-between bg-[#0a2218]/80">
                     <div class="flex items-center space-x-3 cursor-pointer overflow-hidden" onclick="switchTab('dashboard')">
-                        <div class="w-9 h-9 rounded-lg bg-[#ff7d00] text-black flex items-center justify-center font-extrabold text-lg flex-shrink-0 shadow-md shadow-[#ff7d00]/20">
-                            ⚡
+                        <div class="w-9 h-9 rounded-lg bg-[#10b981] text-black flex items-center justify-center font-extrabold text-lg flex-shrink-0 shadow-md shadow-[#10b981]/30">
+                            🌿
                         </div>
                         <div class="sidebar-text truncate">
-                            <span class="font-extrabold text-lg text-white tracking-tight">Carbon<span class="text-[#ff7d00]">Saathi</span></span>
-                            <span class="block text-[10px] text-gray-400 font-mono">v2.0 • PWA App</span>
+                            <span class="font-extrabold text-lg text-white tracking-tight">Carbon<span class="text-[#34d399]">Saathi</span></span>
+                            <span class="block text-[10px] text-emerald-300 font-mono">v2.0 • Eco App</span>
                         </div>
                     </div>
 
                     <!-- Collapse / Close Button -->
-                    <button onclick="toggleSidebar()" class="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-[#222226] transition" title="Toggle Sidebar Navigation">
+                    <button onclick="toggleSidebar()" class="p-1.5 rounded-lg text-emerald-300 hover:text-white hover:bg-[#10b981]/20 transition" title="Toggle Sidebar Navigation">
                         <i data-lucide="chevron-left" id="sidebar-toggle-icon" class="w-5 h-5"></i>
                     </button>
                 </div>
 
                 <!-- Quick Collapsed Toggle Bar for Desktop Mini Mode -->
-                <div class="hidden md:flex justify-center py-2 border-b border-[#242429]/60 bg-[#0a0a0c]">
-                    <button onclick="toggleSidebarDesktop()" class="text-xs text-gray-400 hover:text-[#ff7d00] flex items-center gap-1.5 px-2 py-1 rounded hover:bg-[#1c1c20] transition">
+                <div class="hidden md:flex justify-center py-2 border-b border-[#34d399]/15 bg-[#04120c]/60">
+                    <button onclick="toggleSidebarDesktop()" class="text-xs text-emerald-300 hover:text-[#34d399] flex items-center gap-1.5 px-2 py-1 rounded hover:bg-[#10b981]/15 transition">
                         <i data-lucide="panel-left-close" id="desktop-collapse-icon" class="w-4 h-4"></i>
                         <span class="sidebar-text text-[11px] font-medium">Collapse Menu</span>
                     </button>
@@ -313,34 +301,34 @@
         <div class="flex-1 flex flex-col min-w-0 overflow-y-auto">
             
             <!-- Top Header Bar -->
-            <header class="sticky top-0 z-30 bg-[#16161c]/95 backdrop-blur-md border-b border-[#34343d] px-4 sm:px-6 py-3 flex items-center justify-between">
+            <header class="sticky top-0 z-30 bg-[#04120c]/90 backdrop-blur-xl border-b border-[#34d399]/20 px-4 sm:px-6 py-3 flex items-center justify-between">
                 
                 <div class="flex items-center space-x-2 sm:space-x-3">
                     <!-- Mobile Hamburger Toggle -->
-                    <button onclick="toggleSidebar()" class="p-2 rounded-lg bg-[#24242c] border border-[#34343d] text-gray-300 hover:text-white hover:border-[#ff7d00] transition flex items-center justify-center">
-                        <i data-lucide="menu" class="w-5 h-5 text-[#ff7d00]"></i>
+                    <button onclick="toggleSidebar()" class="p-2 rounded-lg bg-[#0d281e]/80 border border-[#34d399]/30 text-emerald-200 hover:text-white hover:border-[#10b981] transition flex items-center justify-center">
+                        <i data-lucide="menu" class="w-5 h-5 text-[#10b981]"></i>
                     </button>
 
-                    <button onclick="openProfileModal()" class="px-3 py-1.5 rounded-lg bg-[#24242c] border border-[#34343d] text-xs text-gray-300 hover:border-[#ff7d00] transition flex items-center space-x-1.5">
-                        <i data-lucide="sliders" class="w-3.5 h-3.5 text-[#ff7d00]"></i>
+                    <button onclick="openProfileModal()" class="px-3 py-1.5 rounded-lg bg-[#0d281e]/80 border border-[#34d399]/30 text-xs text-emerald-200 hover:border-[#10b981] transition flex items-center space-x-1.5">
+                        <i data-lucide="sliders" class="w-3.5 h-3.5 text-[#10b981]"></i>
                         <span class="hidden sm:inline">Edit Profile</span>
                     </button>
 
-                    <button id="privacy-toggle-btn" onclick="togglePrivacyMode()" class="px-3 py-1.5 rounded-lg bg-[#24242c] border border-[#34343d] text-xs text-gray-300 hover:border-[#a855f7] transition flex items-center space-x-1.5">
-                        <i data-lucide="shield-check" class="w-3.5 h-3.5 text-[#a855f7]"></i>
+                    <button id="privacy-toggle-btn" onclick="togglePrivacyMode()" class="px-3 py-1.5 rounded-lg bg-[#0d281e]/80 border border-[#34d399]/30 text-xs text-emerald-200 hover:border-[#34d399] transition flex items-center space-x-1.5">
+                        <i data-lucide="shield-check" class="w-3.5 h-3.5 text-[#34d399]"></i>
                         <span id="privacy-mode-text">Pseudonym: ON</span>
                     </button>
                 </div>
 
                 <!-- Balance Indicator Pill -->
                 <div class="flex items-center space-x-3">
-                    <div class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-[#ff7d00]/10 border border-[#ff7d00]/30 text-[#ff7d00] font-mono-num font-bold text-xs cursor-pointer" onclick="switchTab('rewards')">
-                        <i data-lucide="coins" class="w-3.5 h-3.5"></i>
+                    <div class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-[#10b981]/15 border border-[#10b981]/40 text-[#34d399] font-mono-num font-bold text-xs cursor-pointer" onclick="switchTab('rewards')">
+                        <i data-lucide="coins" class="w-3.5 h-3.5 text-[#10b981]"></i>
                         <span id="user-green-points">1,280</span>
-                        <span class="text-[10px] text-gray-400 font-sans">PTS</span>
+                        <span class="text-[10px] text-emerald-300 font-sans">PTS</span>
                     </div>
 
-                    <button onclick="switchTab('simulator')" class="px-3.5 py-1.5 rounded-lg bg-[#ff7d00] hover:bg-[#e67000] text-black font-bold text-xs shadow-md shadow-[#ff7d00]/10 flex items-center space-x-1.5 transition">
+                    <button onclick="switchTab('simulator')" class="px-3.5 py-1.5 rounded-lg bg-[#10b981] hover:bg-[#059669] text-black font-bold text-xs shadow-md shadow-[#10b981]/25 flex items-center space-x-1.5 transition">
                         <i data-lucide="plus" class="w-3.5 h-3.5"></i>
                         <span>Log Trip</span>
                     </button>

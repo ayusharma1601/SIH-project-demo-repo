@@ -1,27 +1,31 @@
-/* CarbonSaathi - Frosted Glassmorphism Emerald & Dark Theme */
+/* CarbonSaathi - Frosted Glassmorphism Emerald & Sage Nature Theme */
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
 :root {
-    --bg-main: #06110d; /* Deep Forest Emerald Dark */
-    --bg-card: rgba(18, 30, 24, 0.7); /* Frosted Glass Container */
-    --bg-card-hover: rgba(28, 44, 35, 0.85);
-    --border-subtle: rgba(52, 211, 153, 0.18); /* Subtle Emerald Glass Border */
-    --border-accent: rgba(16, 185, 129, 0.4);
+    --bg-main: #04120c; /* Deep Forest Black-Emerald */
+    --bg-card: rgba(10, 26, 19, 0.75); /* Deep Emerald Glass Container */
+    --bg-card-hover: rgba(16, 40, 29, 0.9);
+    --border-subtle: rgba(52, 211, 153, 0.22); /* Emerald Wireframe Border */
+    --border-accent: rgba(16, 185, 129, 0.5);
     
-    --orange-primary: #ff7d00;
-    --orange-hover: #e67000;
-    --orange-glow: rgba(255, 125, 0, 0.15);
+    --emerald-primary: #10b981;
+    --emerald-hover: #059669;
+    --emerald-glow: rgba(16, 185, 129, 0.25);
 
-    --purple-primary: #a855f7;
-    --purple-glow: rgba(168, 85, 247, 0.15);
+    --orange-primary: #10b981; /* Shift primary accent to lush Emerald Green */
+    --orange-hover: #059669;
+    --orange-glow: rgba(16, 185, 129, 0.25);
 
-    --text-primary: #f0fdf4;
-    --text-secondary: #a7f3d0;
+    --purple-primary: #34d399;
+    --purple-glow: rgba(52, 211, 153, 0.2);
+
+    --text-primary: #ecfdf5; /* Crisp Sage White */
+    --text-secondary: #a7f3d0; /* Mint Sage */
     --text-muted: #6ee7b7;
 }
 
 body {
-    background: radial-gradient(circle at 20% 20%, #0d261e 0%, #06110d 60%, #020605 100%);
+    background: radial-gradient(circle at 30% 20%, #0a291d 0%, #04120c 60%, #020805 100%);
     background-attachment: fixed;
     color: var(--text-primary);
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -32,22 +36,23 @@ h1, h2, h3, .heading-condensed {
     font-family: 'Oswald', 'Inter', sans-serif;
     letter-spacing: 0.05em;
     text-transform: uppercase;
+    color: #f0fdf4;
 }
 
-/* Frosted Glass Card Styling */
+/* Frosted Emerald Glass Card Styling */
 .min-card, .glass-card {
-    background: rgba(15, 28, 22, 0.65) !important;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(52, 211, 153, 0.2) !important;
+    background: rgba(8, 22, 16, 0.72) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(52, 211, 153, 0.22) !important;
     border-radius: 16px !important;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
     transition: all 0.3s ease;
 }
 
 .min-card:hover, .glass-card:hover {
-    border-color: rgba(52, 211, 153, 0.4) !important;
-    box-shadow: 0 12px 40px 0 rgba(16, 185, 129, 0.15);
+    border-color: rgba(52, 211, 153, 0.45) !important;
+    box-shadow: 0 12px 40px 0 rgba(16, 185, 129, 0.2);
 }
 
 /* Accent Borders & Glows */
