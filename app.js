@@ -654,9 +654,9 @@ function renderCashoutHistory() {
     `).join('');
 }
 
-function openProfileModal() {
+function populateProfileTab() {
     const u = appState.user;
-    const emailDisplay = document.getElementById('prof-email-display');
+    const emailDisplay = document.getElementById('tab-prof-email-display');
     if (emailDisplay) emailDisplay.textContent = u.email || 'user@example.com';
     document.getElementById('prof-name').value = u.realName;
     document.getElementById('prof-pseudonym').value = u.pseudonym;
@@ -664,17 +664,10 @@ function openProfileModal() {
     document.getElementById('prof-circle-name').value = u.circleName;
     document.getElementById('prof-goal-steps').value = u.goalSteps;
     document.getElementById('prof-goal-co2').value = u.goalCo2Kg;
-
-    document.getElementById('profile-modal').classList.remove('hidden');
-}
-
-function closeProfileModal() {
-    document.getElementById('profile-modal').classList.add('hidden');
 }
 
 function logoutUser() {
     appState.isAuthenticated = false;
-    closeProfileModal();
     renderAppViewState();
     showToast("Successfully signed out.", "success");
 }
@@ -690,7 +683,6 @@ function saveProfileSettings(event) {
 
     saveUserToLocalStorage();
     updatePersonalizedUI();
-    closeProfileModal();
     showToast("Profile saved!", "success");
 }
 
@@ -742,6 +734,8 @@ function switchTab(tabId) {
 
     const desktopBtn = document.getElementById(`nav-${tabId}`);
     if (desktopBtn) desktopBtn.classList.add('active');
+    
+    if (tabId === 'profile') populateProfileTab();
 
     // Auto-close sidebar drawer when selecting a menu option on mobile screen sizes
     const sidebar = document.getElementById('app-sidebar');

@@ -145,3 +145,22 @@ input[type=range] {
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
+/* Sidebar Collapse (Desktop) */
+.sidebar-collapsed {
+    width: 80px !important;
+}
+.sidebar-collapsed .sidebar-text {
+    display: none !important;
+}
+.sidebar-collapsed .nav-item {
+    justify-content: center;
+    padding-left: 0;
+    padding-right: 0;
+}
+.sidebar-collapsed .nav-item i {
+    margin-right: 0 !important;
+}
+.sidebar-collapsed .nav-item span,
+.sidebar-collapsed .nav-item div.sidebar-text {
+    display: none !important;
+}

@@ -289,6 +289,10 @@
                         <i data-lucide="sparkles" class="w-4 h-4 flex-shrink-0"></i>
                         <span class="sidebar-text truncate">Trip Reel & Card</span>
                     </button>
+                    <button onclick="switchTab('profile')" id="nav-profile" class="nav-item w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-r-lg text-xs font-semibold">
+                        <i data-lucide="user-circle" class="w-4 h-4 flex-shrink-0"></i>
+                        <span class="sidebar-text truncate">Profile & Settings</span>
+                    </button>
                 </nav>
             </div>
 
@@ -331,11 +335,6 @@
                     <!-- Mobile Hamburger Toggle -->
                     <button onclick="toggleSidebar()" class="p-2 rounded-lg bg-[#0d281e]/80 border border-[#c2d6ad]/30 text-[#c2d6ad] hover:text-white hover:border-[#84a956] transition flex items-center justify-center">
                         <i data-lucide="menu" class="w-5 h-5 text-[#84a956]"></i>
-                    </button>
-
-                    <button onclick="openProfileModal()" class="px-3 py-1.5 rounded-lg bg-[#0d281e]/80 border border-[#c2d6ad]/30 text-xs text-[#c2d6ad] hover:border-[#84a956] transition flex items-center space-x-1.5">
-                        <i data-lucide="sliders" class="w-3.5 h-3.5 text-[#84a956]"></i>
-                        <span class="hidden sm:inline">Edit Profile</span>
                     </button>
 
                     <button id="privacy-toggle-btn" onclick="togglePrivacyMode()" class="px-3 py-1.5 rounded-lg bg-[#0d281e]/80 border border-[#c2d6ad]/30 text-xs text-[#c2d6ad] hover:border-[#c2d6ad] transition flex items-center space-x-1.5">
@@ -1004,84 +1003,102 @@
 
                 </section>
 
+                <!-- ================= PROFILE TAB ================= -->
+                <section id="tab-profile" class="tab-content hidden space-y-6">
+                    <div class="min-card p-5 bg-[#102216] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div>
+                            <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                                <i data-lucide="user-circle" class="w-5 h-5 text-[#84a956]"></i>
+                                Account Settings
+                            </h2>
+                            <p class="text-xs text-[#c2d6ad] mt-1">Manage your identity, daily goals, and session.</p>
+                        </div>
+                        <div class="px-3.5 py-2 rounded-lg bg-[#0b1206] border border-[#84a956]/20 flex items-center space-x-3 shadow-md">
+                            <div class="w-8 h-8 rounded-full bg-[#5c3a21] text-white flex items-center justify-center font-bold shadow-sm shadow-[#5c3a21]/50">
+                                <i data-lucide="user" class="w-4 h-4"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] uppercase tracking-wider text-[#c2d6ad]">Signed in as</p>
+                                <p id="tab-prof-email-display" class="text-sm font-bold text-white"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Profile Form -->
+                        <div class="min-card p-6 bg-[#102216] border border-[#84a956]/30">
+                            <form onsubmit="saveProfileSettings(event)" class="space-y-4 text-xs">
+                                
+                                <div class="space-y-3">
+                                    <h3 class="font-bold text-white uppercase tracking-wide border-b border-[#84a956]/20 pb-1 mb-2">Display Identity</h3>
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <div>
+                                            <label class="block text-[#c2d6ad] mb-1">Full Name</label>
+                                            <input type="text" id="prof-name" required class="w-full p-2.5 rounded bg-[#0b1206] border border-[#84a956]/30 text-white focus:border-[#84a956] outline-none">
+                                        </div>
+                                        <div>
+                                            <label class="block text-[#c2d6ad] mb-1">Pseudonym</label>
+                                            <input type="text" id="prof-pseudonym" required class="w-full p-2.5 rounded bg-[#0b1206] border border-[#84a956]/30 text-white focus:border-[#84a956] outline-none">
+                                        </div>
+                                    </div>
+
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <div>
+                                            <label class="block text-[#c2d6ad] mb-1">Circle Type</label>
+                                            <select id="prof-circle-cat" class="w-full p-2.5 rounded bg-[#0b1206] border border-[#84a956]/30 text-white focus:border-[#84a956] outline-none">
+                                                <option value="college">College Campus</option>
+                                                <option value="office">Corporate Office</option>
+                                                <option value="society">Housing Society</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label class="block text-[#c2d6ad] mb-1">Circle Name</label>
+                                            <input type="text" id="prof-circle-name" required class="w-full p-2.5 rounded bg-[#0b1206] border border-[#84a956]/30 text-white focus:border-[#84a956] outline-none">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-3 pt-3">
+                                    <h3 class="font-bold text-white uppercase tracking-wide border-b border-[#84a956]/20 pb-1 mb-2">Daily Goals</h3>
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <div>
+                                            <label class="block text-[#c2d6ad] mb-1">Steps Target</label>
+                                            <input type="number" id="prof-goal-steps" min="3000" max="30000" step="500" class="w-full p-2.5 rounded bg-[#0b1206] border border-[#84a956]/30 text-white focus:border-[#84a956] outline-none">
+                                        </div>
+                                        <div>
+                                            <label class="block text-[#c2d6ad] mb-1">CO2 Target (kg)</label>
+                                            <input type="number" id="prof-goal-co2" min="1.0" max="20.0" step="0.5" class="w-full p-2.5 rounded bg-[#0b1206] border border-[#84a956]/30 text-white focus:border-[#84a956] outline-none">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="pt-5 mt-2 flex justify-end">
+                                    <button type="submit" class="px-8 py-2.5 rounded-lg bg-[#5c3a21] hover:bg-[#4a2e1a] text-white font-bold border border-[#84a956]/30 shadow-lg transition">Save Changes</button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <!-- Account Actions -->
+                        <div class="min-card p-6 bg-[#102216] border border-[#84a956]/30 flex flex-col space-y-4">
+                            <div>
+                                <h3 class="font-bold text-rose-300 uppercase tracking-wide border-b border-rose-500/20 pb-1 mb-3">Session Management</h3>
+                                <p class="text-xs text-[#c2d6ad] mb-4">You can securely sign out of your account on this device. Your data remains safe on the cloud.</p>
+                                <button type="button" onclick="logoutUser()" class="w-full py-3 rounded-lg bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 hover:text-rose-300 font-bold border border-rose-500/30 flex items-center justify-center space-x-2 transition shadow-md">
+                                    <i data-lucide="log-out" class="w-4 h-4"></i>
+                                    <span>Sign Out of CarbonSaathi</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
             </main>
 
         </div>
 
     </div>
 
-    <!-- Edit Profile Modal -->
-    <div id="profile-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-        <div class="min-card max-w-lg w-full bg-[#102216] p-6 space-y-5 border border-[#84a956]/30 relative">
-            <button onclick="closeProfileModal()" class="absolute top-5 right-5 text-gray-400 hover:text-white">
-                <i data-lucide="x" class="w-5 h-5"></i>
-            </button>
 
-            <div>
-                <h2 class="text-xl font-extrabold text-white">Edit Profile & Goals</h2>
-                <p class="text-xs text-[#c2d6ad]">Personalize your display identity and daily goals</p>
-                <div class="mt-3 p-2 rounded-lg bg-[#0b1206] border border-[#84a956]/20 flex items-center space-x-3">
-                    <div class="w-8 h-8 rounded-full bg-[#5c3a21] text-white flex items-center justify-center font-bold shadow-md shadow-[#5c3a21]/30">
-                        <i data-lucide="user" class="w-4 h-4"></i>
-                    </div>
-                    <div>
-                        <p class="text-[10px] uppercase tracking-wider text-[#c2d6ad]">Signed in as</p>
-                        <p id="prof-email-display" class="text-sm font-bold text-white"></p>
-                    </div>
-                </div>
-            </div>
-
-            <form onsubmit="saveProfileSettings(event)" class="space-y-3 text-xs">
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-[#c2d6ad] mb-1">Full Name</label>
-                        <input type="text" id="prof-name" required class="w-full p-2.5 rounded bg-[#0b1206] border border-[#84a956]/30 text-white">
-                    </div>
-                    <div>
-                        <label class="block text-[#c2d6ad] mb-1">Pseudonym</label>
-                        <input type="text" id="prof-pseudonym" required class="w-full p-2.5 rounded bg-[#0b1206] border border-[#84a956]/30 text-white">
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-[#c2d6ad] mb-1">Circle Type</label>
-                        <select id="prof-circle-cat" class="w-full p-2.5 rounded bg-[#0b1206] border border-[#84a956]/30 text-white">
-                            <option value="college">College Campus</option>
-                            <option value="office">Corporate Office</option>
-                            <option value="society">Housing Society</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-[#c2d6ad] mb-1">Circle Name</label>
-                        <input type="text" id="prof-circle-name" required class="w-full p-2.5 rounded bg-[#0b1206] border border-[#84a956]/30 text-white">
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-[#c2d6ad] mb-1">Steps Target</label>
-                        <input type="number" id="prof-goal-steps" min="3000" max="30000" step="500" class="w-full p-2.5 rounded bg-[#0b1206] border border-[#84a956]/30 text-white">
-                    </div>
-                    <div>
-                        <label class="block text-[#c2d6ad] mb-1">CO2 Target (kg)</label>
-                        <input type="number" id="prof-goal-co2" min="1.0" max="20.0" step="0.5" class="w-full p-2.5 rounded bg-[#0b1206] border border-[#84a956]/30 text-white">
-                    </div>
-                </div>
-
-                <div class="pt-4 mt-2 flex justify-between items-center border-t border-[#84a956]/20">
-                    <button type="button" onclick="logoutUser()" class="mt-3 px-3 py-2 rounded bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 hover:text-rose-300 font-semibold border border-rose-500/30 flex items-center space-x-2 transition">
-                        <i data-lucide="log-out" class="w-4 h-4"></i>
-                        <span>Sign Out</span>
-                    </button>
-                    <div class="flex space-x-2 mt-3">
-                        <button type="button" onclick="closeProfileModal()" class="px-4 py-2 rounded bg-[#162a1c] text-gray-300 hover:bg-[#1f3a27] transition">Cancel</button>
-                        <button type="submit" class="px-5 py-2 rounded bg-[#5c3a21] hover:bg-[#4a2e1a] text-white font-bold border border-[#84a956]/30 shadow-lg transition">Save</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
 
     <!-- Voucher QR Modal -->
     <div id="voucher-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
