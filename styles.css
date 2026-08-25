@@ -98,7 +98,26 @@ body {
 /* Transport Mode Card */
 .mode-card {
     background-color: #141418;
-    border: 1px solid var(--border-subtle);
+}
+
+/* Retractable Sidebar Classes */
+#app-sidebar.sidebar-collapsed {
+    width: 4.5rem !important;
+}
+
+#app-sidebar.sidebar-collapsed .sidebar-text {
+    display: none !important;
+}
+
+#app-sidebar.sidebar-collapsed .nav-item {
+    justify-content: center;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#app-sidebar.sidebar-collapsed #desktop-collapse-icon {
+    transform: rotate(180deg);
+}    border: 1px solid var(--border-subtle);
     transition: all 0.2s ease;
 }
 

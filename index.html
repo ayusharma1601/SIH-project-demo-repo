@@ -154,53 +154,69 @@
     <!-- ================= VIEW 2: MAIN DASHBOARD APP ================= -->
     <div id="view-app" class="hidden min-h-screen flex-1 flex-col md:flex-row">
         
-        <!-- Desktop Fixed Left Vertical Sidebar -->
-        <aside class="w-full md:w-64 bg-[#141418] border-r border-[#24242c] flex-shrink-0 flex flex-col justify-between">
+        <!-- Mobile Sidebar Backdrop Overlay -->
+        <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden md:hidden transition-opacity duration-300 opacity-0"></div>
+
+        <!-- Collapsible Left Vertical Sidebar -->
+        <aside id="app-sidebar" class="fixed md:static inset-y-0 left-0 z-50 w-64 bg-[#141418] border-r border-[#24242c] flex-shrink-0 flex flex-col justify-between transition-all duration-300 -translate-x-full md:translate-x-0">
             
             <div>
                 <!-- Brand Header -->
-                <div class="p-5 border-b border-[#24242c] flex items-center justify-between">
-                    <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('dashboard')">
-                        <div class="w-9 h-9 rounded-lg bg-[#ff7d00] text-black flex items-center justify-center font-extrabold text-lg shadow-md shadow-[#ff7d00]/20">
+                <div class="p-4 sm:p-5 border-b border-[#24242c] flex items-center justify-between">
+                    <div class="flex items-center space-x-3 cursor-pointer overflow-hidden" onclick="switchTab('dashboard')">
+                        <div class="w-9 h-9 rounded-lg bg-[#ff7d00] text-black flex items-center justify-center font-extrabold text-lg flex-shrink-0 shadow-md shadow-[#ff7d00]/20">
                             ⚡
                         </div>
-                        <div>
+                        <div class="sidebar-text truncate">
                             <span class="font-extrabold text-lg text-white tracking-tight">Carbon<span class="text-[#ff7d00]">Saathi</span></span>
                             <span class="block text-[10px] text-gray-400 font-mono">v2.0 • PWA App</span>
                         </div>
                     </div>
+
+                    <!-- Collapse / Close Button -->
+                    <button onclick="toggleSidebar()" class="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-[#24242c] transition" title="Toggle Sidebar Navigation">
+                        <i data-lucide="chevron-left" id="sidebar-toggle-icon" class="w-5 h-5"></i>
+                    </button>
+                </div>
+
+                <!-- Quick Collapsed Toggle Bar for Desktop Mini Mode -->
+                <div class="hidden md:flex justify-center py-2 border-b border-[#24242c]/50">
+                    <button onclick="toggleSidebarDesktop()" class="text-xs text-gray-400 hover:text-[#ff7d00] flex items-center gap-1.5 px-2 py-1 rounded hover:bg-[#1a1a20] transition">
+                        <i data-lucide="panel-left-close" id="desktop-collapse-icon" class="w-4 h-4"></i>
+                        <span class="sidebar-text text-[11px] font-medium">Collapse Menu</span>
+                    </button>
                 </div>
 
                 <!-- Navigation Sidebar Links -->
                 <nav class="p-3 space-y-1">
                     <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-item active w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-r-lg text-xs font-semibold">
-                        <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
-                        <span>Dashboard Overview</span>
+                        <i data-lucide="layout-dashboard" class="w-4 h-4 flex-shrink-0"></i>
+                        <span class="sidebar-text truncate">Dashboard Overview</span>
                     </button>
 
                     <button onclick="switchTab('simulator')" id="nav-simulator" class="nav-item w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-r-lg text-xs font-semibold">
-                        <i data-lucide="navigation" class="w-4 h-4"></i>
-                        <span>Trip Logger & Sim</span>
+                        <i data-lucide="navigation" class="w-4 h-4 flex-shrink-0"></i>
+                        <span class="sidebar-text truncate">Trip Logger & Sim</span>
                     </button>
 
                     <button onclick="switchTab('leaderboard')" id="nav-leaderboard" class="nav-item w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-r-lg text-xs font-semibold">
-                        <i data-lucide="trophy" class="w-4 h-4"></i>
-                        <span>Circle Leaderboard</span>
+                        <i data-lucide="trophy" class="w-4 h-4 flex-shrink-0"></i>
+                        <span class="sidebar-text truncate">Circle Leaderboard</span>
                     </button>
 
                     <button onclick="switchTab('challenges')" id="nav-challenges" class="nav-item w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-r-lg text-xs font-semibold">
-                        <i data-lucide="swords" class="w-4 h-4"></i>
-                        <span>Department Battles</span>
+                        <i data-lucide="swords" class="w-4 h-4 flex-shrink-0"></i>
+                        <span class="sidebar-text truncate">Department Battles</span>
                     </button>
 
                     <button onclick="switchTab('rewards')" id="nav-rewards" class="nav-item w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-r-lg text-xs font-semibold">
-                        <i data-lucide="gift" class="w-4 h-4"></i>
-                        <span>Rewards & Cashout</span>
+                        <i data-lucide="gift" class="w-4 h-4 flex-shrink-0"></i>
+                        <span class="sidebar-text truncate">Rewards & Cashout</span>
                     </button>
 
                     <button onclick="switchTab('recap')" id="nav-recap" class="nav-item w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-r-lg text-xs font-semibold">
-                        <i data-lucide="sparkles" class="w-4 h-4"></i>
-                        <span>Weekly Impact Card</span>
+                        <i data-lucide="sparkles" class="w-4 h-4 flex-shrink-0"></i>
+                        <span class="sidebar-text truncate">Weekly Impact Card</span>
                     </button>
                 </nav>
             </div>
@@ -210,20 +226,20 @@
                 
                 <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-2 overflow-hidden">
-                        <div class="w-8 h-8 rounded-lg bg-[#24242c] border border-[#32323e] flex items-center justify-center text-sm">👤</div>
-                        <div class="truncate">
+                        <div class="w-8 h-8 rounded-lg bg-[#24242c] border border-[#32323e] flex items-center justify-center text-sm flex-shrink-0">👤</div>
+                        <div class="truncate sidebar-text">
                             <div id="display-user-name" class="text-xs font-bold text-white truncate">EcoPioneer_42</div>
                             <div id="user-circle-display" class="text-[10px] text-gray-400 truncate">IIT Delhi Campus</div>
                         </div>
                     </div>
 
-                    <button onclick="handleUserLogout()" class="p-1.5 rounded-lg text-gray-400 hover:text-rose-400 hover:bg-rose-500/10 transition" title="Sign Out">
+                    <button onclick="handleUserLogout()" class="p-1.5 rounded-lg text-gray-400 hover:text-rose-400 hover:bg-rose-500/10 transition flex-shrink-0" title="Sign Out">
                         <i data-lucide="log-out" class="w-4 h-4"></i>
                     </button>
                 </div>
 
                 <!-- Network & PWA status -->
-                <div class="flex items-center justify-between pt-1 text-[10px] text-gray-400">
+                <div class="sidebar-text flex items-center justify-between pt-1 text-[10px] text-gray-400">
                     <span id="network-status-badge" class="flex items-center gap-1">
                         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Network: Online
                     </span>
@@ -240,10 +256,15 @@
             <!-- Top Header Bar -->
             <header class="sticky top-0 z-30 bg-[#141418]/90 backdrop-blur-md border-b border-[#24242c] px-4 sm:px-6 py-3 flex items-center justify-between">
                 
-                <div class="flex items-center space-x-3">
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <!-- Mobile Hamburger Toggle -->
+                    <button onclick="toggleSidebar()" class="p-2 rounded-lg bg-[#1c1c22] border border-[#2a2a34] text-gray-300 hover:text-white hover:border-[#ff7d00] transition flex items-center justify-center">
+                        <i data-lucide="menu" class="w-5 h-5 text-[#ff7d00]"></i>
+                    </button>
+
                     <button onclick="openProfileModal()" class="px-3 py-1.5 rounded-lg bg-[#1c1c22] border border-[#2a2a34] text-xs text-gray-300 hover:border-[#ff7d00] transition flex items-center space-x-1.5">
                         <i data-lucide="sliders" class="w-3.5 h-3.5 text-[#ff7d00]"></i>
-                        <span>Edit Profile</span>
+                        <span class="hidden sm:inline">Edit Profile</span>
                     </button>
 
                     <button id="privacy-toggle-btn" onclick="togglePrivacyMode()" class="px-3 py-1.5 rounded-lg bg-[#1c1c22] border border-[#2a2a34] text-xs text-gray-300 hover:border-[#a855f7] transition flex items-center space-x-1.5">

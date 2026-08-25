@@ -590,6 +590,17 @@ function switchTab(tabId) {
     const desktopBtn = document.getElementById(`nav-${tabId}`);
     if (desktopBtn) desktopBtn.classList.add('active');
 
+    // Auto-close sidebar drawer when selecting a menu option on mobile screen sizes
+    const sidebar = document.getElementById('app-sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    if (sidebar && window.innerWidth < 768) {
+        sidebar.classList.add('-translate-x-full');
+        if (overlay) {
+            overlay.classList.add('opacity-0');
+            setTimeout(() => overlay.classList.add('hidden'), 300);
+        }
+    }
+
     lucide.createIcons();
 }
 
@@ -918,4 +929,32 @@ function showToast(message, type = "info") {
         toast.classList.add('opacity-0', 'translate-y-2');
         setTimeout(() => toast.remove(), 300);
     }, 3500);
+}
+
+// Retractable Sidebar Toggle Controllers
+function toggleSidebar() {
+    const sidebar = document.getElementById('app-sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    if (!sidebar) return;
+
+    const isMobileHidden = sidebar.classList.contains('-translate-x-full');
+    if (isMobileHidden) {
+        sidebar.classList.remove('-translate-x-full');
+        if (overlay) {
+            overlay.classList.remove('hidden');
+            setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+        }
+    } else {
+        sidebar.classList.add('-translate-x-full');
+        if (overlay) {
+            overlay.classList.add('opacity-0');
+            setTimeout(() => overlay.classList.add('hidden'), 300);
+        }
+    }
+}
+
+function toggleSidebarDesktop() {
+    const sidebar = document.getElementById('app-sidebar');
+    if (!sidebar) return;
+    sidebar.classList.toggle('sidebar-collapsed');
 }
