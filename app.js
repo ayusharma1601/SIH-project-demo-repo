@@ -393,9 +393,9 @@ function validatePasswordFieldLive() {
         text.className = "text-[10px] text-rose-400 font-semibold";
         return false;
     } else if (score === 2) {
-        bar.className = "h-full bg-amber-400 w-3/4 transition-all duration-300";
+        bar.className = "h-full bg-[#84a956] w-3/4 transition-all duration-300";
         text.textContent = "Moderate strength";
-        text.className = "text-[10px] text-amber-300 font-semibold";
+        text.className = "text-[10px] text-[#c2d6ad] font-semibold";
         return true;
     } else {
         bar.className = "h-full bg-emerald-500 w-full transition-all duration-300";
@@ -427,13 +427,13 @@ function switchAuthTab(mode) {
     const btnText = document.getElementById('auth-btn-text');
 
     if (mode === 'signin') {
-        signinBtn.className = "w-1/2 py-2 rounded-md font-bold transition text-[#ff7d00] bg-[#1a1a20]";
+        signinBtn.className = "w-1/2 py-2 rounded-md font-bold transition text-[#84a956] bg-[#102216]";
         signupBtn.className = "w-1/2 py-2 rounded-md font-bold transition text-gray-400";
         nameField.classList.add('hidden');
         circleField.classList.add('hidden');
         btnText.textContent = "Sign In to CarbonSaathi";
     } else {
-        signupBtn.className = "w-1/2 py-2 rounded-md font-bold transition text-[#ff7d00] bg-[#1a1a20]";
+        signupBtn.className = "w-1/2 py-2 rounded-md font-bold transition text-[#84a956] bg-[#102216]";
         signinBtn.className = "w-1/2 py-2 rounded-md font-bold transition text-gray-400";
         nameField.classList.remove('hidden');
         circleField.classList.remove('hidden');
@@ -642,12 +642,12 @@ function renderCashoutHistory() {
             <div>
                 <div class="font-bold text-white flex items-center gap-1">
                     <span>${tx.amountRupees}</span>
-                    <span class="text-[9px] text-[#ff7d00] bg-[#ff7d00]/10 px-1 py-0.2 rounded border border-[#ff7d00]/20">${tx.status}</span>
+                    <span class="text-[9px] text-[#84a956] bg-[#84a956]/10 px-1 py-0.2 rounded border border-[#84a956]/20">${tx.status}</span>
                 </div>
                 <div class="text-gray-400 text-[10px]">${tx.method} • ${tx.address}</div>
             </div>
             <div class="text-right">
-                <div class="font-bold text-amber-400">-${tx.pointsSpent} PTS</div>
+                <div class="font-bold text-[#c2d6ad]">-${tx.pointsSpent} PTS</div>
                 <div class="text-[9px] text-gray-500">${tx.time}</div>
             </div>
         </div>
@@ -701,7 +701,7 @@ function setupNetworkListeners() {
         if (navigator.onLine) {
             badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Network: Online`;
         } else {
-            badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-amber-400"></span> Network: Offline`;
+            badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-[#5c3a21]"></span> Network: Offline`;
         }
     }
     window.addEventListener('online', updateStatus);
@@ -767,13 +767,13 @@ function initDashboardCharts() {
                     {
                         label: 'Your CO2 Saved (kg)',
                         data: [0.3, 0.4, 0.2, 0.5, 0.3, 0.1, 0.2],
-                        backgroundColor: '#ff7d00',
+                        backgroundColor: '#5c3a21',
                         borderRadius: 4
                     },
                     {
                         label: 'Petrol Baseline (kg)',
                         data: [2.1, 2.5, 1.8, 2.8, 2.2, 1.2, 1.5],
-                        backgroundColor: 'rgba(168, 85, 247, 0.3)',
+                        backgroundColor: 'rgba(132, 169, 86, 0.3)',
                         borderRadius: 4
                     }
                 ]
@@ -800,7 +800,7 @@ function initDashboardCharts() {
                 labels: ['Walking', 'Metro', 'E-Rick', 'Car'],
                 datasets: [{
                     data: [40, 35, 15, 10],
-                    backgroundColor: ['#ff7d00', '#a855f7', '#34d399', '#f43f5e'],
+                    backgroundColor: ['#5c3a21', '#84a956', '#34d399', '#c2d6ad'],
                     borderWidth: 0
                 }]
             },
@@ -832,7 +832,7 @@ function renderSensorStream() {
                 </div>
             </div>
             <div class="text-right">
-                <div class="font-extrabold text-[#ff7d00] font-mono-num">+${item.co2Saved}</div>
+                <div class="font-extrabold text-[#84a956] font-mono-num">+${item.co2Saved}</div>
             </div>
         </div>
     `).join('');
@@ -929,10 +929,10 @@ function renderLeaderboard() {
             const nameToDisplay = item.isUser ? `${userDisplayName}` : item.name;
 
             return `
-                <div class="min-card p-4 bg-[#16161a] border-b-2 ${actualRank === 1 ? 'border-[#ff7d00]' : 'border-[#24242c]'} text-center space-y-2">
+                <div class="min-card p-4 bg-[#102216] border-b-2 ${actualRank === 1 ? 'border-[#5c3a21]' : 'border-[#2a3a20]'} text-center space-y-2">
                     <span class="text-[10px] font-mono-num font-bold text-gray-400">RANK #${actualRank}</span>
                     <h4 class="font-bold text-white text-sm truncate">${nameToDisplay}</h4>
-                    <div class="text-xs text-[#ff7d00] font-mono-num font-extrabold">${item.isUser ? (appState.user.co2SavedTodayKg * 4).toFixed(1) : item.co2} kg CO2</div>
+                    <div class="text-xs text-[#84a956] font-mono-num font-extrabold">${item.isUser ? (appState.user.co2SavedTodayKg * 4).toFixed(1) : item.co2} kg CO2</div>
                 </div>
             `;
         }).join('');
@@ -940,15 +940,15 @@ function renderLeaderboard() {
 
     tableBody.innerHTML = list.map(item => {
         const displayName = item.isUser ? `${userDisplayName}` : item.name;
-        const userRowBg = item.isUser ? 'bg-[#ff7d00]/10 font-bold border-l-2 border-l-[#ff7d00]' : 'hover:bg-[#1a1a20]';
+        const userRowBg = item.isUser ? 'bg-[#5c3a21]/10 font-bold border-l-2 border-l-[#5c3a21]' : 'hover:bg-[#0b1206]';
 
         return `
             <tr class="${userRowBg} transition">
-                <td class="px-5 py-3 font-bold font-mono-num ${item.rank <= 3 ? 'text-[#ff7d00]' : 'text-gray-400'}">#${item.rank}</td>
-                <td class="px-5 py-3 text-white">${displayName} ${item.isUser ? '<span class="text-[9px] bg-[#ff7d00]/20 text-[#ff7d00] px-1 py-0.2 rounded">YOU</span>' : ''}</td>
+                <td class="px-5 py-3 font-bold font-mono-num ${item.rank <= 3 ? 'text-[#84a956]' : 'text-gray-400'}">#${item.rank}</td>
+                <td class="px-5 py-3 text-white">${displayName} ${item.isUser ? '<span class="text-[9px] bg-[#5c3a21]/20 text-[#c2d6ad] px-1 py-0.2 rounded">YOU</span>' : ''}</td>
                 <td class="px-5 py-3 text-gray-400">${item.mode}</td>
-                <td class="px-5 py-3 text-right font-mono-num font-bold text-[#ff7d00]">${item.isUser ? (appState.user.co2SavedTodayKg * 4.2).toFixed(1) : item.co2} kg</td>
-                <td class="px-5 py-3 text-right font-mono-num text-amber-400">🔥 ${item.isUser ? appState.user.streakDays : item.streak}d</td>
+                <td class="px-5 py-3 text-right font-mono-num font-bold text-[#84a956]">${item.isUser ? (appState.user.co2SavedTodayKg * 4.2).toFixed(1) : item.co2} kg</td>
+                <td class="px-5 py-3 text-right font-mono-num text-[#c2d6ad]">🔥 ${item.isUser ? appState.user.streakDays : item.streak}d</td>
             </tr>
         `;
     }).join('');
@@ -967,10 +967,10 @@ function renderChallenges() {
             <div class="space-y-2 text-xs">
                 <div class="flex justify-between text-gray-300">
                     <span>${item.deptA}</span>
-                    <span class="font-mono-num text-[#ff7d00]">${item.progressA} kg</span>
+                    <span class="font-mono-num text-[#84a956]">${item.progressA} kg</span>
                 </div>
                 <div class="w-full h-1.5 bg-[#0e0e11] rounded-full overflow-hidden">
-                    <div class="h-full bg-[#ff7d00]" style="width: ${Math.round((item.progressA / item.target) * 100)}%"></div>
+                    <div class="h-full bg-[#5c3a21]" style="width: ${Math.round((item.progressA / item.target) * 100)}%"></div>
                 </div>
             </div>
         </div>
@@ -989,7 +989,7 @@ function renderVouchers() {
                 <p class="text-[10px] text-gray-400 mt-0.5">${item.partner}</p>
             </div>
             <div class="flex justify-between items-center pt-2 border-t border-[#24242c]">
-                <span class="text-xs font-bold text-[#ff7d00] font-mono-num">${item.pts} PTS</span>
+                <span class="text-xs font-bold text-[#84a956] font-mono-num">${item.pts} PTS</span>
                 <button onclick="claimVoucher('${item.id}')" class="px-2.5 py-1 rounded bg-[#1c1c22] border border-[#2a2a34] text-xs text-white font-bold">Claim</button>
             </div>
         </div>
@@ -1022,9 +1022,9 @@ function closeVoucherModal() {
 function changeRecapTheme(theme) {
     const card = document.getElementById('social-recap-card');
     if (!card) return;
-    if (theme === 'emerald') card.className = "w-full max-w-md p-6 rounded-2xl bg-[#141418] border-2 border-[#ff7d00]/40 shadow-2xl space-y-5 relative overflow-hidden";
-    else if (theme === 'cyber') card.className = "w-full max-w-md p-6 rounded-2xl bg-[#141418] border-2 border-[#a855f7]/40 shadow-2xl space-y-5 relative overflow-hidden";
-    else card.className = "w-full max-w-md p-6 rounded-2xl bg-[#141418] border-2 border-amber-500/40 shadow-2xl space-y-5 relative overflow-hidden";
+    if (theme === 'emerald') card.className = "w-full max-w-md p-6 rounded-2xl bg-[#102216] border-2 border-[#5c3a21]/40 shadow-2xl space-y-5 relative overflow-hidden";
+    else if (theme === 'cyber') card.className = "w-full max-w-md p-6 rounded-2xl bg-[#102216] border-2 border-[#84a956]/40 shadow-2xl space-y-5 relative overflow-hidden";
+    else card.className = "w-full max-w-md p-6 rounded-2xl bg-[#102216] border-2 border-[#c2d6ad]/40 shadow-2xl space-y-5 relative overflow-hidden";
 }
 
 function updateRecapQuote() {
@@ -1059,9 +1059,9 @@ function showToast(message, type = "info") {
 
     const toast = document.createElement('div');
     const bgColors = {
-        success: 'bg-[#141418] border-[#ff7d00] text-gray-100',
-        warning: 'bg-[#141418] border-amber-500 text-amber-200',
-        info: 'bg-[#141418] border-[#24242c] text-gray-200'
+        success: 'bg-[#102216] border-[#5c3a21] text-gray-100',
+        warning: 'bg-[#102216] border-[#84a956] text-[#c2d6ad]',
+        info: 'bg-[#102216] border-[#2a3a20] text-gray-200'
     };
 
     toast.className = `px-3.5 py-2.5 rounded-lg border backdrop-blur-md shadow-2xl text-xs font-bold transition-all transform translate-y-2 opacity-0 ${bgColors[type] || bgColors.info}`;

@@ -78,7 +78,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-[#18181e] text-gray-100 min-h-full flex flex-col font-sans selection:bg-[#ff7d00] selection:text-black">
+<body class="bg-[#18181e] text-gray-100 min-h-full flex flex-col font-sans selection:bg-[#5c3a21] selection:text-white">
 
     <!-- ================= GROWING TREE LOADING BUFFER SCREEN ================= -->
     <div id="tree-loader" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#06110d]/95 backdrop-blur-xl text-white transition-opacity duration-500 p-6">
@@ -117,27 +117,27 @@
     </div>
 
     <!-- ================= VIEW 1: AUTHENTICATION / LOGIN SCREEN ================= -->
-    <section id="view-auth" class="min-h-screen flex items-center justify-center p-4 relative overflow-hidden bg-[#000000]">
+    <section id="view-auth" class="min-h-screen flex items-center justify-center p-4 relative overflow-hidden bg-[#0b1206]">
         
         <!-- Subtle Ambient Background Glows -->
-        <div class="absolute -top-32 -left-32 w-96 h-96 bg-[#ff7d00]/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-[#a855f7]/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -top-32 -left-32 w-96 h-96 bg-[#5c3a21]/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-[#84a956]/10 rounded-full blur-3xl pointer-events-none"></div>
 
-        <div class="max-w-md w-full min-card p-6 sm:p-8 border border-[#27272c] bg-[#161619] shadow-2xl relative z-10 space-y-6">
+        <div class="max-w-md w-full min-card p-6 sm:p-8 border border-[#2a3a20] bg-[#102216] shadow-2xl relative z-10 space-y-6">
             
             <!-- App Branding Header -->
             <div class="text-center space-y-2">
-                <div class="w-12 h-12 rounded-xl bg-[#ff7d00] text-black flex items-center justify-center font-bold text-xl mx-auto shadow-lg shadow-[#ff7d00]/20">
+                <div class="w-12 h-12 rounded-xl bg-[#5c3a21] text-white flex items-center justify-center font-bold text-xl mx-auto shadow-lg shadow-[#5c3a21]/40 border border-[#84a956]/30">
                     ⚡
                 </div>
-                <h1 class="text-2xl font-extrabold tracking-tight text-white mt-3">Carbon<span class="text-[#ff7d00]">Saathi</span></h1>
-                <p class="text-xs text-gray-400">Mission LiFE Personal Carbon & Fitness Tracker</p>
+                <h1 class="text-2xl font-extrabold tracking-tight text-white mt-3">Carbon<span class="text-[#84a956]">Saathi</span></h1>
+                <p class="text-xs text-[#c2d6ad]">Mission LiFE Personal Carbon & Fitness Tracker</p>
             </div>
 
             <!-- Login / Sign Up Tab Toggle -->
-            <div class="flex p-1 bg-[#0a0a0c] rounded-lg border border-[#27272c] text-xs">
-                <button onclick="switchAuthTab('signin')" id="auth-tab-signin" class="w-1/2 py-2 rounded-md font-bold transition text-[#ff7d00] bg-[#222226]">Sign In</button>
-                <button onclick="switchAuthTab('signup')" id="auth-tab-signup" class="w-1/2 py-2 rounded-md font-bold transition text-gray-400">Create Account</button>
+            <div class="flex p-1 bg-[#0b1206] rounded-lg border border-[#84a956]/20 text-xs">
+                <button onclick="switchAuthTab('signin')" id="auth-tab-signin" class="w-1/2 py-2 rounded-md font-bold transition text-white bg-[#5c3a21]">Sign In</button>
+                <button onclick="switchAuthTab('signup')" id="auth-tab-signup" class="w-1/2 py-2 rounded-md font-bold transition text-[#c2d6ad]">Create Account</button>
             </div>
 
             <!-- Global Auth Validation Alert Box -->
@@ -148,64 +148,64 @@
 
             <!-- Quick SSO Login Buttons -->
             <div class="space-y-2">
-                <button onclick="handleQuickAuth('Google User', 'google_user@gmail.com')" class="w-full py-2.5 px-4 rounded-lg bg-[#1a1a20] hover:bg-[#22222a] border border-[#2a2a34] text-white font-semibold text-xs transition flex items-center justify-center space-x-2">
+                <button onclick="handleQuickAuth('Google User', 'google_user@gmail.com')" class="w-full py-2.5 px-4 rounded-lg bg-[#142418] hover:bg-[#1e3624] border border-[#84a956]/30 text-white font-semibold text-xs transition flex items-center justify-center space-x-2">
                     <svg class="w-4 h-4" viewBox="0 0 24 24"><path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.3 1.6 14.8 0 12 0 7.4 0 3.5 2.6 1.6 6.4l3.7 2.9C6.2 6.5 8.9 5 12 5z"/><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.7-.2-2.3H12v4.6h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.9z"/><path fill="#FBBC05" d="M5.3 14.8c-.2-.7-.4-1.5-.4-2.3s.2-1.6.4-2.3L1.6 7.3C.6 9.3 0 11.6 0 14s.6 4.7 1.6 6.7l3.7-2.9z"/><path fill="#34A853" d="M12 24c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3.1 0-5.8-1.5-6.7-4.3L1.6 17.9C3.5 21.4 7.4 24 12 24z"/></svg>
                     <span>Continue with Google</span>
                 </button>
                 
-                <button onclick="handleQuickAuth('DigiLocker User', 'digilocker@gov.in')" class="w-full py-2.5 px-4 rounded-lg bg-[#1a1a20] hover:bg-[#22222a] border border-[#2a2a34] text-white font-semibold text-xs transition flex items-center justify-center space-x-2">
+                <button onclick="handleQuickAuth('DigiLocker User', 'digilocker@gov.in')" class="w-full py-2.5 px-4 rounded-lg bg-[#142418] hover:bg-[#1e3624] border border-[#84a956]/30 text-white font-semibold text-xs transition flex items-center justify-center space-x-2">
                     <span class="text-base">🇮🇳</span>
                     <span>Sign In via Govt DigiLocker / Mission LiFE</span>
                 </button>
             </div>
 
             <div class="flex items-center my-2">
-                <div class="flex-1 border-t border-[#24242c]"></div>
-                <span class="px-3 text-[10px] text-gray-500 uppercase tracking-widest">Or login with email</span>
-                <div class="flex-1 border-t border-[#24242c]"></div>
+                <div class="flex-1 border-t border-[#84a956]/20"></div>
+                <span class="px-3 text-[10px] text-[#c2d6ad] uppercase tracking-widest">Or login with email</span>
+                <div class="flex-1 border-t border-[#84a956]/20"></div>
             </div>
 
             <!-- Login Form -->
             <form id="form-auth" onsubmit="handleFormAuthSubmit(event)" class="space-y-4 text-xs">
                 
                 <div id="field-name-container" class="hidden">
-                    <label class="block text-gray-400 font-semibold uppercase tracking-wider mb-1">Full Name</label>
-                    <input type="text" id="auth-name" placeholder="Aysha Khan" class="w-full px-3.5 py-2.5 rounded-lg bg-[#0a0a0c] border border-[#24242c] text-white focus:outline-none focus:border-[#ff7d00]">
+                    <label class="block text-[#c2d6ad] font-semibold uppercase tracking-wider mb-1">Full Name</label>
+                    <input type="text" id="auth-name" placeholder="Aysha Khan" class="w-full px-3.5 py-2.5 rounded-lg bg-[#0b1206] border border-[#84a956]/30 text-white focus:outline-none focus:border-[#84a956]">
                 </div>
 
                 <div>
-                    <label class="block text-gray-400 font-semibold uppercase tracking-wider mb-1">Email Address</label>
-                    <input type="email" id="auth-email" required placeholder="aysha@example.com" oninput="validateEmailFieldLive()" class="w-full px-3.5 py-2.5 rounded-lg bg-[#0a0a0c] border border-[#24242c] text-white focus:outline-none focus:border-[#ff7d00]">
+                    <label class="block text-[#c2d6ad] font-semibold uppercase tracking-wider mb-1">Email Address</label>
+                    <input type="email" id="auth-email" required placeholder="aysha@example.com" oninput="validateEmailFieldLive()" class="w-full px-3.5 py-2.5 rounded-lg bg-[#0b1206] border border-[#84a956]/30 text-white focus:outline-none focus:border-[#84a956]">
                     <p id="email-error-msg" class="hidden text-[10px] text-rose-400 mt-1">Please enter a valid email format (e.g. name@domain.com)</p>
                 </div>
 
                 <div>
                     <div class="flex justify-between items-center mb-1">
-                        <label class="block text-gray-400 font-semibold uppercase tracking-wider">Password</label>
-                        <a href="#" onclick="alert('Demo Recovery: Use password \'Password123\' for default demo user!')" class="text-[11px] text-[#ff7d00] hover:underline">Forgot?</a>
+                        <label class="block text-[#c2d6ad] font-semibold uppercase tracking-wider">Password</label>
+                        <a href="#" onclick="alert('Demo Recovery: Use password \'Password123\' for default demo user!')" class="text-[11px] text-[#84a956] hover:underline">Forgot?</a>
                     </div>
-                    <input type="password" id="auth-password" required placeholder="••••••••" oninput="validatePasswordFieldLive()" class="w-full px-3.5 py-2.5 rounded-lg bg-[#0a0a0c] border border-[#24242c] text-white focus:outline-none focus:border-[#ff7d00]">
+                    <input type="password" id="auth-password" required placeholder="••••••••" oninput="validatePasswordFieldLive()" class="w-full px-3.5 py-2.5 rounded-lg bg-[#0b1206] border border-[#84a956]/30 text-white focus:outline-none focus:border-[#84a956]">
                     
                     <div id="password-strength-container" class="hidden mt-1.5 space-y-1">
-                        <div class="flex h-1.5 w-full bg-[#1e1e24] rounded-full overflow-hidden">
+                        <div class="flex h-1.5 w-full bg-[#122216] rounded-full overflow-hidden">
                             <div id="pw-strength-bar" class="h-full bg-rose-500 w-1/3 transition-all duration-300"></div>
                         </div>
-                        <span id="pw-strength-text" class="text-[10px] text-gray-400 font-semibold">Min 6 chars</span>
+                        <span id="pw-strength-text" class="text-[10px] text-[#c2d6ad] font-semibold">Min 6 chars</span>
                     </div>
                 </div>
 
                 <div id="field-circle-container" class="hidden">
-                    <label class="block text-gray-400 font-semibold uppercase tracking-wider mb-1">College / Office Circle</label>
-                    <input type="text" id="auth-circle" placeholder="e.g. IIT Delhi Campus" class="w-full px-3.5 py-2.5 rounded-lg bg-[#0a0a0c] border border-[#24242c] text-white focus:outline-none focus:border-[#ff7d00]">
+                    <label class="block text-[#c2d6ad] font-semibold uppercase tracking-wider mb-1">College / Office Circle</label>
+                    <input type="text" id="auth-circle" placeholder="e.g. IIT Delhi Campus" class="w-full px-3.5 py-2.5 rounded-lg bg-[#0b1206] border border-[#84a956]/30 text-white focus:outline-none focus:border-[#84a956]">
                 </div>
 
-                <button type="submit" id="auth-submit-btn" class="w-full py-3 rounded-lg bg-[#ff7d00] hover:bg-[#e67000] text-black font-bold text-xs shadow-lg shadow-[#ff7d00]/20 transition flex items-center justify-center space-x-2">
+                <button type="submit" id="auth-submit-btn" class="w-full py-3 rounded-lg bg-[#5c3a21] hover:bg-[#4a2e1a] text-white font-bold text-xs shadow-lg shadow-[#5c3a21]/30 transition flex items-center justify-center space-x-2 border border-[#84a956]/30">
                     <i data-lucide="log-in" class="w-4 h-4"></i>
                     <span id="auth-btn-text">Sign In to CarbonSaathi</span>
                 </button>
             </form>
 
-            <div class="p-3 rounded-lg bg-[#0a0a0c] border border-[#24242c] text-[11px] text-gray-400 text-center">
+            <div class="p-3 rounded-lg bg-[#0b1206] border border-[#84a956]/20 text-[11px] text-[#c2d6ad] text-center">
                 🔒 <strong>Privacy First:</strong> DPDP Act 2023 Compliant.
             </div>
 
@@ -304,7 +304,7 @@
                     <span id="network-status-badge" class="flex items-center gap-1">
                         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Network: Online
                     </span>
-                    <button id="pwa-install-btn" onclick="triggerPwaInstall()" class="hidden text-[#ff7d00] hover:underline font-bold">Install PWA</button>
+                    <button id="pwa-install-btn" onclick="triggerPwaInstall()" class="hidden text-[#84a956] hover:underline font-bold">Install PWA</button>
                 </div>
 
             </div>
@@ -468,60 +468,60 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                         
                         <!-- Metric 1: CO2 Saved -->
-                        <div class="min-card p-5 border-orange-accent bg-[#16161a] relative overflow-hidden">
-                            <div class="flex items-center justify-between text-xs text-gray-400">
+                        <div class="min-card p-5 border-brown-accent bg-[#102216] relative overflow-hidden">
+                            <div class="flex items-center justify-between text-xs text-[#c2d6ad]">
                                 <span>CO2 PREVENTED TODAY</span>
-                                <i data-lucide="cloud-off" class="w-4 h-4 text-[#ff7d00]"></i>
+                                <i data-lucide="cloud-off" class="w-4 h-4 text-[#84a956]"></i>
                             </div>
                             <div class="mt-3">
-                                <div class="text-3xl font-extrabold text-[#ff7d00] font-mono-num" id="metric-co2-saved">3.85</div>
-                                <span class="text-[11px] text-gray-400">kg CO2 (Goal: <span id="goal-co2-display">5.0 kg</span>)</span>
+                                <div class="text-3xl font-extrabold text-[#84a956] font-mono-num" id="metric-co2-saved">3.85</div>
+                                <span class="text-[11px] text-[#c2d6ad]">kg CO2 (Goal: <span id="goal-co2-display">5.0 kg</span>)</span>
                             </div>
-                            <div class="mt-3 h-1 w-full bg-[#24242c] rounded-full overflow-hidden">
-                                <div class="h-full bg-[#ff7d00] w-3/4"></div>
+                            <div class="mt-3 h-1 w-full bg-[#1b3422] rounded-full overflow-hidden">
+                                <div class="h-full bg-[#84a956] w-3/4"></div>
                             </div>
                         </div>
 
                         <!-- Metric 2: Steps & Fitness -->
-                        <div class="min-card p-5 border-purple-accent bg-[#16161a] relative overflow-hidden">
-                            <div class="flex items-center justify-between text-xs text-gray-400">
+                        <div class="min-card p-5 border-olive-accent bg-[#102216] relative overflow-hidden">
+                            <div class="flex items-center justify-between text-xs text-[#c2d6ad]">
                                 <span>STEPS & ACTIVE FITNESS</span>
-                                <i data-lucide="footprints" class="w-4 h-4 text-[#a855f7]"></i>
+                                <i data-lucide="footprints" class="w-4 h-4 text-[#84a956]"></i>
                             </div>
                             <div class="mt-3">
-                                <div class="text-3xl font-extrabold text-[#a855f7] font-mono-num" id="metric-steps">8,420</div>
-                                <span class="text-[11px] text-gray-400">/ <span id="goal-steps-display">10,000</span> steps</span>
+                                <div class="text-3xl font-extrabold text-[#84a956] font-mono-num" id="metric-steps">8,420</div>
+                                <span class="text-[11px] text-[#c2d6ad]">/ <span id="goal-steps-display">10,000</span> steps</span>
                             </div>
-                            <div class="mt-3 flex items-center gap-3 text-[10px] text-gray-400 font-mono-num">
+                            <div class="mt-3 flex items-center gap-3 text-[10px] text-[#c2d6ad] font-mono-num">
                                 <span>🔥 <strong class="text-white" id="metric-calories">412</strong> kcal</span>
                                 <span>⏱️ <strong class="text-white" id="metric-active-mins">45</strong> min</span>
                             </div>
                         </div>
 
                         <!-- Metric 3: Rank -->
-                        <div class="min-card p-5 bg-[#16161a]">
-                            <div class="flex items-center justify-between text-xs text-gray-400">
+                        <div class="min-card p-5 bg-[#102216]">
+                            <div class="flex items-center justify-between text-xs text-[#c2d6ad]">
                                 <span>CIRCLE RANKING</span>
-                                <i data-lucide="award" class="w-4 h-4 text-amber-400"></i>
+                                <i data-lucide="award" class="w-4 h-4 text-[#84a956]"></i>
                             </div>
                             <div class="mt-3">
                                 <div class="text-3xl font-extrabold text-white font-mono-num" id="metric-rank">#4</div>
-                                <span class="text-[11px] text-amber-400 font-semibold">Campus Leaderboard</span>
+                                <span class="text-[11px] text-[#84a956] font-semibold">Campus Leaderboard</span>
                             </div>
-                            <div class="mt-3 text-[10px] text-gray-400">Top Eco-Commuter in Campus</div>
+                            <div class="mt-3 text-[10px] text-[#c2d6ad]">Top Eco-Commuter in Campus</div>
                         </div>
 
                         <!-- Metric 4: Score -->
-                        <div class="min-card p-5 bg-[#16161a]">
-                            <div class="flex items-center justify-between text-xs text-gray-400">
+                        <div class="min-card p-5 bg-[#102216]">
+                            <div class="flex items-center justify-between text-xs text-[#c2d6ad]">
                                 <span>MISSION LiFE SCORE</span>
-                                <i data-lucide="zap" class="w-4 h-4 text-emerald-400"></i>
+                                <i data-lucide="zap" class="w-4 h-4 text-[#84a956]"></i>
                             </div>
                             <div class="mt-3">
-                                <div class="text-3xl font-extrabold text-emerald-400 font-mono-num" id="metric-score">92</div>
-                                <span class="text-[11px] text-emerald-400 font-bold uppercase">Grade A+</span>
+                                <div class="text-3xl font-extrabold text-[#84a956] font-mono-num" id="metric-score">92</div>
+                                <span class="text-[11px] text-[#84a956] font-bold uppercase">Grade A+</span>
                             </div>
-                            <div class="mt-3 text-[10px] text-gray-400">Transit Efficiency 94%</div>
+                            <div class="mt-3 text-[10px] text-[#c2d6ad]">Transit Efficiency 94%</div>
                         </div>
 
                     </div>
@@ -530,13 +530,13 @@
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                         
                         <!-- Main Bar Chart (2 cols) -->
-                        <div class="lg:col-span-2 min-card p-5 bg-[#16161a]">
-                            <div class="flex items-center justify-between mb-4 border-b border-[#24242c] pb-3">
+                        <div class="lg:col-span-2 min-card p-5 bg-[#102216]">
+                            <div class="flex items-center justify-between mb-4 border-b border-[#84a956]/20 pb-3">
                                 <h3 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
-                                    <i data-lucide="bar-chart-2" class="w-4 h-4 text-[#ff7d00]"></i>
+                                    <i data-lucide="bar-chart-2" class="w-4 h-4 text-[#84a956]"></i>
                                     Weekly Carbon Saved vs Petrol Baseline
                                 </h3>
-                                <span class="text-[10px] font-mono text-gray-400 bg-[#0e0e11] px-2 py-1 rounded border border-[#24242c]">7 Days</span>
+                                <span class="text-[10px] font-mono text-[#c2d6ad] bg-[#0b1206] px-2 py-1 rounded border border-[#84a956]/20">7 Days</span>
                             </div>
                             <div class="h-60">
                                 <canvas id="chart-weekly-carbon"></canvas>
@@ -544,22 +544,22 @@
                         </div>
 
                         <!-- Commute Mode Split Doughnut (1 col) -->
-                        <div class="min-card p-5 bg-[#16161a] flex flex-col justify-between">
+                        <div class="min-card p-5 bg-[#102216] flex flex-col justify-between">
                             <div>
-                                <div class="flex items-center justify-between mb-3 border-b border-[#24242c] pb-3">
+                                <div class="flex items-center justify-between mb-3 border-b border-[#84a956]/20 pb-3">
                                     <h3 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
-                                        <i data-lucide="pie-chart" class="w-4 h-4 text-[#a855f7]"></i>
+                                        <i data-lucide="pie-chart" class="w-4 h-4 text-[#84a956]"></i>
                                         Mode Split
                                     </h3>
-                                    <span class="text-[10px] text-gray-400">This Week</span>
+                                    <span class="text-[10px] text-[#c2d6ad]">This Week</span>
                                 </div>
                                 <div class="h-44 relative flex items-center justify-center">
                                     <canvas id="chart-mode-split"></canvas>
                                 </div>
                             </div>
-                            <div class="mt-4 pt-3 border-t border-[#24242c] grid grid-cols-2 gap-2 text-[11px] text-gray-300 font-mono-num">
-                                <div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#ff7d00]"></span> Walking (40%)</div>
-                                <div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#a855f7]"></span> Metro (35%)</div>
+                            <div class="mt-4 pt-3 border-t border-[#84a956]/20 grid grid-cols-2 gap-2 text-[11px] text-[#c2d6ad] font-mono-num">
+                                <div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#84a956]"></span> Walking (40%)</div>
+                                <div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#5c3a21]"></span> Metro (35%)</div>
                                 <div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> E-Rick (15%)</div>
                                 <div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-rose-500"></span> Car (10%)</div>
                             </div>
@@ -571,13 +571,13 @@
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                         
                         <!-- Sensor Log -->
-                        <div class="lg:col-span-2 min-card p-5 bg-[#16161a]">
-                            <div class="flex items-center justify-between mb-4 border-b border-[#24242c] pb-3">
+                        <div class="lg:col-span-2 min-card p-5 bg-[#102216]">
+                            <div class="flex items-center justify-between mb-4 border-b border-[#84a956]/20 pb-3">
                                 <div class="flex items-center space-x-2">
-                                    <span class="w-2 h-2 rounded-full bg-[#ff7d00] animate-pulse"></span>
+                                    <span class="w-2 h-2 rounded-full bg-[#84a956] animate-pulse"></span>
                                     <h3 class="text-xs font-bold text-white uppercase tracking-wider">Live On-Device Sensor Telemetry</h3>
                                 </div>
-                                <span class="text-[10px] text-gray-500 font-mono">Android Opt-in</span>
+                                <span class="text-[10px] text-[#c2d6ad] font-mono">Android Opt-in</span>
                             </div>
                             <div id="sensor-log-list" class="space-y-2.5">
                                 <!-- Populated dynamically -->
@@ -585,28 +585,28 @@
                         </div>
 
                         <!-- Environmental Footprint Box -->
-                        <div class="min-card p-5 bg-[#16161a] border-purple-accent flex flex-col justify-between">
+                        <div class="min-card p-5 bg-[#102216] border-olive-accent flex flex-col justify-between">
                             <div>
-                                <span class="text-[10px] text-[#a855f7] font-bold uppercase tracking-widest block mb-1">Monthly Footprint</span>
+                                <span class="text-[10px] text-[#84a956] font-bold uppercase tracking-widest block mb-1">Monthly Footprint</span>
                                 <h4 class="text-lg font-bold text-white">Your Environmental Impact</h4>
-                                <p class="text-gray-400 text-xs mt-1">
-                                    Prevented <strong class="text-[#ff7d00] font-mono-num" id="footprint-co2-display">48.2 kg CO2</strong> emissions this month.
+                                <p class="text-[#c2d6ad] text-xs mt-1">
+                                    Prevented <strong class="text-[#84a956] font-mono-num" id="footprint-co2-display">48.2 kg CO2</strong> emissions this month.
                                 </p>
 
                                 <div class="mt-4 space-y-2">
-                                    <div class="p-3 rounded-lg bg-[#0e0e11] border border-[#24242c] flex items-center justify-between text-xs">
-                                        <span class="text-gray-400">Trees Planted Eq.</span>
-                                        <span class="font-bold text-emerald-400 font-mono-num" id="footprint-trees-display">2.4 Trees</span>
+                                    <div class="p-3 rounded-lg bg-[#0b1206] border border-[#84a956]/20 flex items-center justify-between text-xs">
+                                        <span class="text-[#c2d6ad]">Trees Planted Eq.</span>
+                                        <span class="font-bold text-[#84a956] font-mono-num" id="footprint-trees-display">2.4 Trees</span>
                                     </div>
-                                    <div class="p-3 rounded-lg bg-[#0e0e11] border border-[#24242c] flex items-center justify-between text-xs">
-                                        <span class="text-gray-400">Fuel Saved</span>
-                                        <span class="font-bold text-[#ff7d00] font-mono-num" id="footprint-fuel-display">19.5 L</span>
+                                    <div class="p-3 rounded-lg bg-[#0b1206] border border-[#84a956]/20 flex items-center justify-between text-xs">
+                                        <span class="text-[#c2d6ad]">Fuel Saved</span>
+                                        <span class="font-bold text-[#84a956] font-mono-num" id="footprint-fuel-display">19.5 L</span>
                                     </div>
                                 </div>
                             </div>
 
-                            <button onclick="switchTab('recap')" class="mt-4 w-full py-2 rounded-lg bg-[#1c1c22] hover:bg-[#24242c] text-xs font-bold text-gray-200 transition flex items-center justify-center space-x-2 border border-[#2a2a34]">
-                                <i data-lucide="share-2" class="w-3.5 h-3.5 text-[#ff7d00]"></i>
+                            <button onclick="switchTab('recap')" class="mt-4 w-full py-2 rounded-lg bg-[#5c3a21] hover:bg-[#4a2e1a] text-xs font-bold text-white transition flex items-center justify-center space-x-2 border border-[#84a956]/30">
+                                <i data-lucide="share-2" class="w-3.5 h-3.5 text-[#84a956]"></i>
                                 <span>Generate Impact Card</span>
                             </button>
                         </div>
@@ -618,12 +618,12 @@
                 <!-- ================= TAB 2: TRIP LOGGER / SIMULATOR ================= -->
                 <section id="tab-simulator" class="tab-content hidden space-y-6">
                     
-                    <div class="min-card p-5 bg-[#16161a] border-b border-[#24242c]">
+                    <div class="min-card p-5 bg-[#102216] border-b border-[#84a956]/20">
                         <h2 class="text-xl font-bold text-white flex items-center gap-2">
-                            <i data-lucide="navigation" class="w-5 h-5 text-[#ff7d00]"></i>
+                            <i data-lucide="navigation" class="w-5 h-5 text-[#84a956]"></i>
                             Commute Mode & Trip Simulator
                         </h2>
-                        <p class="text-xs text-gray-400 mt-1">
+                        <p class="text-xs text-[#c2d6ad] mt-1">
                             Simulate commute trips to calculate gCO2/km emission savings and earn Green PTS.
                         </p>
                     </div>
@@ -631,34 +631,34 @@
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                         
                         <!-- Mode Selector Grid -->
-                        <div class="lg:col-span-2 min-card p-5 bg-[#16161a] space-y-5">
+                        <div class="lg:col-span-2 min-card p-5 bg-[#102216] space-y-5">
                             
                             <div>
-                                <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">1. Choose Transport Mode</label>
+                                <label class="block text-xs font-semibold text-[#c2d6ad] uppercase tracking-wider mb-3">1. Choose Transport Mode</label>
                                 <div class="grid grid-cols-2 sm:grid-cols-3 gap-3" id="mode-selector">
                                     
                                     <button type="button" onclick="selectMode('walking')" data-mode="walking" class="mode-card active p-3.5 rounded-xl text-center">
                                         <span class="text-2xl block mb-1">🚶</span>
                                         <span class="text-xs font-bold text-white block">Walking</span>
-                                        <span class="text-[10px] text-[#ff7d00] font-mono-num">0 gCO2/km</span>
+                                        <span class="text-[10px] text-[#84a956] font-mono-num">0 gCO2/km</span>
                                     </button>
 
                                     <button type="button" onclick="selectMode('cycling')" data-mode="cycling" class="mode-card p-3.5 rounded-xl text-center">
                                         <span class="text-2xl block mb-1">🚲</span>
                                         <span class="text-xs font-bold text-white block">Bicycle / E-Bike</span>
-                                        <span class="text-[10px] text-[#ff7d00] font-mono-num">0 gCO2/km</span>
+                                        <span class="text-[10px] text-[#84a956] font-mono-num">0 gCO2/km</span>
                                     </button>
 
                                     <button type="button" onclick="selectMode('metro')" data-mode="metro" class="mode-card p-3.5 rounded-xl text-center">
                                         <span class="text-2xl block mb-1">🚇</span>
                                         <span class="text-xs font-bold text-white block">City Metro</span>
-                                        <span class="text-[10px] text-[#a855f7] font-mono-num">15 gCO2/km</span>
+                                        <span class="text-[10px] text-[#5c3a21] font-mono-num">15 gCO2/km</span>
                                     </button>
 
                                     <button type="button" onclick="selectMode('shared_auto')" data-mode="shared_auto" class="mode-card p-3.5 rounded-xl text-center">
                                         <span class="text-2xl block mb-1">🛺</span>
                                         <span class="text-xs font-bold text-white block">Shared Auto</span>
-                                        <span class="text-[10px] text-teal-400 font-mono-num">28 gCO2/km</span>
+                                        <span class="text-[10px] text-[#84a956] font-mono-num">28 gCO2/km</span>
                                     </button>
 
                                     <button type="button" onclick="selectMode('ev_scooter')" data-mode="ev_scooter" class="mode-card p-3.5 rounded-xl text-center">
@@ -678,64 +678,64 @@
 
                             <div class="space-y-3">
                                 <div class="flex justify-between items-center text-xs">
-                                    <label class="font-semibold text-gray-400 uppercase tracking-wider">2. Trip Distance (km)</label>
-                                    <span class="text-base font-extrabold text-[#ff7d00] font-mono-num" id="distance-val-display">5.0 km</span>
+                                    <label class="font-semibold text-[#c2d6ad] uppercase tracking-wider">2. Trip Distance (km)</label>
+                                    <span class="text-base font-extrabold text-[#84a956] font-mono-num" id="distance-val-display">5.0 km</span>
                                 </div>
-                                <input type="range" id="trip-distance" min="0.5" max="30" step="0.5" value="5.0" oninput="updateTripCalculation()" class="w-full h-1.5 bg-[#0e0e11] rounded-lg">
+                                <input type="range" id="trip-distance" min="0.5" max="30" step="0.5" value="5.0" oninput="updateTripCalculation()" class="w-full h-1.5 bg-[#0b1206] rounded-lg">
                             </div>
 
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                                 <div>
-                                    <label class="block text-gray-400 mb-1">Trip Label</label>
-                                    <input type="text" id="trip-label" value="Morning Campus Commute" class="w-full px-3 py-2 rounded-lg bg-[#0e0e11] border border-[#24242c] text-white focus:outline-none focus:border-[#ff7d00]">
+                                    <label class="block text-[#c2d6ad] mb-1">Trip Label</label>
+                                    <input type="text" id="trip-label" value="Morning Campus Commute" class="w-full px-3 py-2 rounded-lg bg-[#0b1206] border border-[#84a956]/30 text-white focus:outline-none focus:border-[#84a956]">
                                 </div>
                                 <div>
-                                    <label class="block text-gray-400 mb-1">Verification Method</label>
-                                    <select id="trip-verification" class="w-full px-3 py-2 rounded-lg bg-[#0e0e11] border border-[#24242c] text-white focus:outline-none focus:border-[#ff7d00]">
+                                    <label class="block text-[#c2d6ad] mb-1">Verification Method</label>
+                                    <select id="trip-verification" class="w-full px-3 py-2 rounded-lg bg-[#0b1206] border border-[#84a956]/30 text-white focus:outline-none focus:border-[#84a956]">
                                         <option value="sensor">Sensor GPS (Auto-verified)</option>
                                         <option value="ticket">DMRC Ticket Pass Verified</option>
                                     </select>
                                 </div>
                             </div>
 
-                            <button type="button" onclick="logSimulatedTrip()" class="w-full py-3 rounded-lg bg-[#ff7d00] hover:bg-[#e67000] text-black font-bold text-xs shadow-lg shadow-[#ff7d00]/20 transition">
+                            <button type="button" onclick="logSimulatedTrip()" class="w-full py-3 rounded-lg bg-[#5c3a21] hover:bg-[#4a2e1a] text-white font-bold text-xs shadow-lg shadow-[#5c3a21]/30 transition border border-[#84a956]/30">
                                 Log Trip & Claim Eco Points
                             </button>
 
                         </div>
 
                         <!-- Calculation Output Box -->
-                        <div class="min-card p-5 bg-[#16161a] flex flex-col justify-between">
+                        <div class="min-card p-5 bg-[#102216] flex flex-col justify-between">
                             <div>
-                                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider border-b border-[#24242c] pb-3 mb-4">Calculation Telemetry</h3>
+                                <h3 class="text-xs font-bold text-[#c2d6ad] uppercase tracking-wider border-b border-[#84a956]/20 pb-3 mb-4">Calculation Telemetry</h3>
 
                                 <div class="space-y-3 text-xs font-mono-num">
-                                    <div class="flex justify-between py-1 border-b border-[#24242c]/50">
-                                        <span class="text-gray-400">Mode Factor:</span>
-                                        <span id="calc-mode-ef" class="text-[#ff7d00]">0 gCO2/km</span>
+                                    <div class="flex justify-between py-1 border-b border-[#84a956]/15">
+                                        <span class="text-[#c2d6ad]">Mode Factor:</span>
+                                        <span id="calc-mode-ef" class="text-[#84a956]">0 gCO2/km</span>
                                     </div>
-                                    <div class="flex justify-between py-1 border-b border-[#24242c]/50">
-                                        <span class="text-gray-400">Baseline Car:</span>
+                                    <div class="flex justify-between py-1 border-b border-[#84a956]/15">
+                                        <span class="text-[#c2d6ad]">Baseline Car:</span>
                                         <span class="text-rose-400">142 gCO2/km</span>
                                     </div>
-                                    <div class="flex justify-between py-1 border-b border-[#24242c]/50">
-                                        <span class="text-gray-400">Net Saving/km:</span>
+                                    <div class="flex justify-between py-1 border-b border-[#84a956]/15">
+                                        <span class="text-[#c2d6ad]">Net Saving/km:</span>
                                         <span id="calc-net-saving-rate" class="text-white">142 gCO2/km</span>
                                     </div>
 
-                                    <div class="p-4 rounded-xl bg-[#ff7d00]/10 border border-[#ff7d00]/30 text-center my-4">
-                                        <div class="text-[10px] text-[#ff7d00] uppercase font-bold">Net CO2 Prevented</div>
-                                        <div id="calc-total-co2" class="text-2xl font-black text-[#ff7d00] my-1">0.71 kg</div>
+                                    <div class="p-4 rounded-xl bg-[#5c3a21]/20 border border-[#5c3a21]/50 text-center my-4">
+                                        <div class="text-[10px] text-[#c2d6ad] uppercase font-bold">Net CO2 Prevented</div>
+                                        <div id="calc-total-co2" class="text-2xl font-black text-[#84a956] my-1">0.71 kg</div>
                                     </div>
 
                                     <div class="grid grid-cols-2 gap-2 text-center text-xs">
-                                        <div class="p-2.5 rounded-lg bg-[#0e0e11] border border-[#24242c]">
-                                            <span class="text-gray-400 text-[10px]">Calories</span>
-                                            <div id="calc-calories" class="font-bold text-amber-400 mt-0.5">240 kcal</div>
+                                        <div class="p-2.5 rounded-lg bg-[#0b1206] border border-[#84a956]/20">
+                                            <span class="text-[#c2d6ad] text-[10px]">Calories</span>
+                                            <div id="calc-calories" class="font-bold text-[#84a956] mt-0.5">240 kcal</div>
                                         </div>
-                                        <div class="p-2.5 rounded-lg bg-[#0e0e11] border border-[#24242c]">
-                                            <span class="text-gray-400 text-[10px]">PTS Earned</span>
-                                            <div id="calc-points" class="font-bold text-[#ff7d00] mt-0.5">+50 PTS</div>
+                                        <div class="p-2.5 rounded-lg bg-[#0b1206] border border-[#84a956]/20">
+                                            <span class="text-[#c2d6ad] text-[10px]">PTS Earned</span>
+                                            <div id="calc-points" class="font-bold text-[#84a956] mt-0.5">+50 PTS</div>
                                         </div>
                                     </div>
                                 </div>
@@ -749,16 +749,16 @@
                 <!-- ================= TAB 3: HYPERLOCAL LEADERBOARD ================= -->
                 <section id="tab-leaderboard" class="tab-content hidden space-y-6">
                     
-                    <div class="min-card p-5 bg-[#16161a] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="min-card p-5 bg-[#102216] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                         <div>
                             <h2 class="text-xl font-bold text-white flex items-center gap-2">
-                                <i data-lucide="trophy" class="w-5 h-5 text-amber-400"></i>
+                                <i data-lucide="trophy" class="w-5 h-5 text-[#84a956]"></i>
                                 Hyperlocal Circle Leaderboard
                             </h2>
-                            <p class="text-xs text-gray-400 mt-0.5">Campus & Corporate sustainability rankings</p>
+                            <p class="text-xs text-[#c2d6ad] mt-0.5">Campus & Corporate sustainability rankings</p>
                         </div>
 
-                        <div class="flex p-1 bg-[#0e0e11] rounded-lg border border-[#24242c] text-xs">
+                        <div class="flex p-1 bg-[#0b1206] rounded-lg border border-[#84a956]/20 text-xs">
                             <button onclick="switchLeaderboardCategory('college')" id="lb-tab-college" class="lb-cat-btn active px-3 py-1.5 rounded font-semibold transition">College</button>
                             <button onclick="switchLeaderboardCategory('office')" id="lb-tab-office" class="lb-cat-btn px-3 py-1.5 rounded font-semibold transition">Corporate</button>
                             <button onclick="switchLeaderboardCategory('society')" id="lb-tab-society" class="lb-cat-btn px-3 py-1.5 rounded font-semibold transition">Society</button>
@@ -771,13 +771,13 @@
                     </div>
 
                     <!-- Full Table -->
-                    <div class="min-card bg-[#16161a] overflow-hidden">
-                        <div class="p-3.5 bg-[#0e0e11] border-b border-[#24242c] text-xs font-bold text-gray-400 uppercase tracking-wider">
+                    <div class="min-card bg-[#102216] overflow-hidden">
+                        <div class="p-3.5 bg-[#0b1206] border-b border-[#84a956]/20 text-xs font-bold text-[#c2d6ad] uppercase tracking-wider">
                             Circle Ranking • <span id="lb-category-title" class="text-white">IIT Delhi Circle</span>
                         </div>
                         <div class="overflow-x-auto">
                             <table class="w-full text-left text-xs text-gray-300">
-                                <thead class="bg-[#0e0e11]/50 uppercase text-gray-400 border-b border-[#24242c]">
+                                <thead class="bg-[#0b1206]/50 uppercase text-[#c2d6ad] border-b border-[#84a956]/20">
                                     <tr>
                                         <th class="px-5 py-3">Rank</th>
                                         <th class="px-5 py-3">User / Pseudonym</th>
@@ -786,7 +786,7 @@
                                         <th class="px-5 py-3 text-right">Streak</th>
                                     </tr>
                                 </thead>
-                                <tbody id="leaderboard-table-body" class="divide-y divide-[#24242c]/60">
+                                <tbody id="leaderboard-table-body" class="divide-y divide-[#84a956]/15">
                                     <!-- Rows JS -->
                                 </tbody>
                             </table>
@@ -798,12 +798,12 @@
                 <!-- ================= TAB 4: TEAM BATTLES ================= -->
                 <section id="tab-challenges" class="tab-content hidden space-y-6">
                     
-                    <div class="min-card p-5 bg-[#16161a]">
+                    <div class="min-card p-5 bg-[#102216]">
                         <h2 class="text-xl font-bold text-white flex items-center gap-2">
                             <i data-lucide="swords" class="w-5 h-5 text-rose-400"></i>
                             Department & Team Battles
                         </h2>
-                        <p class="text-xs text-gray-400 mt-1">Inter-departmental carbon slash drives</p>
+                        <p class="text-xs text-[#c2d6ad] mt-1">Inter-departmental carbon slash drives</p>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="challenges-container">
@@ -815,15 +815,15 @@
                 <!-- ================= TAB 5: GREEN REWARDS & CASHOUT PORTAL ================= -->
                 <section id="tab-rewards" class="tab-content hidden space-y-6">
                     
-                    <div class="min-card p-5 bg-[#16161a] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="min-card p-5 bg-[#102216] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                         <div>
                             <h2 class="text-xl font-bold text-white flex items-center gap-2">
-                                <i data-lucide="gift" class="w-5 h-5 text-[#ff7d00]"></i>
+                                <i data-lucide="gift" class="w-5 h-5 text-[#84a956]"></i>
                                 Point Conversion & Cashout Portal
                             </h2>
-                            <p class="text-xs text-gray-400 mt-1">Direct point conversion to UPI Cash, DMRC Cards, or Vouchers</p>
+                            <p class="text-xs text-[#c2d6ad] mt-1">Direct point conversion to UPI Cash, DMRC Cards, or Vouchers</p>
                         </div>
-                        <div class="px-3.5 py-2 rounded-lg bg-[#ff7d00]/10 border border-[#ff7d00]/30 text-[#ff7d00] font-bold text-xs font-mono-num">
+                        <div class="px-3.5 py-2 rounded-lg bg-[#5c3a21]/30 border border-[#5c3a21]/60 text-[#c2d6ad] font-bold text-xs font-mono-num">
                             Balance: <span id="rewards-points-balance">1,280</span> PTS
                         </div>
                     </div>
@@ -831,64 +831,64 @@
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
                         
                         <!-- Converter Form (7 cols) -->
-                        <div class="lg:col-span-7 min-card p-5 bg-[#16161a] border-orange-accent space-y-5">
-                            <div class="flex items-center justify-between border-b border-[#24242c] pb-3">
+                        <div class="lg:col-span-7 min-card p-5 bg-[#102216] border-brown-accent space-y-5">
+                            <div class="flex items-center justify-between border-b border-[#84a956]/20 pb-3">
                                 <div class="flex items-center space-x-2">
-                                    <div class="w-7 h-7 rounded-lg bg-[#ff7d00] text-black font-extrabold flex items-center justify-center text-xs">₹</div>
+                                    <div class="w-7 h-7 rounded-lg bg-[#5c3a21] text-white font-extrabold flex items-center justify-center text-xs border border-[#84a956]/30">₹</div>
                                     <div>
                                         <h3 class="text-sm font-bold text-white">Instant Point Cashout</h3>
-                                        <p class="text-[11px] text-gray-400">Rate: <strong class="text-[#ff7d00] font-mono-num">100 PTS = ₹10.00 INR</strong></p>
+                                        <p class="text-[11px] text-[#c2d6ad]">Rate: <strong class="text-[#84a956] font-mono-num">100 PTS = ₹10.00 INR</strong></p>
                                     </div>
                                 </div>
-                                <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 text-[10px] font-bold">Instant Transfer</span>
+                                <span class="px-2 py-0.5 rounded bg-[#84a956]/15 text-[#84a956] text-[10px] font-bold">Instant Transfer</span>
                             </div>
 
                             <div class="space-y-3">
                                 <div class="flex justify-between items-center">
-                                    <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Select Points</span>
-                                    <span id="cashout-pts-display" class="text-lg font-extrabold text-[#ff7d00] font-mono-num">500 PTS (<span id="cashout-inr-display" class="text-emerald-400">₹50.00</span>)</span>
+                                    <span class="text-xs font-semibold text-[#c2d6ad] uppercase tracking-wider">Select Points</span>
+                                    <span id="cashout-pts-display" class="text-lg font-extrabold text-[#84a956] font-mono-num">500 PTS (<span id="cashout-inr-display" class="text-emerald-400">₹50.00</span>)</span>
                                 </div>
 
-                                <input type="range" id="cashout-range" min="100" max="2500" step="50" value="500" oninput="updateCashoutCalculation()" class="w-full h-1.5 bg-[#0e0e11] rounded-lg">
+                                <input type="range" id="cashout-range" min="100" max="2500" step="50" value="500" oninput="updateCashoutCalculation()" class="w-full h-1.5 bg-[#0b1206] rounded-lg">
                             </div>
 
                             <!-- Method Radio Options -->
                             <div class="space-y-2 pt-1">
-                                <label class="block text-xs text-gray-400 uppercase tracking-wider">Destination</label>
+                                <label class="block text-xs text-[#c2d6ad] uppercase tracking-wider">Destination</label>
                                 <div class="grid grid-cols-3 gap-2 text-xs">
-                                    <label class="p-2.5 rounded-lg border border-[#24242c] bg-[#0e0e11] flex flex-col items-center cursor-pointer hover:border-[#ff7d00] transition">
-                                        <input type="radio" name="payout-method" value="upi" checked onchange="togglePayoutInputs()" class="accent-[#ff7d00] mb-1">
+                                    <label class="p-2.5 rounded-lg border border-[#84a956]/25 bg-[#0b1206] flex flex-col items-center cursor-pointer hover:border-[#84a956] transition">
+                                        <input type="radio" name="payout-method" value="upi" checked onchange="togglePayoutInputs()" class="accent-[#84a956] mb-1">
                                         <span class="text-base">⚡</span>
                                         <span class="text-[11px] font-bold text-white mt-1">UPI ID</span>
                                     </label>
 
-                                    <label class="p-2.5 rounded-lg border border-[#24242c] bg-[#0e0e11] flex flex-col items-center cursor-pointer hover:border-[#ff7d00] transition">
-                                        <input type="radio" name="payout-method" value="dmrc" onchange="togglePayoutInputs()" class="accent-[#ff7d00] mb-1">
+                                    <label class="p-2.5 rounded-lg border border-[#84a956]/25 bg-[#0b1206] flex flex-col items-center cursor-pointer hover:border-[#84a956] transition">
+                                        <input type="radio" name="payout-method" value="dmrc" onchange="togglePayoutInputs()" class="accent-[#84a956] mb-1">
                                         <span class="text-base">🚇</span>
                                         <span class="text-[11px] font-bold text-white mt-1">Metro Card</span>
                                     </label>
 
-                                    <label class="p-2.5 rounded-lg border border-[#24242c] bg-[#0e0e11] flex flex-col items-center cursor-pointer hover:border-[#ff7d00] transition">
-                                        <input type="radio" name="payout-method" value="amazon" onchange="togglePayoutInputs()" class="accent-[#ff7d00] mb-1">
+                                    <label class="p-2.5 rounded-lg border border-[#84a956]/25 bg-[#0b1206] flex flex-col items-center cursor-pointer hover:border-[#84a956] transition">
+                                        <input type="radio" name="payout-method" value="amazon" onchange="togglePayoutInputs()" class="accent-[#84a956] mb-1">
                                         <span class="text-base">🎁</span>
                                         <span class="text-[11px] font-bold text-white mt-1">Amazon Pay</span>
                                     </label>
                                 </div>
 
                                 <div class="pt-2">
-                                    <label id="payout-input-label" class="block text-[11px] text-gray-400 mb-1">Enter your VPA / UPI ID</label>
-                                    <input type="text" id="payout-address-input" placeholder="aysha@okicici" class="w-full px-3 py-2 rounded-lg bg-[#0e0e11] border border-[#24242c] text-white text-xs font-mono-num focus:outline-none focus:border-[#ff7d00]">
+                                    <label id="payout-input-label" class="block text-[11px] text-[#c2d6ad] mb-1">Enter your VPA / UPI ID</label>
+                                    <input type="text" id="payout-address-input" placeholder="aysha@okicici" class="w-full px-3 py-2 rounded-lg bg-[#0b1206] border border-[#84a956]/30 text-white text-xs font-mono-num focus:outline-none focus:border-[#84a956]">
                                 </div>
                             </div>
 
-                            <button type="button" onclick="executePointCashout()" class="w-full py-3 rounded-lg bg-[#ff7d00] hover:bg-[#e67000] text-black font-bold text-xs transition">
+                            <button type="button" onclick="executePointCashout()" class="w-full py-3 rounded-lg bg-[#5c3a21] hover:bg-[#4a2e1a] text-white font-bold text-xs transition border border-[#84a956]/30">
                                 Transfer <span id="btn-cashout-rupees">₹50.00</span> to Account
                             </button>
                         </div>
 
                         <!-- Ledger (5 cols) -->
-                        <div class="lg:col-span-5 min-card p-5 bg-[#16161a] space-y-3">
-                            <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider border-b border-[#24242c] pb-3">Withdrawal Ledger</h3>
+                        <div class="lg:col-span-5 min-card p-5 bg-[#102216] space-y-3">
+                            <h3 class="text-xs font-bold text-[#c2d6ad] uppercase tracking-wider border-b border-[#84a956]/20 pb-3">Withdrawal Ledger</h3>
                             <div id="cashout-history-list" class="space-y-2">
                                 <!-- Populated dynamically -->
                             </div>
@@ -909,76 +909,76 @@
                 <!-- ================= TAB 6: WEEKLY RECAP CARD ================= -->
                 <section id="tab-recap" class="tab-content hidden space-y-6">
                     
-                    <div class="min-card p-5 bg-[#16161a]">
+                    <div class="min-card p-5 bg-[#102216]">
                         <h2 class="text-xl font-bold text-white flex items-center gap-2">
-                            <i data-lucide="sparkles" class="w-5 h-5 text-amber-400"></i>
+                            <i data-lucide="sparkles" class="w-5 h-5 text-[#84a956]"></i>
                             Shareable Impact Card Generator
                         </h2>
-                        <p class="text-xs text-gray-400 mt-1">Generate viral graphics highlighting your weekly saved CO2 & active transit</p>
+                        <p class="text-xs text-[#c2d6ad] mt-1">Generate viral graphics highlighting your weekly saved CO2 & active transit</p>
                     </div>
 
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
                         
                         <div class="lg:col-span-7 flex flex-col items-center">
-                            <div id="social-recap-card" class="w-full max-w-md p-6 rounded-2xl bg-[#141418] border-2 border-[#ff7d00]/40 shadow-2xl space-y-5 relative overflow-hidden">
+                            <div id="social-recap-card" class="w-full max-w-md p-6 rounded-2xl bg-[#0b1206] border-2 border-[#5c3a21]/60 shadow-2xl space-y-5 relative overflow-hidden">
                                 
-                                <div class="flex items-center justify-between border-b border-[#24242c] pb-3">
+                                <div class="flex items-center justify-between border-b border-[#84a956]/20 pb-3">
                                     <div class="flex items-center space-x-2">
-                                        <div class="w-7 h-7 rounded bg-[#ff7d00] text-black font-extrabold flex items-center justify-center text-sm">⚡</div>
+                                        <div class="w-7 h-7 rounded bg-[#5c3a21] text-white font-extrabold flex items-center justify-center text-sm">⚡</div>
                                         <div>
                                             <h4 class="font-extrabold text-white text-sm">CarbonSaathi</h4>
-                                            <span class="text-[10px] text-gray-400">Weekly Commute Recap</span>
+                                            <span class="text-[10px] text-[#c2d6ad]">Weekly Commute Recap</span>
                                         </div>
                                     </div>
-                                    <span class="px-2 py-0.5 rounded bg-[#ff7d00]/10 text-[#ff7d00] text-[10px] font-bold">Mission LiFE</span>
+                                    <span class="px-2 py-0.5 rounded bg-[#5c3a21]/30 text-[#c2d6ad] text-[10px] font-bold">Mission LiFE</span>
                                 </div>
 
                                 <div class="flex items-center space-x-3">
-                                    <div class="w-10 h-10 rounded-full bg-[#24242c] border border-[#32323e] flex items-center justify-center text-base">👤</div>
+                                    <div class="w-10 h-10 rounded-full bg-[#162a1c] border border-[#84a956]/30 flex items-center justify-center text-base">👤</div>
                                     <div>
                                         <h5 id="recap-card-username" class="font-bold text-white text-base">EcoPioneer_42</h5>
-                                        <p class="text-xs text-gray-400">Circle: <span class="text-[#ff7d00]" id="recap-card-circle">IIT Delhi Campus</span></p>
+                                        <p class="text-xs text-[#c2d6ad]">Circle: <span class="text-[#84a956]" id="recap-card-circle">IIT Delhi Campus</span></p>
                                     </div>
                                 </div>
 
                                 <div class="grid grid-cols-2 gap-3">
-                                    <div class="p-3.5 rounded-xl bg-[#0e0e11] border border-[#24242c] text-center">
-                                        <span class="text-[10px] text-gray-400 uppercase">CO2 Prevented</span>
-                                        <div id="recap-card-co2" class="text-xl font-extrabold text-[#ff7d00] font-mono-num mt-0.5">18.5 kg</div>
+                                    <div class="p-3.5 rounded-xl bg-[#102216] border border-[#84a956]/20 text-center">
+                                        <span class="text-[10px] text-[#c2d6ad] uppercase">CO2 Prevented</span>
+                                        <div id="recap-card-co2" class="text-xl font-extrabold text-[#84a956] font-mono-num mt-0.5">18.5 kg</div>
                                     </div>
-                                    <div class="p-3.5 rounded-xl bg-[#0e0e11] border border-[#24242c] text-center">
-                                        <span class="text-[10px] text-gray-400 uppercase">Calories Burned</span>
-                                        <div id="recap-card-calories" class="text-xl font-extrabold text-[#a855f7] font-mono-num mt-0.5">2,450 kcal</div>
+                                    <div class="p-3.5 rounded-xl bg-[#102216] border border-[#84a956]/20 text-center">
+                                        <span class="text-[10px] text-[#c2d6ad] uppercase">Calories Burned</span>
+                                        <div id="recap-card-calories" class="text-xl font-extrabold text-[#5c3a21] font-mono-num mt-0.5">2,450 kcal</div>
                                     </div>
                                 </div>
 
-                                <div class="p-3 rounded-xl bg-[#0e0e11] border border-[#24242c] text-center">
+                                <div class="p-3 rounded-xl bg-[#102216] border border-[#84a956]/20 text-center">
                                     <p id="recap-card-quote" class="text-xs text-gray-300 italic">"Small green commutes in India lead to massive national impact!"</p>
                                 </div>
 
                             </div>
                         </div>
 
-                        <div class="lg:col-span-5 min-card p-5 bg-[#16161a] space-y-4">
-                            <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider">Customize Card</h3>
+                        <div class="lg:col-span-5 min-card p-5 bg-[#102216] space-y-4">
+                            <h3 class="text-xs font-bold text-[#c2d6ad] uppercase tracking-wider">Customize Card</h3>
 
                             <div>
-                                <label class="block text-xs text-gray-400 mb-1">Theme</label>
+                                <label class="block text-xs text-[#c2d6ad] mb-1">Theme</label>
                                 <div class="grid grid-cols-3 gap-2 text-xs">
-                                    <button onclick="changeRecapTheme('emerald')" class="p-2 rounded bg-[#0e0e11] border border-[#ff7d00] text-gray-200">Obsidian</button>
-                                    <button onclick="changeRecapTheme('cyber')" class="p-2 rounded bg-[#0e0e11] border border-[#a855f7] text-gray-200">Purple</button>
-                                    <button onclick="changeRecapTheme('sunset')" class="p-2 rounded bg-[#0e0e11] border border-amber-500 text-gray-200">Gold</button>
+                                    <button onclick="changeRecapTheme('emerald')" class="p-2 rounded bg-[#0b1206] border border-[#84a956] text-gray-200">Obsidian</button>
+                                    <button onclick="changeRecapTheme('cyber')" class="p-2 rounded bg-[#0b1206] border border-[#5c3a21] text-gray-200">Brown</button>
+                                    <button onclick="changeRecapTheme('sunset')" class="p-2 rounded bg-[#0b1206] border border-[#84a956] text-gray-200">Olive</button>
                                 </div>
                             </div>
 
                             <div>
-                                <label class="block text-xs text-gray-400 mb-1">Custom Message</label>
-                                <textarea id="recap-quote-input" oninput="updateRecapQuote()" rows="3" class="w-full p-2 rounded bg-[#0e0e11] border border-[#24242c] text-white text-xs focus:outline-none focus:border-[#ff7d00]">Saved 18.5 kg CO2 this week with CarbonSaathi! #MissionLiFE</textarea>
+                                <label class="block text-xs text-[#c2d6ad] mb-1">Custom Message</label>
+                                <textarea id="recap-quote-input" oninput="updateRecapQuote()" rows="3" class="w-full p-2 rounded bg-[#0b1206] border border-[#84a956]/30 text-white text-xs focus:outline-none focus:border-[#84a956]">Saved 18.5 kg CO2 this week with CarbonSaathi! #MissionLiFE</textarea>
                             </div>
 
                             <div class="space-y-2 pt-2">
-                                <button onclick="downloadRecapCard()" class="w-full py-2.5 rounded bg-[#ff7d00] hover:bg-[#e67000] text-black font-bold text-xs transition">Download PNG</button>
-                                <button onclick="copyRecapText()" class="w-full py-2 rounded bg-[#1c1c22] border border-[#2a2a34] text-gray-300 font-semibold text-xs transition">Copy Text</button>
+                                <button onclick="downloadRecapCard()" class="w-full py-2.5 rounded bg-[#5c3a21] hover:bg-[#4a2e1a] text-white font-bold text-xs transition border border-[#84a956]/30">Download PNG</button>
+                                <button onclick="copyRecapText()" class="w-full py-2 rounded bg-[#162a1c] border border-[#84a956]/30 text-gray-300 font-semibold text-xs transition">Copy Text</button>
                             </div>
                         </div>
 
@@ -994,57 +994,57 @@
 
     <!-- Edit Profile Modal -->
     <div id="profile-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-        <div class="min-card max-w-lg w-full bg-[#141418] p-6 space-y-5 border border-[#282832] relative">
+        <div class="min-card max-w-lg w-full bg-[#102216] p-6 space-y-5 border border-[#84a956]/30 relative">
             <button onclick="closeProfileModal()" class="absolute top-5 right-5 text-gray-400 hover:text-white">
                 <i data-lucide="x" class="w-5 h-5"></i>
             </button>
 
             <div>
                 <h2 class="text-xl font-extrabold text-white">Edit Profile & Goals</h2>
-                <p class="text-xs text-gray-400">Personalize your display identity and daily goals</p>
+                <p class="text-xs text-[#c2d6ad]">Personalize your display identity and daily goals</p>
             </div>
 
             <form onsubmit="saveProfileSettings(event)" class="space-y-3 text-xs">
                 <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-gray-400 mb-1">Full Name</label>
-                        <input type="text" id="prof-name" required class="w-full p-2.5 rounded bg-[#0e0e11] border border-[#24242c] text-white">
+                        <label class="block text-[#c2d6ad] mb-1">Full Name</label>
+                        <input type="text" id="prof-name" required class="w-full p-2.5 rounded bg-[#0b1206] border border-[#84a956]/30 text-white">
                     </div>
                     <div>
-                        <label class="block text-gray-400 mb-1">Pseudonym</label>
-                        <input type="text" id="prof-pseudonym" required class="w-full p-2.5 rounded bg-[#0e0e11] border border-[#24242c] text-white">
+                        <label class="block text-[#c2d6ad] mb-1">Pseudonym</label>
+                        <input type="text" id="prof-pseudonym" required class="w-full p-2.5 rounded bg-[#0b1206] border border-[#84a956]/30 text-white">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-gray-400 mb-1">Circle Type</label>
-                        <select id="prof-circle-cat" class="w-full p-2.5 rounded bg-[#0e0e11] border border-[#24242c] text-white">
+                        <label class="block text-[#c2d6ad] mb-1">Circle Type</label>
+                        <select id="prof-circle-cat" class="w-full p-2.5 rounded bg-[#0b1206] border border-[#84a956]/30 text-white">
                             <option value="college">College Campus</option>
                             <option value="office">Corporate Office</option>
                             <option value="society">Housing Society</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-gray-400 mb-1">Circle Name</label>
-                        <input type="text" id="prof-circle-name" required class="w-full p-2.5 rounded bg-[#0e0e11] border border-[#24242c] text-white">
+                        <label class="block text-[#c2d6ad] mb-1">Circle Name</label>
+                        <input type="text" id="prof-circle-name" required class="w-full p-2.5 rounded bg-[#0b1206] border border-[#84a956]/30 text-white">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-gray-400 mb-1">Steps Target</label>
-                        <input type="number" id="prof-goal-steps" min="3000" max="30000" step="500" class="w-full p-2.5 rounded bg-[#0e0e11] border border-[#24242c] text-white">
+                        <label class="block text-[#c2d6ad] mb-1">Steps Target</label>
+                        <input type="number" id="prof-goal-steps" min="3000" max="30000" step="500" class="w-full p-2.5 rounded bg-[#0b1206] border border-[#84a956]/30 text-white">
                     </div>
                     <div>
-                        <label class="block text-gray-400 mb-1">CO2 Target (kg)</label>
-                        <input type="number" id="prof-goal-co2" min="1.0" max="20.0" step="0.5" class="w-full p-2.5 rounded bg-[#0e0e11] border border-[#24242c] text-white">
+                        <label class="block text-[#c2d6ad] mb-1">CO2 Target (kg)</label>
+                        <input type="number" id="prof-goal-co2" min="1.0" max="20.0" step="0.5" class="w-full p-2.5 rounded bg-[#0b1206] border border-[#84a956]/30 text-white">
                     </div>
                 </div>
 
                 <div class="pt-3 flex justify-end space-x-2">
-                    <button type="button" onclick="closeProfileModal()" class="px-4 py-2 rounded bg-[#1c1c22] text-gray-300">Cancel</button>
-                    <button type="submit" class="px-5 py-2 rounded bg-[#ff7d00] text-black font-bold">Save</button>
+                    <button type="button" onclick="closeProfileModal()" class="px-4 py-2 rounded bg-[#162a1c] text-gray-300">Cancel</button>
+                    <button type="submit" class="px-5 py-2 rounded bg-[#5c3a21] text-white font-bold border border-[#84a956]/30">Save</button>
                 </div>
             </form>
         </div>
@@ -1052,13 +1052,13 @@
 
     <!-- Voucher QR Modal -->
     <div id="voucher-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-        <div class="min-card max-w-xs w-full bg-[#141418] p-6 text-center space-y-4 border border-[#282832] relative">
+        <div class="min-card max-w-xs w-full bg-[#102216] p-6 text-center space-y-4 border border-[#84a956]/30 relative">
             <button onclick="closeVoucherModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
                 <i data-lucide="x" class="w-5 h-5"></i>
             </button>
 
             <h3 id="modal-voucher-title" class="text-lg font-bold text-white">Voucher Claimed!</h3>
-            <p id="modal-voucher-subtitle" class="text-xs text-gray-400">Show QR at partner counter</p>
+            <p id="modal-voucher-subtitle" class="text-xs text-[#c2d6ad]">Show QR at partner counter</p>
 
             <div class="p-3 bg-white rounded-xl mx-auto w-36 h-36 flex items-center justify-center">
                 <svg viewBox="0 0 100 100" class="w-full h-full text-black fill-current">
@@ -1072,11 +1072,11 @@
                 </svg>
             </div>
 
-            <div class="p-2.5 rounded bg-[#0e0e11] border border-[#24242c]">
-                <span id="modal-voucher-code" class="text-sm font-mono-num font-bold text-[#ff7d00]">CS-METRO-8829</span>
+            <div class="p-2.5 rounded bg-[#0b1206] border border-[#84a956]/20">
+                <span id="modal-voucher-code" class="text-sm font-mono-num font-bold text-[#84a956]">CS-METRO-8829</span>
             </div>
 
-            <button onclick="closeVoucherModal()" class="w-full py-2 rounded bg-[#1c1c22] text-white font-bold text-xs">Done</button>
+            <button onclick="closeVoucherModal()" class="w-full py-2 rounded bg-[#5c3a21] text-white font-bold text-xs border border-[#84a956]/30">Done</button>
         </div>
     </div>
 
