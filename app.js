@@ -666,6 +666,91 @@ function populateProfileTab() {
     document.getElementById('prof-goal-co2').value = u.goalCo2Kg;
 }
 
+let fitnessChartInstance = null;
+
+function populateFitnessTab() {
+    const u = appState.user;
+    
+    // Default mock data if missing
+    const calories = u.caloriesToday || 412;
+    
+    document.getElementById('fitness-calories-display').textContent = calories;
+    document.getElementById('fitness-steps-val').textContent = u.stepsToday;
+    document.getElementById('fitness-steps-goal').textContent = `/ ${u.goalSteps}`;
+    document.getElementById('fitness-cal-val').textContent = calories;
+    
+    // Estimate distance (1 step ~ 0.762m)
+    const distanceKm = ((u.stepsToday * 0.762) / 1000).toFixed(2);
+    document.getElementById('fitness-dist-val').textContent = distanceKm;
+    
+    // Estimate active time (100 steps per min avg walking pace)
+    const activeTimeMins = Math.floor(u.stepsToday / 100);
+    document.getElementById('fitness-time-val').textContent = activeTimeMins;
+    
+    // Update progress bar
+    const stepPct = Math.min(100, Math.floor((u.stepsToday / u.goalSteps) * 100));
+    document.getElementById('quest-steps-bar').style.width = `${stepPct}%`;
+    
+    initFitnessChart();
+}
+
+function initFitnessChart() {
+    const ctx = document.getElementById('fitnessChart')?.getContext('2d');
+    if (!ctx) return;
+    
+    if (fitnessChartInstance) {
+        fitnessChartInstance.destroy();
+    }
+    
+    fitnessChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Today'],
+            datasets: [
+                {
+                    label: 'Calories Burned',
+                    data: [350, 420, 310, 500, 380, 460, appState.user.caloriesToday || 412],
+                    borderColor: '#f43f5e', // rose-500
+                    backgroundColor: 'rgba(244, 63, 94, 0.1)',
+                    borderWidth: 3,
+                    tension: 0.4,
+                    fill: true,
+                    yAxisID: 'y'
+                },
+                {
+                    label: 'Steps',
+                    data: [7200, 8500, 6400, 10200, 7800, 9100, appState.user.stepsToday],
+                    borderColor: '#84a956', // Olive
+                    backgroundColor: 'transparent',
+                    borderWidth: 3,
+                    borderDash: [5, 5],
+                    tension: 0.4,
+                    yAxisID: 'y1'
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+                legend: { labels: { color: '#c2d6ad', font: { family: 'Inter' } } }
+            },
+            scales: {
+                x: { ticks: { color: '#c2d6ad' }, grid: { color: 'rgba(132,169,86,0.1)' } },
+                y: { 
+                    type: 'linear', display: true, position: 'left',
+                    ticks: { color: '#f43f5e' }, grid: { color: 'rgba(132,169,86,0.1)' } 
+                },
+                y1: { 
+                    type: 'linear', display: true, position: 'right',
+                    ticks: { color: '#84a956' }, grid: { drawOnChartArea: false } 
+                }
+            }
+        }
+    });
+}
+
 function logoutUser() {
     appState.isAuthenticated = false;
     renderAppViewState();
@@ -736,6 +821,7 @@ function switchTab(tabId) {
     if (desktopBtn) desktopBtn.classList.add('active');
     
     if (tabId === 'profile') populateProfileTab();
+    if (tabId === 'fitness') populateFitnessTab();
 
     // Auto-close sidebar drawer when selecting a menu option on mobile screen sizes
     const sidebar = document.getElementById('app-sidebar');

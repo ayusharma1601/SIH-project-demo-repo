@@ -280,6 +280,11 @@
                         <span class="sidebar-text truncate">Department Battles</span>
                     </button>
 
+                    <button onclick="switchTab('fitness')" id="nav-fitness" class="nav-item w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-r-lg text-xs font-semibold">
+                        <i data-lucide="activity" class="w-4 h-4 flex-shrink-0"></i>
+                        <span class="sidebar-text truncate">Health & Fitness</span>
+                    </button>
+
                     <button onclick="switchTab('rewards')" id="nav-rewards" class="nav-item w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-r-lg text-xs font-semibold">
                         <i data-lucide="gift" class="w-4 h-4 flex-shrink-0"></i>
                         <span class="sidebar-text truncate">Rewards & Cashout</span>
@@ -1001,6 +1006,99 @@
 
                     </div>
 
+                </section>
+
+                <!-- ================= FITNESS TAB ================= -->
+                <section id="tab-fitness" class="tab-content hidden space-y-6">
+                    <div class="min-card p-5 bg-[#102216] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div>
+                            <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                                <i data-lucide="activity" class="w-5 h-5 text-[#84a956]"></i>
+                                Health & Fitness
+                            </h2>
+                            <p class="text-xs text-[#c2d6ad] mt-1">Track calories, daily steps, and active commute goals.</p>
+                        </div>
+                        <div class="px-3.5 py-2 rounded-lg bg-[#5c3a21]/30 border border-[#5c3a21]/60 text-white font-bold text-xs flex items-center gap-2 shadow-md">
+                            <i data-lucide="flame" class="w-4 h-4 text-rose-400"></i>
+                            <span id="fitness-calories-display">0</span> kcal burned
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="min-card p-4 bg-[#102216] border-l-4 border-l-[#84a956] flex flex-col justify-between">
+                            <p class="text-[10px] text-[#c2d6ad] uppercase tracking-wider mb-1 font-bold">Steps Today</p>
+                            <div class="flex items-baseline gap-1.5 mt-2">
+                                <span id="fitness-steps-val" class="text-2xl sm:text-3xl font-black text-white">0</span>
+                                <span id="fitness-steps-goal" class="text-xs text-gray-400 font-mono">/ 0</span>
+                            </div>
+                        </div>
+                        <div class="min-card p-4 bg-[#102216] border-l-4 border-l-rose-500 flex flex-col justify-between">
+                            <p class="text-[10px] text-[#c2d6ad] uppercase tracking-wider mb-1 font-bold">Total Calories</p>
+                            <div class="flex items-baseline gap-1.5 mt-2">
+                                <span id="fitness-cal-val" class="text-2xl sm:text-3xl font-black text-white">0</span>
+                                <span class="text-xs text-gray-400 font-mono">kcal</span>
+                            </div>
+                        </div>
+                        <div class="min-card p-4 bg-[#102216] border-l-4 border-l-[#c2d6ad] flex flex-col justify-between">
+                            <p class="text-[10px] text-[#c2d6ad] uppercase tracking-wider mb-1 font-bold">Active Time</p>
+                            <div class="flex items-baseline gap-1.5 mt-2">
+                                <span id="fitness-time-val" class="text-2xl sm:text-3xl font-black text-white">45</span>
+                                <span class="text-xs text-gray-400 font-mono">mins</span>
+                            </div>
+                        </div>
+                        <div class="min-card p-4 bg-[#102216] border-l-4 border-l-[#5c3a21] flex flex-col justify-between">
+                            <p class="text-[10px] text-[#c2d6ad] uppercase tracking-wider mb-1 font-bold">Est. Distance</p>
+                            <div class="flex items-baseline gap-1.5 mt-2">
+                                <span id="fitness-dist-val" class="text-2xl sm:text-3xl font-black text-white">0</span>
+                                <span class="text-xs text-gray-400 font-mono">km</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div class="lg:col-span-2 min-card p-5 bg-[#102216] border border-[#84a956]/20">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="font-bold text-white uppercase tracking-wide text-sm">Weekly Calorie Burn</h3>
+                                <div class="text-[10px] text-[#c2d6ad] bg-[#0b1206] px-2 py-1 rounded border border-[#84a956]/30">Last 7 Days</div>
+                            </div>
+                            <div class="relative h-64 w-full">
+                                <canvas id="fitnessChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <h3 class="font-bold text-white uppercase tracking-wide text-sm px-1">Fitness Quests</h3>
+                            <div class="min-card p-4 bg-[#0b1206] border border-[#84a956]/30 flex flex-col gap-3 relative overflow-hidden group hover:border-[#84a956] transition">
+                                <div class="absolute -right-6 -top-6 text-[#84a956]/10 group-hover:text-[#84a956]/20 transition transform group-hover:scale-110">
+                                    <i data-lucide="footprints" class="w-24 h-24"></i>
+                                </div>
+                                <div class="relative z-10">
+                                    <p class="text-sm font-bold text-white">10K Step Master</p>
+                                    <p class="text-xs text-[#c2d6ad] mt-0.5">Hit your daily step goal to unlock the badge.</p>
+                                </div>
+                                <div class="relative z-10 mt-1">
+                                    <div class="w-full bg-[#102216] rounded-full h-2 border border-[#84a956]/30 mb-2 overflow-hidden">
+                                        <div id="quest-steps-bar" class="bg-[#84a956] h-2 rounded-full" style="width: 0%"></div>
+                                    </div>
+                                    <button class="w-full py-2 rounded bg-[#84a956] text-black text-xs font-extrabold shadow-md hover:bg-[#95b378] transition" onclick="showToast('Steps logged! Goal updated.', 'success')">Log Walk Session</button>
+                                </div>
+                            </div>
+                            <div class="min-card p-4 bg-[#0b1206] border border-[#5c3a21]/50 flex flex-col gap-3 relative overflow-hidden group hover:border-[#5c3a21] transition">
+                                <div class="absolute -right-6 -top-6 text-rose-500/10 group-hover:text-rose-500/20 transition transform group-hover:scale-110">
+                                    <i data-lucide="flame" class="w-24 h-24"></i>
+                                </div>
+                                <div class="relative z-10">
+                                    <p class="text-sm font-bold text-white">Calorie Crusher</p>
+                                    <p class="text-xs text-[#c2d6ad] mt-0.5">Burn 500 kcal by cycling to work.</p>
+                                </div>
+                                <div class="relative z-10 mt-1">
+                                    <div class="w-full bg-[#102216] rounded-full h-2 border border-[#5c3a21]/50 mb-2 overflow-hidden">
+                                        <div class="bg-rose-500 h-2 rounded-full" style="width: 60%"></div>
+                                    </div>
+                                    <button class="w-full py-2 rounded bg-[#5c3a21] text-white text-xs font-bold border border-[#84a956]/30 shadow-md">In Progress (60%)</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </section>
 
                 <!-- ================= PROFILE TAB ================= -->
