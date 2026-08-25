@@ -441,29 +441,6 @@ function switchAuthTab(mode) {
     }
 }
 
-function showOnboarding() {
-    const modal = document.getElementById('onboarding-modal');
-    const card = document.getElementById('onboarding-card');
-    document.getElementById('view-auth').classList.add('hidden');
-    modal.classList.remove('hidden');
-    // slight delay for animation
-    setTimeout(() => {
-        card.classList.remove('scale-95');
-        card.classList.add('scale-100');
-    }, 50);
-}
-
-function closeOnboarding() {
-    const modal = document.getElementById('onboarding-modal');
-    modal.classList.add('hidden');
-    showView('view-dashboard');
-    // trigger tree loader for dramatic effect
-    const loader = document.getElementById('tree-loader');
-    loader.classList.remove('hidden');
-    setTimeout(() => { loader.classList.add('opacity-0'); }, 1500);
-    setTimeout(() => { loader.classList.add('hidden'); loader.classList.remove('opacity-0'); }, 2000);
-}
-
 function handleFormAuthSubmit(e) {
     e.preventDefault();
     hideAuthAlert();
@@ -502,8 +479,7 @@ function handleFormAuthSubmit(e) {
         saveUserToLocalStorage();
 
         appState.isAuthenticated = true;
-        // Show onboarding modal instead of going directly to dashboard
-        showOnboarding();
+        renderAppViewState();
         showToast(`Welcome to CarbonSaathi, ${newAcc.name}! 🎉`, "success");
     } else {
         const account = appState.accounts.find(a => a.email.toLowerCase() === email);
@@ -1029,22 +1005,9 @@ function claimVoucher(voucherId) {
         return;
     }
 
-    v.claimed = true;
     appState.user.greenPoints -= v.pts;
     saveUserToLocalStorage();
-    renderVouchers();
     updatePersonalizedUI();
-    showToast(`Claimed ${v.title}! 🎁`, "success");
-
-    // Prompt user to share milestone
-    setTimeout(() => {
-        openModal('modal-recap');
-        const input = document.getElementById('recap-quote-input');
-        if (input) {
-            input.value = `I just claimed a ${v.title} reward on CarbonSaathi! 🌿`;
-            updateRecapQuote();
-        }
-    }, 1500);
 
     document.getElementById('modal-voucher-title').textContent = v.title;
     document.getElementById('modal-voucher-subtitle').textContent = `Claimed from ${v.partner}`;
