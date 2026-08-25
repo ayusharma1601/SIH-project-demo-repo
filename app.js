@@ -180,6 +180,7 @@ function saveCashoutHistoryToLocalStorage() {
 
 let weeklyCarbonChart = null;
 let modeSplitChart = null;
+let polarstepsLeafletMap = null;
 
 document.addEventListener("DOMContentLoaded", () => {
     lucide.createIcons();
@@ -189,6 +190,62 @@ document.addEventListener("DOMContentLoaded", () => {
     setupNetworkListeners();
     setupPwaInstallPrompt();
 });
+
+function initPolarstepsMap() {
+    const mapContainer = document.getElementById('polarsteps-map');
+    if (!mapContainer || polarstepsLeafletMap || typeof L === 'undefined') return;
+
+    // Coordinate points for Delhi commuter path (Hostel -> Metro -> Campus)
+    const tripWaypoints = [
+        { lat: 28.5457, lng: 77.1928, title: "Step 1: Morning Walk (Hostel to Hauz Khas)", mode: "🚶 Walking", co2: "0.26 kg" },
+        { lat: 28.5494, lng: 77.2066, title: "Step 2: Hauz Khas Metro Entry", mode: "🚇 Metro", co2: "0.50 kg" },
+        { lat: 28.6974, lng: 77.2106, title: "Step 3: Vishwavidyalaya Metro Exit", mode: "🚇 Metro", co2: "1.32 kg" },
+        { lat: 28.7001, lng: 77.2140, title: "Step 4: E-Rickshaw to CS Dept", mode: "🛺 E-Rickshaw", co2: "0.77 kg" }
+    ];
+
+    // Initialize Leaflet map centered at Delhi
+    polarstepsLeafletMap = L.map('polarsteps-map', {
+        zoomControl: true,
+        scrollWheelZoom: false
+    }).setView([28.6200, 77.2050], 11);
+
+    // Dark Mapbox/CartoDB tiles for Polarsteps aesthetic
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; OpenStreetMap',
+        maxZoom: 19
+    }).addTo(polarstepsLeafletMap);
+
+    const latLngs = tripWaypoints.map(wp => [wp.lat, wp.lng]);
+
+    // Draw Polarsteps path line (Polyline with glowing orange border)
+    L.polyline(latLngs, {
+        color: '#ff7d00',
+        weight: 4,
+        opacity: 0.9,
+        dashArray: '8, 6'
+    }).addTo(polarstepsLeafletMap);
+
+    // Add Step pin markers
+    tripWaypoints.forEach((wp, idx) => {
+        const marker = L.circleMarker([wp.lat, wp.lng], {
+            radius: 7,
+            fillColor: idx === tripWaypoints.length - 1 ? '#a855f7' : '#ff7d00',
+            color: '#ffffff',
+            weight: 2,
+            opacity: 1,
+            fillOpacity: 1
+        }).addTo(polarstepsLeafletMap);
+
+        marker.bindPopup(`
+            <div style="font-family: sans-serif; font-size: 12px; color: #000; padding: 2px;">
+                <strong>${wp.title}</strong><br/>
+                <span>${wp.mode} • Saved ${wp.co2} CO2</span>
+            </div>
+        `);
+    });
+
+    polarstepsLeafletMap.fitBounds(L.polyline(latLngs).getBounds(), { padding: [30, 30] });
+}
 
 function renderAppViewState() {
     const authView = document.getElementById('view-auth');
@@ -201,6 +258,7 @@ function renderAppViewState() {
 
         updatePersonalizedUI();
         initDashboardCharts();
+        setTimeout(initPolarstepsMap, 200);
         renderSensorStream();
         renderLeaderboard();
         renderChallenges();

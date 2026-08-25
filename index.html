@@ -44,6 +44,9 @@
     </script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Leaflet.js for Polarsteps-style Interactive Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- html2canvas for recap screenshot -->
@@ -190,13 +193,13 @@
                 <!-- Navigation Sidebar Links -->
                 <nav class="p-3 space-y-1">
                     <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-item active w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-r-lg text-xs font-semibold">
-                        <i data-lucide="layout-dashboard" class="w-4 h-4 flex-shrink-0"></i>
-                        <span class="sidebar-text truncate">Dashboard Overview</span>
+                        <i data-lucide="map" class="w-4 h-4 flex-shrink-0"></i>
+                        <span class="sidebar-text truncate">Journey Map & Feed</span>
                     </button>
 
                     <button onclick="switchTab('simulator')" id="nav-simulator" class="nav-item w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-r-lg text-xs font-semibold">
                         <i data-lucide="navigation" class="w-4 h-4 flex-shrink-0"></i>
-                        <span class="sidebar-text truncate">Trip Logger & Sim</span>
+                        <span class="sidebar-text truncate">Track & Add Step</span>
                     </button>
 
                     <button onclick="switchTab('leaderboard')" id="nav-leaderboard" class="nav-item w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-r-lg text-xs font-semibold">
@@ -216,7 +219,7 @@
 
                     <button onclick="switchTab('recap')" id="nav-recap" class="nav-item w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-r-lg text-xs font-semibold">
                         <i data-lucide="sparkles" class="w-4 h-4 flex-shrink-0"></i>
-                        <span class="sidebar-text truncate">Weekly Impact Card</span>
+                        <span class="sidebar-text truncate">Trip Reel & Card</span>
                     </button>
                 </nav>
             </div>
@@ -295,20 +298,108 @@
             <!-- Page Content Views -->
             <main class="p-4 sm:p-6 lg:p-8 space-y-6 max-w-7xl w-full mx-auto">
 
-                <!-- ================= TAB 1: DASHBOARD OVERVIEW ================= -->
+                <!-- ================= TAB 1: JOURNEY MAP & STEP FEED (POLARSTEPS STYLE) ================= -->
                 <section id="tab-dashboard" class="tab-content block space-y-6">
                     
                     <!-- Header Title Banner -->
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-[#24242c]">
                         <div>
                             <div class="flex items-center space-x-2">
-                                <h1 class="text-2xl font-extrabold text-white">Commute Summary</h1>
+                                <h1 class="text-2xl font-extrabold text-white flex items-center gap-2">
+                                    <span>🇮🇳</span>
+                                    <span>Eco Journey & Commute Tracker</span>
+                                </h1>
                                 <span id="badge-streak" class="px-2 py-0.5 text-[10px] font-bold rounded bg-amber-500/10 text-[#ff7d00] border border-[#ff7d00]/30">🔥 12 Day Streak</span>
                             </div>
-                            <p class="text-xs text-gray-400 mt-1">Circle: <strong class="text-gray-200" id="circle-tag-display">IIT Delhi Campus</strong></p>
+                            <p class="text-xs text-gray-400 mt-1">Circle: <strong class="text-gray-200" id="circle-tag-display">IIT Delhi Campus</strong> • Live GPS Path Tracking</p>
                         </div>
                         <div class="flex items-center gap-2">
                             <span class="text-xs text-gray-400">Total Saved Today: <strong class="text-[#ff7d00] font-mono-num" id="hero-co2-display">3.85 kg CO2</strong></span>
+                        </div>
+                    </div>
+
+                    <!-- Polarsteps Interactive GPS Map View Card -->
+                    <div class="min-card overflow-hidden bg-[#141418] border border-[#24242c] shadow-2xl relative">
+                        <div class="p-3 bg-[#0e0e11] border-b border-[#24242c] flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+                                <span class="text-xs font-bold text-white uppercase tracking-wider">Interactive Trip Route & Geo Pins</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-[10px] font-mono text-gray-400">
+                                <span class="px-2 py-0.5 rounded bg-[#1c1c22] border border-[#2a2a34]">4 Steps Pinned</span>
+                                <span class="px-2 py-0.5 rounded bg-[#ff7d00]/10 text-[#ff7d00] border border-[#ff7d00]/30 font-bold">GPS Active</span>
+                            </div>
+                        </div>
+
+                        <!-- Leaflet Map Container -->
+                        <div id="polarsteps-map" class="w-full h-80 sm:h-96 z-10"></div>
+                    </div>
+
+                    <!-- Polarsteps Chronological Timeline "Steps Feed" -->
+                    <div class="min-card p-5 bg-[#141418] border border-[#24242c] space-y-4">
+                        <div class="flex items-center justify-between border-b border-[#24242c] pb-3">
+                            <h3 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                                <i data-lucide="footprints" class="w-4 h-4 text-[#ff7d00]"></i>
+                                Journey Steps Timeline
+                            </h3>
+                            <button onclick="switchTab('simulator')" class="px-3 py-1 rounded bg-[#ff7d00] hover:bg-[#e67000] text-black font-bold text-xs flex items-center gap-1 transition">
+                                <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                                <span>Add New Step Pin</span>
+                            </button>
+                        </div>
+
+                        <div id="timeline-steps-feed" class="space-y-4 relative before:absolute before:inset-0 before:left-4 before:w-0.5 before:bg-[#24242c]">
+                            
+                            <!-- Step 1 -->
+                            <div class="relative pl-10">
+                                <div class="absolute left-2 top-1 -translate-x-1/2 w-4 h-4 rounded-full bg-[#ff7d00] border-2 border-[#141418] z-10 flex items-center justify-center text-[8px] font-bold text-black">1</div>
+                                <div class="p-3.5 rounded-xl bg-[#1c1c22] border border-[#2a2a34] space-y-2">
+                                    <div class="flex items-center justify-between text-xs">
+                                        <span class="font-bold text-white">🚶 Morning Metro Walk • IIT Gate</span>
+                                        <span class="text-[10px] text-gray-400 font-mono">08:30 AM</span>
+                                    </div>
+                                    <p class="text-xs text-gray-300">Walked 1.8 km from hostel to Metro station. Zero carbon footprint!</p>
+                                    <div class="flex items-center space-x-3 text-[10px] text-gray-400 font-mono-num pt-1">
+                                        <span class="text-emerald-400">🌱 +0.26 kg CO2 Saved</span>
+                                        <span>🔥 180 kcal</span>
+                                        <span class="text-[#ff7d00]">📍 Hauz Khas</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 2 -->
+                            <div class="relative pl-10">
+                                <div class="absolute left-2 top-1 -translate-x-1/2 w-4 h-4 rounded-full bg-[#a855f7] border-2 border-[#141418] z-10 flex items-center justify-center text-[8px] font-bold text-black">2</div>
+                                <div class="p-3.5 rounded-xl bg-[#1c1c22] border border-[#2a2a34] space-y-2">
+                                    <div class="flex items-center justify-between text-xs">
+                                        <span class="font-bold text-white">🚇 Delhi Metro Yellow Line Ride</span>
+                                        <span class="text-[10px] text-gray-400 font-mono">09:05 AM</span>
+                                    </div>
+                                    <p class="text-xs text-gray-300">Transit trip across 6 stations from Hauz Khas to Vishwavidyalaya.</p>
+                                    <div class="flex items-center space-x-3 text-[10px] text-gray-400 font-mono-num pt-1">
+                                        <span class="text-emerald-400">🌱 +1.82 kg CO2 Saved</span>
+                                        <span>⚡ DMRC Verified</span>
+                                        <span class="text-[#a855f7]">📍 North Campus</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 3 -->
+                            <div class="relative pl-10">
+                                <div class="absolute left-2 top-1 -translate-x-1/2 w-4 h-4 rounded-full bg-teal-400 border-2 border-[#141418] z-10 flex items-center justify-center text-[8px] font-bold text-black">3</div>
+                                <div class="p-3.5 rounded-xl bg-[#1c1c22] border border-[#2a2a34] space-y-2">
+                                    <div class="flex items-center justify-between text-xs">
+                                        <span class="font-bold text-white">🛺 Shared E-Rickshaw Shuttle</span>
+                                        <span class="text-[10px] text-gray-400 font-mono">09:40 AM</span>
+                                    </div>
+                                    <p class="text-xs text-gray-300">Clean last-mile electric ride to CS Department Block.</p>
+                                    <div class="flex items-center space-x-3 text-[10px] text-gray-400 font-mono-num pt-1">
+                                        <span class="text-emerald-400">🌱 +0.77 kg CO2 Saved</span>
+                                        <span class="text-teal-400">📍 Department Gate</span>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
