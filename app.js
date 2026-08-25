@@ -656,6 +656,8 @@ function renderCashoutHistory() {
 
 function openProfileModal() {
     const u = appState.user;
+    const emailDisplay = document.getElementById('prof-email-display');
+    if (emailDisplay) emailDisplay.textContent = u.email || 'user@example.com';
     document.getElementById('prof-name').value = u.realName;
     document.getElementById('prof-pseudonym').value = u.pseudonym;
     document.getElementById('prof-circle-cat').value = u.circleCategory;
@@ -668,6 +670,13 @@ function openProfileModal() {
 
 function closeProfileModal() {
     document.getElementById('profile-modal').classList.add('hidden');
+}
+
+function logoutUser() {
+    appState.isAuthenticated = false;
+    closeProfileModal();
+    renderAppViewState();
+    showToast("Successfully signed out.", "success");
 }
 
 function saveProfileSettings(event) {
