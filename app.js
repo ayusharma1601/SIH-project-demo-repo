@@ -348,7 +348,7 @@ function validatePasswordFieldLive() {
 
     if (isSequentialOrRepetitive) {
         bar.className = "h-full bg-rose-500 w-1/4 transition-all duration-300";
-        text.textContent = "Weak: Avoid simple patterns like '12345678'";
+        text.textContent = "Weak password";
         text.className = "text-[10px] text-rose-400 font-semibold";
         return false;
     }
@@ -361,9 +361,9 @@ function validatePasswordFieldLive() {
     if (/[^A-Za-z0-9]/.test(val)) score += 1; // Has special char
 
     if (score <= 1) {
-        bar.className = "h-full bg-amber-500 w-2/4 transition-all duration-300";
-        text.textContent = "Weak: Add letters & symbols (e.g. Pass@123)";
-        text.className = "text-[10px] text-amber-400 font-semibold";
+        bar.className = "h-full bg-rose-500 w-2/4 transition-all duration-300";
+        text.textContent = "Weak password";
+        text.className = "text-[10px] text-rose-400 font-semibold";
         return false;
     } else if (score === 2) {
         bar.className = "h-full bg-amber-400 w-3/4 transition-all duration-300";
