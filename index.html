@@ -80,6 +80,16 @@
 </head>
 <body class="bg-[#18181e] text-gray-100 min-h-full flex flex-col font-sans selection:bg-[#5c3a21] selection:text-white">
 
+    <!-- ================= ONBOARDING MODAL ================= -->
+    <div id="onboarding-modal" class="hidden fixed inset-0 z-[60] flex items-center justify-center bg-[#0b1206]/95 backdrop-blur-md p-4 transition-opacity">
+        <div class="max-w-sm w-full min-card p-8 border-2 border-[#5c3a21] bg-[#102216] shadow-2xl text-center space-y-5 rounded-2xl transform scale-95 transition-transform duration-300" id="onboarding-card">
+            <div class="w-20 h-20 mx-auto bg-[#5c3a21] rounded-full flex items-center justify-center text-4xl mb-4 border-4 border-[#84a956]/40 shadow-[0_0_30px_rgba(132,169,86,0.3)]">🌿</div>
+            <h2 class="text-2xl font-extrabold text-white">Welcome to CarbonSaathi</h2>
+            <p class="text-sm text-[#c2d6ad] leading-relaxed font-medium">Your journey to a greener footprint starts here. Track your daily commutes, earn eco-points, and claim exclusive premium rewards.</p>
+            <button onclick="closeOnboarding()" class="w-full py-3.5 mt-6 rounded-xl bg-[#84a956] text-black font-extrabold text-lg border-2 border-[#c2d6ad]/50 hover:bg-[#95b378] transition shadow-lg hover:-translate-y-0.5 duration-200">Let's Get Started</button>
+        </div>
+    </div>
+
     <!-- ================= GROWING TREE LOADING BUFFER SCREEN ================= -->
     <div id="tree-loader" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#06110d]/95 backdrop-blur-xl text-white transition-opacity duration-500 p-6">
         <div class="relative w-32 h-32 flex items-center justify-center">
@@ -97,9 +107,9 @@
                 
                 <!-- Flourishing Green Canopy Leaves -->
                 <g class="tree-leaves">
-                    <circle cx="50" cy="30" r="16" fill="#10b981" />
+                    <circle cx="50" cy="30" r="16" fill="#84a956" />
                     <circle cx="35" cy="40" r="12" fill="#059669" />
-                    <circle cx="65" cy="35" r="13" fill="#34d399" />
+                    <circle cx="65" cy="35" r="13" fill="#c2d6ad" />
                     <circle cx="50" cy="22" r="11" fill="#6ee7b7" />
                 </g>
             </svg>
@@ -109,9 +119,9 @@
             <h3 class="text-sm font-extrabold text-white tracking-wider uppercase">Carbon<span class="text-[#a05a2c]">Saathi</span></h3>
             
             <!-- Random Environmental Fact Box -->
-            <div class="p-3.5 rounded-xl bg-[#0f231b]/80 border border-[#34d399]/30 text-xs shadow-lg space-y-1">
-                <span class="text-[10px] uppercase font-bold text-[#10b981] tracking-widest block">💡 Did You Know?</span>
-                <p id="env-fact-text" class="text-emerald-100 text-xs font-medium italic">"A single mature tree absorbs over 21 kg of CO2 per year."</p>
+            <div class="p-3.5 rounded-xl bg-[#0f231b]/80 border border-[#c2d6ad]/30 text-xs shadow-lg space-y-1">
+                <span class="text-[10px] uppercase font-bold text-[#84a956] tracking-widest block">💡 Did You Know?</span>
+                <p id="env-fact-text" class="text-[#c2d6ad] text-xs font-medium italic">"A single mature tree absorbs over 21 kg of CO2 per year."</p>
             </div>
         </div>
     </div>
@@ -219,30 +229,30 @@
         <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden md:hidden transition-opacity duration-300 opacity-0"></div>
 
         <!-- Collapsible Left Vertical Sidebar -->
-        <aside id="app-sidebar" class="fixed md:static inset-y-0 left-0 z-50 w-64 bg-[#061610]/95 backdrop-blur-xl border-r border-[#34d399]/20 flex-shrink-0 flex flex-col justify-between transition-all duration-300 -translate-x-full md:translate-x-0">
+        <aside id="app-sidebar" class="fixed md:static inset-y-0 left-0 z-50 w-64 bg-[#061610]/95 backdrop-blur-xl border-r border-[#c2d6ad]/20 flex-shrink-0 flex flex-col justify-between transition-all duration-300 -translate-x-full md:translate-x-0">
             
             <div>
                 <!-- Brand Header -->
-                <div class="p-4 sm:p-5 border-b border-[#34d399]/20 flex items-center justify-between bg-[#0a2218]/80">
+                <div class="p-4 sm:p-5 border-b border-[#c2d6ad]/20 flex items-center justify-between bg-[#0a2218]/80">
                     <div class="flex items-center space-x-3 cursor-pointer overflow-hidden" onclick="switchTab('dashboard')">
-                        <div class="w-9 h-9 rounded-lg bg-[#10b981] text-black flex items-center justify-center font-extrabold text-lg flex-shrink-0 shadow-md shadow-[#10b981]/30">
+                        <div class="w-9 h-9 rounded-lg bg-[#84a956] text-black flex items-center justify-center font-extrabold text-lg flex-shrink-0 shadow-md shadow-[#84a956]/30">
                             🌿
                         </div>
                         <div class="sidebar-text truncate">
-                            <span class="font-extrabold text-lg text-white tracking-tight">Carbon<span class="text-[#34d399]">Saathi</span></span>
-                            <span class="block text-[10px] text-emerald-300 font-mono">v2.0 • Eco App</span>
+                            <span class="font-extrabold text-lg text-white tracking-tight">Carbon<span class="text-[#c2d6ad]">Saathi</span></span>
+                            <span class="block text-[10px] text-[#c2d6ad] font-mono">v2.0 • Eco App</span>
                         </div>
                     </div>
 
                     <!-- Collapse / Close Button -->
-                    <button onclick="toggleSidebar()" class="p-1.5 rounded-lg text-emerald-300 hover:text-white hover:bg-[#10b981]/20 transition" title="Toggle Sidebar Navigation">
+                    <button onclick="toggleSidebar()" class="p-1.5 rounded-lg text-[#c2d6ad] hover:text-white hover:bg-[#84a956]/20 transition" title="Toggle Sidebar Navigation">
                         <i data-lucide="chevron-left" id="sidebar-toggle-icon" class="w-5 h-5"></i>
                     </button>
                 </div>
 
                 <!-- Quick Collapsed Toggle Bar for Desktop Mini Mode -->
-                <div class="hidden md:flex justify-center py-2 border-b border-[#34d399]/15 bg-[#04120c]/60">
-                    <button onclick="toggleSidebarDesktop()" class="text-xs text-emerald-300 hover:text-[#34d399] flex items-center gap-1.5 px-2 py-1 rounded hover:bg-[#10b981]/15 transition">
+                <div class="hidden md:flex justify-center py-2 border-b border-[#c2d6ad]/15 bg-[#0b1206]/60">
+                    <button onclick="toggleSidebarDesktop()" class="text-xs text-[#c2d6ad] hover:text-[#c2d6ad] flex items-center gap-1.5 px-2 py-1 rounded hover:bg-[#84a956]/15 transition">
                         <i data-lucide="panel-left-close" id="desktop-collapse-icon" class="w-4 h-4"></i>
                         <span class="sidebar-text text-[11px] font-medium">Collapse Menu</span>
                     </button>
@@ -302,7 +312,7 @@
                 <!-- Network & PWA status -->
                 <div class="sidebar-text flex items-center justify-between pt-1 text-[10px] text-gray-400">
                     <span id="network-status-badge" class="flex items-center gap-1">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Network: Online
+                        <span class="w-2 h-2 rounded-full bg-[#c2d6ad] animate-pulse"></span> Network: Online
                     </span>
                     <button id="pwa-install-btn" onclick="triggerPwaInstall()" class="hidden text-[#84a956] hover:underline font-bold">Install PWA</button>
                 </div>
@@ -315,34 +325,34 @@
         <div class="flex-1 flex flex-col min-w-0 overflow-y-auto">
             
             <!-- Top Header Bar -->
-            <header class="sticky top-0 z-30 bg-[#04120c]/90 backdrop-blur-xl border-b border-[#34d399]/20 px-4 sm:px-6 py-3 flex items-center justify-between">
+            <header class="sticky top-0 z-30 bg-[#0b1206]/90 backdrop-blur-xl border-b border-[#c2d6ad]/20 px-4 sm:px-6 py-3 flex items-center justify-between">
                 
                 <div class="flex items-center space-x-2 sm:space-x-3">
                     <!-- Mobile Hamburger Toggle -->
-                    <button onclick="toggleSidebar()" class="p-2 rounded-lg bg-[#0d281e]/80 border border-[#34d399]/30 text-emerald-200 hover:text-white hover:border-[#10b981] transition flex items-center justify-center">
-                        <i data-lucide="menu" class="w-5 h-5 text-[#10b981]"></i>
+                    <button onclick="toggleSidebar()" class="p-2 rounded-lg bg-[#0d281e]/80 border border-[#c2d6ad]/30 text-[#c2d6ad] hover:text-white hover:border-[#84a956] transition flex items-center justify-center">
+                        <i data-lucide="menu" class="w-5 h-5 text-[#84a956]"></i>
                     </button>
 
-                    <button onclick="openProfileModal()" class="px-3 py-1.5 rounded-lg bg-[#0d281e]/80 border border-[#34d399]/30 text-xs text-emerald-200 hover:border-[#10b981] transition flex items-center space-x-1.5">
-                        <i data-lucide="sliders" class="w-3.5 h-3.5 text-[#10b981]"></i>
+                    <button onclick="openProfileModal()" class="px-3 py-1.5 rounded-lg bg-[#0d281e]/80 border border-[#c2d6ad]/30 text-xs text-[#c2d6ad] hover:border-[#84a956] transition flex items-center space-x-1.5">
+                        <i data-lucide="sliders" class="w-3.5 h-3.5 text-[#84a956]"></i>
                         <span class="hidden sm:inline">Edit Profile</span>
                     </button>
 
-                    <button id="privacy-toggle-btn" onclick="togglePrivacyMode()" class="px-3 py-1.5 rounded-lg bg-[#0d281e]/80 border border-[#34d399]/30 text-xs text-emerald-200 hover:border-[#34d399] transition flex items-center space-x-1.5">
-                        <i data-lucide="shield-check" class="w-3.5 h-3.5 text-[#34d399]"></i>
+                    <button id="privacy-toggle-btn" onclick="togglePrivacyMode()" class="px-3 py-1.5 rounded-lg bg-[#0d281e]/80 border border-[#c2d6ad]/30 text-xs text-[#c2d6ad] hover:border-[#c2d6ad] transition flex items-center space-x-1.5">
+                        <i data-lucide="shield-check" class="w-3.5 h-3.5 text-[#c2d6ad]"></i>
                         <span id="privacy-mode-text">Pseudonym: ON</span>
                     </button>
                 </div>
 
                 <!-- Balance Indicator Pill -->
                 <div class="flex items-center space-x-3">
-                    <div class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-[#10b981]/15 border border-[#10b981]/40 text-[#34d399] font-mono-num font-bold text-xs cursor-pointer" onclick="switchTab('rewards')">
-                        <i data-lucide="coins" class="w-3.5 h-3.5 text-[#10b981]"></i>
+                    <div class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-[#84a956]/15 border border-[#84a956]/40 text-[#c2d6ad] font-mono-num font-bold text-xs cursor-pointer" onclick="switchTab('rewards')">
+                        <i data-lucide="coins" class="w-3.5 h-3.5 text-[#84a956]"></i>
                         <span id="user-green-points">1,280</span>
-                        <span class="text-[10px] text-emerald-300 font-sans">PTS</span>
+                        <span class="text-[10px] text-[#c2d6ad] font-sans">PTS</span>
                     </div>
 
-                    <button onclick="switchTab('simulator')" class="px-3.5 py-1.5 rounded-lg bg-[#10b981] hover:bg-[#059669] text-black font-bold text-xs shadow-md shadow-[#10b981]/25 flex items-center space-x-1.5 transition">
+                    <button onclick="switchTab('simulator')" class="px-3.5 py-1.5 rounded-lg bg-[#84a956] hover:bg-[#059669] text-black font-bold text-xs shadow-md shadow-[#84a956]/25 flex items-center space-x-1.5 transition">
                         <i data-lucide="plus" class="w-3.5 h-3.5"></i>
                         <span>Log Trip</span>
                     </button>
@@ -376,19 +386,27 @@
                         </div>
                     </div>
 
+                    <!-- HEADER CTA: The Golden Path -->
+                    <div class="mb-4 mt-2">
+                        <button onclick="switchTab('simulator')" class="w-full py-4 rounded-xl bg-[#5c3a21] text-white font-bold text-lg border-2 border-[#84a956]/50 shadow-lg shadow-[#5c3a21]/20 flex items-center justify-center gap-3 hover:bg-[#4a2e1a] hover:scale-[1.01] transition-all duration-200">
+                            <i data-lucide="footprints" class="w-6 h-6 text-[#c2d6ad]"></i>
+                            <span>Log New Commute & Earn Points</span>
+                        </button>
+                    </div>
+
                     <!-- Polarsteps Interactive GPS Map View Card -->
-                    <div class="min-card overflow-hidden bg-[#04120c] border border-[#34d399]/25 shadow-2xl relative">
-                        <div class="p-3 bg-[#081b13] border-b border-[#34d399]/20 flex flex-wrap items-center justify-between gap-2">
+                    <div class="min-card overflow-hidden bg-[#0b1206] border border-[#84a956]/25 shadow-2xl relative">
+                        <div class="p-3 bg-[#102216] border-b border-[#84a956]/20 flex flex-wrap items-center justify-between gap-2">
                             <div class="flex items-center space-x-2">
-                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-[#84a956] animate-ping"></span>
                                 <span class="text-xs font-bold text-white uppercase tracking-wider">Live Personal GPS Route & Pins</span>
                             </div>
                             <div class="flex items-center space-x-2 text-[10px] font-mono text-gray-300">
-                                <button id="btn-request-gps" onclick="requestLiveGpsLocation()" class="px-2.5 py-1 rounded bg-[#10b981] hover:bg-[#059669] text-black font-bold flex items-center gap-1 transition">
-                                    <i data-lucide="locate-fixed" class="w-3.5 h-3.5"></i>
+                                <button id="btn-request-gps" onclick="requestLiveGpsLocation()" class="px-2.5 py-1 rounded bg-[#5c3a21] hover:bg-[#4a2e1a] text-white font-bold flex items-center gap-1 border border-[#84a956]/30 transition shadow-md">
+                                    <i data-lucide="locate-fixed" class="w-3.5 h-3.5 text-[#c2d6ad]"></i>
                                     <span id="gps-btn-text">Locate Me Live</span>
                                 </button>
-                                <span id="gps-status-badge" class="px-2 py-0.5 rounded bg-[#10b981]/15 text-[#34d399] border border-[#10b981]/40 font-bold">GPS: Opted In</span>
+                                <span id="gps-status-badge" class="px-2 py-0.5 rounded bg-[#84a956]/15 text-[#84a956] border border-[#84a956]/40 font-bold">GPS: Opted In</span>
                             </div>
                         </div>
 
@@ -397,66 +415,66 @@
                     </div>
 
                     <!-- Polarsteps Chronological Timeline "Steps Feed" -->
-                    <div class="min-card p-5 bg-[#141418] border border-[#24242c] space-y-4">
+                    <div class="min-card p-5 bg-[#102216] border border-[#2a3a20] space-y-4">
                         <div class="flex items-center justify-between border-b border-[#84a956]/20 pb-3">
                             <h3 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
                                 <i data-lucide="footprints" class="w-4 h-4 text-[#84a956]"></i>
                                 Journey Steps Timeline
                             </h3>
-                            <button onclick="switchTab('simulator')" class="px-3 py-1 rounded bg-[#5c3a21] hover:bg-[#4a2e1a] text-white font-bold text-xs flex items-center gap-1 transition shadow-md shadow-[#5c3a21]/30">
-                                <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                            <button onclick="switchTab('simulator')" class="px-3 py-1 rounded bg-[#5c3a21] hover:bg-[#4a2e1a] border border-[#84a956]/40 text-white font-bold text-xs flex items-center gap-1 transition shadow-md shadow-[#5c3a21]/30">
+                                <i data-lucide="plus" class="w-3.5 h-3.5 text-[#c2d6ad]"></i>
                                 <span>Add New Step Pin</span>
                             </button>
                         </div>
 
-                        <div id="timeline-steps-feed" class="space-y-4 relative before:absolute before:inset-0 before:left-4 before:w-0.5 before:bg-[#34d399]/20">
+                        <div id="timeline-steps-feed" class="space-y-4 relative before:absolute before:inset-0 before:left-4 before:w-0.5 before:bg-[#c2d6ad]/20">
                             
                             <!-- Step 1 -->
                             <div class="relative pl-10">
-                                <div class="absolute left-2 top-1 -translate-x-1/2 w-4 h-4 rounded-full bg-[#10b981] border-2 border-[#04120c] z-10 flex items-center justify-center text-[8px] font-bold text-black shadow-md shadow-[#10b981]/50">1</div>
+                                <div class="absolute left-2 top-1 -translate-x-1/2 w-4 h-4 rounded-full bg-[#84a956] border-2 border-[#0b1206] z-10 flex items-center justify-center text-[8px] font-bold text-black shadow-md shadow-[#84a956]/50">1</div>
                                 <div class="step-item-card p-4 rounded-xl space-y-2">
                                     <div class="flex items-center justify-between text-xs">
                                         <span class="font-bold text-white">🚶 Morning Metro Walk • IIT Gate</span>
-                                        <span class="text-[10px] text-emerald-300 font-mono">08:30 AM</span>
+                                        <span class="text-[10px] text-[#c2d6ad] font-mono">08:30 AM</span>
                                     </div>
-                                    <p class="text-xs text-emerald-100/90">Walked 1.8 km from hostel to Metro station. Zero carbon footprint!</p>
-                                    <div class="flex items-center space-x-3 text-[10px] text-emerald-300 font-mono-num pt-1">
-                                        <span class="text-emerald-400 font-bold">🌱 +0.26 kg CO2 Saved</span>
+                                    <p class="text-xs text-[#c2d6ad]/90">Walked 1.8 km from hostel to Metro station. Zero carbon footprint!</p>
+                                    <div class="flex items-center space-x-3 text-[10px] text-[#c2d6ad] font-mono-num pt-1">
+                                        <span class="text-[#c2d6ad] font-bold">🌱 +0.26 kg CO2 Saved</span>
                                         <span>🔥 180 kcal</span>
-                                        <span class="text-[#34d399]">📍 Hauz Khas</span>
+                                        <span class="text-[#c2d6ad]">📍 Hauz Khas</span>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Step 2 -->
                             <div class="relative pl-10">
-                                <div class="absolute left-2 top-1 -translate-x-1/2 w-4 h-4 rounded-full bg-[#34d399] border-2 border-[#04120c] z-10 flex items-center justify-center text-[8px] font-bold text-black shadow-md shadow-[#34d399]/50">2</div>
+                                <div class="absolute left-2 top-1 -translate-x-1/2 w-4 h-4 rounded-full bg-[#c2d6ad] border-2 border-[#0b1206] z-10 flex items-center justify-center text-[8px] font-bold text-black shadow-md shadow-[#c2d6ad]/50">2</div>
                                 <div class="step-item-card p-4 rounded-xl space-y-2">
                                     <div class="flex items-center justify-between text-xs">
                                         <span class="font-bold text-white">🚇 Delhi Metro Yellow Line Ride</span>
-                                        <span class="text-[10px] text-emerald-300 font-mono">09:05 AM</span>
+                                        <span class="text-[10px] text-[#c2d6ad] font-mono">09:05 AM</span>
                                     </div>
-                                    <p class="text-xs text-emerald-100/90">Transit trip across 6 stations from Hauz Khas to Vishwavidyalaya.</p>
-                                    <div class="flex items-center space-x-3 text-[10px] text-emerald-300 font-mono-num pt-1">
-                                        <span class="text-emerald-400 font-bold">🌱 +1.82 kg CO2 Saved</span>
+                                    <p class="text-xs text-[#c2d6ad]/90">Transit trip across 6 stations from Hauz Khas to Vishwavidyalaya.</p>
+                                    <div class="flex items-center space-x-3 text-[10px] text-[#c2d6ad] font-mono-num pt-1">
+                                        <span class="text-[#c2d6ad] font-bold">🌱 +1.82 kg CO2 Saved</span>
                                         <span>⚡ DMRC Verified</span>
-                                        <span class="text-[#34d399]">📍 North Campus</span>
+                                        <span class="text-[#c2d6ad]">📍 North Campus</span>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Step 3 -->
                             <div class="relative pl-10">
-                                <div class="absolute left-2 top-1 -translate-x-1/2 w-4 h-4 rounded-full bg-teal-400 border-2 border-[#04120c] z-10 flex items-center justify-center text-[8px] font-bold text-black shadow-md shadow-teal-400/50">3</div>
+                                <div class="absolute left-2 top-1 -translate-x-1/2 w-4 h-4 rounded-full bg-[#c2d6ad] border-2 border-[#0b1206] z-10 flex items-center justify-center text-[8px] font-bold text-black shadow-md shadow-[#c2d6ad]/50">3</div>
                                 <div class="step-item-card p-4 rounded-xl space-y-2">
                                     <div class="flex items-center justify-between text-xs">
                                         <span class="font-bold text-white">🛺 Shared E-Rickshaw Shuttle</span>
-                                        <span class="text-[10px] text-emerald-300 font-mono">09:40 AM</span>
+                                        <span class="text-[10px] text-[#c2d6ad] font-mono">09:40 AM</span>
                                     </div>
-                                    <p class="text-xs text-emerald-100/90">Clean last-mile electric ride to CS Department Block.</p>
-                                    <div class="flex items-center space-x-3 text-[10px] text-emerald-300 font-mono-num pt-1">
-                                        <span class="text-emerald-400 font-bold">🌱 +0.77 kg CO2 Saved</span>
-                                        <span class="text-teal-300">📍 Department Gate</span>
+                                    <p class="text-xs text-[#c2d6ad]/90">Clean last-mile electric ride to CS Department Block.</p>
+                                    <div class="flex items-center space-x-3 text-[10px] text-[#c2d6ad] font-mono-num pt-1">
+                                        <span class="text-[#c2d6ad] font-bold">🌱 +0.77 kg CO2 Saved</span>
+                                        <span class="text-[#c2d6ad]">📍 Department Gate</span>
                                     </div>
                                 </div>
                             </div>
@@ -560,7 +578,7 @@
                             <div class="mt-4 pt-3 border-t border-[#84a956]/20 grid grid-cols-2 gap-2 text-[11px] text-[#c2d6ad] font-mono-num">
                                 <div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#84a956]"></span> Walking (40%)</div>
                                 <div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#5c3a21]"></span> Metro (35%)</div>
-                                <div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> E-Rick (15%)</div>
+                                <div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#c2d6ad]"></span> E-Rick (15%)</div>
                                 <div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-rose-500"></span> Car (10%)</div>
                             </div>
                         </div>
@@ -664,7 +682,7 @@
                                     <button type="button" onclick="selectMode('ev_scooter')" data-mode="ev_scooter" class="mode-card p-3.5 rounded-xl text-center">
                                         <span class="text-2xl block mb-1">🛵</span>
                                         <span class="text-xs font-bold text-white block">Electric 2W</span>
-                                        <span class="text-[10px] text-emerald-400 font-mono-num">12 gCO2/km</span>
+                                        <span class="text-[10px] text-[#c2d6ad] font-mono-num">12 gCO2/km</span>
                                     </button>
 
                                     <button type="button" onclick="selectMode('petrol_car')" data-mode="petrol_car" class="mode-card p-3.5 rounded-xl text-center">
@@ -846,7 +864,7 @@
                             <div class="space-y-3">
                                 <div class="flex justify-between items-center">
                                     <span class="text-xs font-semibold text-[#c2d6ad] uppercase tracking-wider">Select Points</span>
-                                    <span id="cashout-pts-display" class="text-lg font-extrabold text-[#84a956] font-mono-num">500 PTS (<span id="cashout-inr-display" class="text-emerald-400">₹50.00</span>)</span>
+                                    <span id="cashout-pts-display" class="text-lg font-extrabold text-[#84a956] font-mono-num">500 PTS (<span id="cashout-inr-display" class="text-[#c2d6ad]">₹50.00</span>)</span>
                                 </div>
 
                                 <input type="range" id="cashout-range" min="100" max="2500" step="50" value="500" oninput="updateCashoutCalculation()" class="w-full h-1.5 bg-[#0b1206] rounded-lg">

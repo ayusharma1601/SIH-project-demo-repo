@@ -239,7 +239,7 @@ function requestLiveGpsLocation() {
             if (btnText) btnText.textContent = "Located Live ✓";
             if (badge) {
                 badge.textContent = `Live GPS Active (±${Math.round(accuracy)}m)`;
-                badge.className = "px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold";
+                badge.className = "px-2 py-0.5 rounded bg-emerald-500/20 text-[#c2d6ad] border border-emerald-500/40 font-bold";
             }
 
             // Focus map on real personalized GPS coordinates
@@ -251,7 +251,7 @@ function requestLiveGpsLocation() {
                 } else {
                     userLiveGpsMarker = L.circleMarker([lat, lng], {
                         radius: 10,
-                        fillColor: '#10b981',
+                        fillColor: '#84a956',
                         color: '#ffffff',
                         weight: 3,
                         opacity: 1,
@@ -400,7 +400,7 @@ function validatePasswordFieldLive() {
     } else {
         bar.className = "h-full bg-emerald-500 w-full transition-all duration-300";
         text.textContent = "Strong password! 🔒";
-        text.className = "text-[10px] text-emerald-400 font-semibold";
+        text.className = "text-[10px] text-[#c2d6ad] font-semibold";
         return true;
     }
 }
@@ -441,6 +441,29 @@ function switchAuthTab(mode) {
     }
 }
 
+function showOnboarding() {
+    const modal = document.getElementById('onboarding-modal');
+    const card = document.getElementById('onboarding-card');
+    document.getElementById('view-auth').classList.add('hidden');
+    modal.classList.remove('hidden');
+    // slight delay for animation
+    setTimeout(() => {
+        card.classList.remove('scale-95');
+        card.classList.add('scale-100');
+    }, 50);
+}
+
+function closeOnboarding() {
+    const modal = document.getElementById('onboarding-modal');
+    modal.classList.add('hidden');
+    showView('view-dashboard');
+    // trigger tree loader for dramatic effect
+    const loader = document.getElementById('tree-loader');
+    loader.classList.remove('hidden');
+    setTimeout(() => { loader.classList.add('opacity-0'); }, 1500);
+    setTimeout(() => { loader.classList.add('hidden'); loader.classList.remove('opacity-0'); }, 2000);
+}
+
 function handleFormAuthSubmit(e) {
     e.preventDefault();
     hideAuthAlert();
@@ -479,7 +502,8 @@ function handleFormAuthSubmit(e) {
         saveUserToLocalStorage();
 
         appState.isAuthenticated = true;
-        renderAppViewState();
+        // Show onboarding modal instead of going directly to dashboard
+        showOnboarding();
         showToast(`Welcome to CarbonSaathi, ${newAcc.name}! 🎉`, "success");
     } else {
         const account = appState.accounts.find(a => a.email.toLowerCase() === email);
@@ -699,7 +723,7 @@ function setupNetworkListeners() {
 
     function updateStatus() {
         if (navigator.onLine) {
-            badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Network: Online`;
+            badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-[#c2d6ad] animate-pulse"></span> Network: Online`;
         } else {
             badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-[#5c3a21]"></span> Network: Offline`;
         }
@@ -800,7 +824,7 @@ function initDashboardCharts() {
                 labels: ['Walking', 'Metro', 'E-Rick', 'Car'],
                 datasets: [{
                     data: [40, 35, 15, 10],
-                    backgroundColor: ['#5c3a21', '#84a956', '#34d399', '#c2d6ad'],
+                    backgroundColor: ['#5c3a21', '#84a956', '#c2d6ad', '#c2d6ad'],
                     borderWidth: 0
                 }]
             },
@@ -1005,9 +1029,22 @@ function claimVoucher(voucherId) {
         return;
     }
 
+    v.claimed = true;
     appState.user.greenPoints -= v.pts;
     saveUserToLocalStorage();
+    renderVouchers();
     updatePersonalizedUI();
+    showToast(`Claimed ${v.title}! 🎁`, "success");
+
+    // Prompt user to share milestone
+    setTimeout(() => {
+        openModal('modal-recap');
+        const input = document.getElementById('recap-quote-input');
+        if (input) {
+            input.value = `I just claimed a ${v.title} reward on CarbonSaathi! 🌿`;
+            updateRecapQuote();
+        }
+    }, 1500);
 
     document.getElementById('modal-voucher-title').textContent = v.title;
     document.getElementById('modal-voucher-subtitle').textContent = `Claimed from ${v.partner}`;
