@@ -182,6 +182,16 @@ let weeklyCarbonChart = null;
 let modeSplitChart = null;
 let polarstepsLeafletMap = null;
 
+const ENV_FACTS = [
+    "A single mature tree can absorb over 21 kg of carbon dioxide per year.",
+    "Riding a bicycle instead of driving a car for 10 km saves ~2.5 kg of CO2 emissions.",
+    "Taking the Metro train emits up to 75% less CO2 per passenger km than a solo petrol car.",
+    "Recycling one aluminum can saves enough energy to run a TV for 3 hours.",
+    "Walking 10,000 steps daily prevents over 1.2 tonnes of CO2 per year if replacing short car trips.",
+    "E-Rickshaws in urban hubs slash last-mile transit emissions by over 60%.",
+    "Forests cover 31% of global land area and trap over 2.6 billion tonnes of carbon annually."
+];
+
 document.addEventListener("DOMContentLoaded", () => {
     lucide.createIcons();
     renderAppViewState();
@@ -190,6 +200,13 @@ document.addEventListener("DOMContentLoaded", () => {
     setupNetworkListeners();
     setupPwaInstallPrompt();
 
+    // Display random environmental fact on load
+    const factTextEl = document.getElementById('env-fact-text');
+    if (factTextEl) {
+        const randomFact = ENV_FACTS[Math.floor(Math.random() * ENV_FACTS.length)];
+        factTextEl.textContent = `"${randomFact}"`;
+    }
+
     // Growing Tree Loading Screen Buffer Timer
     setTimeout(() => {
         const loader = document.getElementById('tree-loader');
@@ -197,7 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
             loader.style.opacity = '0';
             setTimeout(() => loader.style.display = 'none', 500);
         }
-    }, 1500);
+    }, 2200);
 });
 
 function initPolarstepsMap() {

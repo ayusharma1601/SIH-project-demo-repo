@@ -79,12 +79,12 @@
 <body class="bg-[#18181e] text-gray-100 min-h-full flex flex-col font-sans selection:bg-[#ff7d00] selection:text-black">
 
     <!-- ================= GROWING TREE LOADING BUFFER SCREEN ================= -->
-    <div id="tree-loader" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black text-white transition-opacity duration-500">
+    <div id="tree-loader" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#06110d]/95 backdrop-blur-xl text-white transition-opacity duration-500 p-6">
         <div class="relative w-32 h-32 flex items-center justify-center">
             <!-- Growing Tree Animated SVG -->
             <svg class="w-28 h-28" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <!-- Ground Line -->
-                <path d="M20 90 H80" stroke="#333338" stroke-width="4" stroke-linecap="round" />
+                <path d="M20 90 H80" stroke="#1c382b" stroke-width="4" stroke-linecap="round" />
                 
                 <!-- Tree Trunk -->
                 <path class="tree-trunk" d="M50 90 V45" stroke="#ff7d00" stroke-width="5" stroke-linecap="round" />
@@ -103,9 +103,14 @@
             </svg>
         </div>
 
-        <div class="mt-4 text-center space-y-1">
+        <div class="mt-4 text-center space-y-2 max-w-sm">
             <h3 class="text-sm font-extrabold text-white tracking-wider uppercase">Carbon<span class="text-[#ff7d00]">Saathi</span></h3>
-            <p class="text-xs text-gray-400 font-mono">Growing your carbon savings...</p>
+            
+            <!-- Random Environmental Fact Box -->
+            <div class="p-3.5 rounded-xl bg-[#0f231b]/80 border border-[#34d399]/30 text-xs shadow-lg space-y-1">
+                <span class="text-[10px] uppercase font-bold text-[#10b981] tracking-widest block">💡 Did You Know?</span>
+                <p id="env-fact-text" class="text-emerald-100 text-xs font-medium italic">"A single mature tree absorbs over 21 kg of CO2 per year."</p>
+            </div>
         </div>
     </div>
 
