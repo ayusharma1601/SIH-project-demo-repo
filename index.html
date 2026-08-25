@@ -13,6 +13,11 @@
     <meta name="apple-mobile-web-app-title" content="CarbonSaathi">
     <link rel="apple-touch-icon" href="icon-192.svg">
 
+    <!-- Google Fonts for Oswald condensed editorial headers -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -21,38 +26,36 @@
             theme: {
                 extend: {
                     colors: {
+                        slatecharcoal: {
+                            DEFAULT: '#18181e',
+                            950: '#121216',
+                            900: '#18181e',
+                            850: '#1e1e24',
+                            800: '#24242c',
+                            750: '#2c2c36',
+                            700: '#34343d',
+                            600: '#484854'
+                        },
                         pitchblack: {
                             DEFAULT: '#000000',
                             950: '#020203',
-                            900: '#050505',
-                            850: '#0a0a0b',
-                            800: '#0d0d0f'
+                            900: '#121216',
+                            850: '#18181e',
+                            800: '#1e1e24'
                         },
                         charcoal: {
-                            DEFAULT: '#18181b',
-                            950: '#121214',
-                            900: '#161619',
-                            850: '#1c1c20',
-                            800: '#222226',
-                            750: '#27272c',
-                            700: '#323238',
-                            600: '#3f3f46'
-                        },
-                        obsidian: {
-                            950: '#09090b',
-                            900: '#050505',
-                            850: '#0d0d0f',
-                            800: '#161619',
-                            750: '#222226',
-                            700: '#282832'
+                            DEFAULT: '#1e1e24',
+                            950: '#121216',
+                            900: '#18181e',
+                            850: '#1e1e24',
+                            800: '#24242c',
+                            750: '#2c2c36',
+                            700: '#34343d',
+                            600: '#484854'
                         },
                         amberAccent: {
                             500: '#ff7d00',
                             600: '#e67000'
-                        },
-                        purpleAccent: {
-                            500: '#a855f7',
-                            600: '#9333ea'
                         }
                     }
                 }
@@ -73,7 +76,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-[#000000] text-gray-100 min-h-full flex flex-col font-sans selection:bg-[#ff7d00] selection:text-black">
+<body class="bg-[#18181e] text-gray-100 min-h-full flex flex-col font-sans selection:bg-[#ff7d00] selection:text-black">
 
     <!-- ================= GROWING TREE LOADING BUFFER SCREEN ================= -->
     <div id="tree-loader" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black text-white transition-opacity duration-500">
@@ -305,20 +308,20 @@
         <div class="flex-1 flex flex-col min-w-0 overflow-y-auto">
             
             <!-- Top Header Bar -->
-            <header class="sticky top-0 z-30 bg-[#141418]/90 backdrop-blur-md border-b border-[#24242c] px-4 sm:px-6 py-3 flex items-center justify-between">
+            <header class="sticky top-0 z-30 bg-[#16161c]/95 backdrop-blur-md border-b border-[#34343d] px-4 sm:px-6 py-3 flex items-center justify-between">
                 
                 <div class="flex items-center space-x-2 sm:space-x-3">
                     <!-- Mobile Hamburger Toggle -->
-                    <button onclick="toggleSidebar()" class="p-2 rounded-lg bg-[#1c1c22] border border-[#2a2a34] text-gray-300 hover:text-white hover:border-[#ff7d00] transition flex items-center justify-center">
+                    <button onclick="toggleSidebar()" class="p-2 rounded-lg bg-[#24242c] border border-[#34343d] text-gray-300 hover:text-white hover:border-[#ff7d00] transition flex items-center justify-center">
                         <i data-lucide="menu" class="w-5 h-5 text-[#ff7d00]"></i>
                     </button>
 
-                    <button onclick="openProfileModal()" class="px-3 py-1.5 rounded-lg bg-[#1c1c22] border border-[#2a2a34] text-xs text-gray-300 hover:border-[#ff7d00] transition flex items-center space-x-1.5">
+                    <button onclick="openProfileModal()" class="px-3 py-1.5 rounded-lg bg-[#24242c] border border-[#34343d] text-xs text-gray-300 hover:border-[#ff7d00] transition flex items-center space-x-1.5">
                         <i data-lucide="sliders" class="w-3.5 h-3.5 text-[#ff7d00]"></i>
                         <span class="hidden sm:inline">Edit Profile</span>
                     </button>
 
-                    <button id="privacy-toggle-btn" onclick="togglePrivacyMode()" class="px-3 py-1.5 rounded-lg bg-[#1c1c22] border border-[#2a2a34] text-xs text-gray-300 hover:border-[#a855f7] transition flex items-center space-x-1.5">
+                    <button id="privacy-toggle-btn" onclick="togglePrivacyMode()" class="px-3 py-1.5 rounded-lg bg-[#24242c] border border-[#34343d] text-xs text-gray-300 hover:border-[#a855f7] transition flex items-center space-x-1.5">
                         <i data-lucide="shield-check" class="w-3.5 h-3.5 text-[#a855f7]"></i>
                         <span id="privacy-mode-text">Pseudonym: ON</span>
                     </button>

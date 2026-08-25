@@ -1,12 +1,12 @@
-/* CarbonSaathi - Minimalist Obsidian & Orange/Purple Theme */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700;800&display=swap');
+/* CarbonSaathi - Matte Charcoal & Wireframe Grid Theme (Vim & Vigour Style) */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
 :root {
-    --bg-main: #050505; /* Pitch Black */
-    --bg-card: #161619; /* Deep Charcoal Gray */
-    --bg-card-hover: #1c1c20; /* Charcoal Hover */
-    --border-subtle: #242429; /* Charcoal Border */
-    --border-accent: #32323a;
+    --bg-main: #18181e; /* Matte Slate Charcoal Outer */
+    --bg-card: #1e1e24; /* Dark Matte Slate Charcoal Card */
+    --bg-card-hover: #24242c;
+    --border-subtle: #34343d; /* Crisp Thin Wireframe Grid Line */
+    --border-accent: #484854;
     
     --orange-primary: #ff7d00;
     --orange-hover: #e67000;
@@ -15,9 +15,9 @@
     --purple-primary: #a855f7;
     --purple-glow: rgba(168, 85, 247, 0.15);
 
-    --text-primary: #f3f4f6;
-    --text-secondary: #9ca3af;
-    --text-muted: #6b7280;
+    --text-primary: #f0f0f4;
+    --text-secondary: #a0a0ab;
+    --text-muted: #6e6e7a;
 }
 
 body {
@@ -27,31 +27,17 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-.font-mono-num {
-    font-family: 'JetBrains Mono', monospace;
+h1, h2, h3, .heading-condensed {
+    font-family: 'Oswald', 'Inter', sans-serif;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-}
-::-webkit-scrollbar-track {
-    background: #0e0e11;
-}
-::-webkit-scrollbar-thumb {
-    background: #262630;
-    border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: var(--orange-primary);
-}
-
-/* Minimal Card Styling */
+/* Minimal Wireframe Grid Card Styling */
 .min-card {
     background-color: var(--bg-card);
     border: 1px solid var(--border-subtle);
-    border-radius: 16px;
+    border-radius: 4px; /* Crisp square grid corners */
     transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
