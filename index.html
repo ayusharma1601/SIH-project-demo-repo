@@ -363,15 +363,18 @@
                     </div>
 
                     <!-- Polarsteps Interactive GPS Map View Card -->
-                    <div class="min-card overflow-hidden bg-[#141418] border border-[#24242c] shadow-2xl relative">
-                        <div class="p-3 bg-[#0e0e11] border-b border-[#24242c] flex items-center justify-between">
+                    <div class="min-card overflow-hidden bg-[#04120c] border border-[#34d399]/25 shadow-2xl relative">
+                        <div class="p-3 bg-[#081b13] border-b border-[#34d399]/20 flex flex-wrap items-center justify-between gap-2">
                             <div class="flex items-center space-x-2">
                                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
-                                <span class="text-xs font-bold text-white uppercase tracking-wider">Interactive Trip Route & Geo Pins</span>
+                                <span class="text-xs font-bold text-white uppercase tracking-wider">Live Personal GPS Route & Pins</span>
                             </div>
-                            <div class="flex items-center space-x-2 text-[10px] font-mono text-gray-400">
-                                <span class="px-2 py-0.5 rounded bg-[#1c1c22] border border-[#2a2a34]">4 Steps Pinned</span>
-                                <span class="px-2 py-0.5 rounded bg-[#ff7d00]/10 text-[#ff7d00] border border-[#ff7d00]/30 font-bold">GPS Active</span>
+                            <div class="flex items-center space-x-2 text-[10px] font-mono text-gray-300">
+                                <button id="btn-request-gps" onclick="requestLiveGpsLocation()" class="px-2.5 py-1 rounded bg-[#10b981] hover:bg-[#059669] text-black font-bold flex items-center gap-1 transition">
+                                    <i data-lucide="locate-fixed" class="w-3.5 h-3.5"></i>
+                                    <span id="gps-btn-text">Locate Me Live</span>
+                                </button>
+                                <span id="gps-status-badge" class="px-2 py-0.5 rounded bg-[#10b981]/15 text-[#34d399] border border-[#10b981]/40 font-bold">GPS: Opted In</span>
                             </div>
                         </div>
 

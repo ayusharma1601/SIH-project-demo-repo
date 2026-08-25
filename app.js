@@ -217,23 +217,76 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 2200);
 });
 
+let userLiveGpsMarker = null;
+
+function requestLiveGpsLocation() {
+    const btnText = document.getElementById('gps-btn-text');
+    const badge = document.getElementById('gps-status-badge');
+
+    if (!('geolocation' in navigator)) {
+        showToast("Geolocation is not supported by your browser.", "warning");
+        return;
+    }
+
+    if (btnText) btnText.textContent = "Acquiring GPS...";
+
+    navigator.geolocation.getCurrentPosition(
+        (position) => {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            const accuracy = position.coords.accuracy;
+
+            if (btnText) btnText.textContent = "Located Live ✓";
+            if (badge) {
+                badge.textContent = `Live GPS Active (±${Math.round(accuracy)}m)`;
+                badge.className = "px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold";
+            }
+
+            // Focus map on real personalized GPS coordinates
+            if (polarstepsLeafletMap) {
+                polarstepsLeafletMap.setView([lat, lng], 15);
+
+                if (userLiveGpsMarker) {
+                    userLiveGpsMarker.setLatLng([lat, lng]);
+                } else {
+                    userLiveGpsMarker = L.circleMarker([lat, lng], {
+                        radius: 10,
+                        fillColor: '#10b981',
+                        color: '#ffffff',
+                        weight: 3,
+                        opacity: 1,
+                        fillOpacity: 0.9
+                    }).addTo(polarstepsLeafletMap);
+
+                    userLiveGpsMarker.bindPopup(`
+                        <div style="font-family: sans-serif; font-size: 12px; color: #000; padding: 2px;">
+                            <strong>📍 Your Live Location</strong><br/>
+                            <span>Accuracy: ±${Math.round(accuracy)} meters</span>
+                        </div>
+                    `).openPopup();
+                }
+            }
+            showToast(`GPS Position Acquired: ${lat.toFixed(4)}°, ${lng.toFixed(4)}°`, "success");
+        },
+        (error) => {
+            if (btnText) btnText.textContent = "Locate Me Live";
+            let errMsg = "GPS permission denied or unavailable.";
+            if (error.code === error.TIMEOUT) errMsg = "GPS location request timed out.";
+            showToast(errMsg, "warning");
+        },
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+    );
+}
+
 function initPolarstepsMap() {
     const mapContainer = document.getElementById('polarsteps-map');
     if (!mapContainer || polarstepsLeafletMap || typeof L === 'undefined') return;
 
-    // Coordinate points for Delhi commuter path (Hostel -> Metro -> Campus)
-    const tripWaypoints = [
-        { lat: 28.5457, lng: 77.1928, title: "Step 1: Morning Walk (Hostel to Hauz Khas)", mode: "🚶 Walking", co2: "0.26 kg" },
-        { lat: 28.5494, lng: 77.2066, title: "Step 2: Hauz Khas Metro Entry", mode: "🚇 Metro", co2: "0.50 kg" },
-        { lat: 28.6974, lng: 77.2106, title: "Step 3: Vishwavidyalaya Metro Exit", mode: "🚇 Metro", co2: "1.32 kg" },
-        { lat: 28.7001, lng: 77.2140, title: "Step 4: E-Rickshaw to CS Dept", mode: "🛺 E-Rickshaw", co2: "0.77 kg" }
-    ];
-
-    // Initialize Leaflet map centered at Delhi
+    // Initialize Leaflet map centered at default view
     polarstepsLeafletMap = L.map('polarsteps-map', {
         zoomControl: true,
         scrollWheelZoom: false
-    }).setView([28.6200, 77.2050], 11);
+    }).setView([28.6139, 77.2090], 12);
 
     // Dark Mapbox/CartoDB tiles for Polarsteps aesthetic
     L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
@@ -241,36 +294,10 @@ function initPolarstepsMap() {
         maxZoom: 19
     }).addTo(polarstepsLeafletMap);
 
-    const latLngs = tripWaypoints.map(wp => [wp.lat, wp.lng]);
-
-    // Draw Polarsteps path line (Polyline with glowing orange border)
-    L.polyline(latLngs, {
-        color: '#ff7d00',
-        weight: 4,
-        opacity: 0.9,
-        dashArray: '8, 6'
-    }).addTo(polarstepsLeafletMap);
-
-    // Add Step pin markers
-    tripWaypoints.forEach((wp, idx) => {
-        const marker = L.circleMarker([wp.lat, wp.lng], {
-            radius: 7,
-            fillColor: idx === tripWaypoints.length - 1 ? '#a855f7' : '#ff7d00',
-            color: '#ffffff',
-            weight: 2,
-            opacity: 1,
-            fillOpacity: 1
-        }).addTo(polarstepsLeafletMap);
-
-        marker.bindPopup(`
-            <div style="font-family: sans-serif; font-size: 12px; color: #000; padding: 2px;">
-                <strong>${wp.title}</strong><br/>
-                <span>${wp.mode} • Saved ${wp.co2} CO2</span>
-            </div>
-        `);
-    });
-
-    polarstepsLeafletMap.fitBounds(L.polyline(latLngs).getBounds(), { padding: [30, 30] });
+    // Request real personalized GPS position immediately on map init
+    if ('geolocation' in navigator) {
+        requestLiveGpsLocation();
+    }
 }
 
 function renderAppViewState() {
