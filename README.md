@@ -3,6 +3,8 @@
 > **Mission LiFE Aligned Personal Carbon & Fitness Tracker**  
 > *Smart India Hackathon (SIH) Solution for Urban Commute Sustainability & Gamified Wellness*
 
+🔗 **Live Demo:** [https://sih-project-demo-repo.vercel.app/](https://sih-project-demo-repo.vercel.app/)
+
 ---
 
 ## 🚀 Overview
