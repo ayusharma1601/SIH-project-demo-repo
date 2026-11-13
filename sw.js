@@ -1,67 +1,69 @@
-const CACHE_NAME = 'carbonsaathi-v1';
-const ASSETS_TO_CACHE = [
+const CACHE_NAME = 'carbonsaathi-v2';
+const CORE_ASSETS = [
   './',
   './index.html',
   './styles.css',
   './app.js',
   './manifest.json',
   './icon-192.svg',
-  './icon-512.svg',
-  'https://cdn.tailwindcss.com',
-  'https://unpkg.com/lucide@latest',
-  'https://cdn.jsdelivr.net/npm/chart.js',
-  'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js',
-  'https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js'
+  './icon-512.svg'
 ];
 
-// Install Event
 self.addEventListener('install', (event) => {
+  // Fail installation if the local app shell is incomplete; don't claim to be
+  // offline-ready without caching the assets required to render the app.
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      console.log('[ServiceWorker] Pre-caching offline assets');
-      return cache.addAll(ASSETS_TO_CACHE).catch(err => {
-        console.warn('[ServiceWorker] Pre-cache non-critical error:', err);
-      });
-    }).then(() => self.skipWaiting())
+    caches.open(CACHE_NAME)
+      .then((cache) => cache.addAll(CORE_ASSETS))
+      .then(() => self.skipWaiting())
   );
 });
 
-// Activate Event
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((keyList) => {
-      return Promise.all(
-        keyList.map((key) => {
-          if (key !== CACHE_NAME) {
-            console.log('[ServiceWorker] Removing old cache', key);
-            return caches.delete(key);
-          }
-        })
-      );
-    }).then(() => self.clients.claim())
+    caches.keys()
+      .then((keys) => Promise.all(
+        keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))
+      ))
+      .then(() => self.clients.claim())
   );
 });
 
-// Fetch Event - Stale while revalidate
 self.addEventListener('fetch', (event) => {
-  // Only handle GET requests
-  if (event.request.method !== 'GET') return;
+  const request = event.request;
+  if (request.method !== 'GET') return;
 
-  event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      const fetchPromise = fetch(event.request).then((networkResponse) => {
-        if (networkResponse && networkResponse.status === 200) {
-          const responseToCache = networkResponse.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseToCache);
-          });
-        }
-        return networkResponse;
-      }).catch((err) => {
-        console.log('[ServiceWorker] Fetch failed; returning cached page if available.', err);
+  const requestUrl = new URL(request.url);
+  // Do not cache cross-origin resources, API responses, or opaque CDN requests.
+  if (requestUrl.origin !== self.location.origin) return;
+
+  event.respondWith((async () => {
+    const cache = await caches.open(CACHE_NAME);
+    const cachedResponse = await cache.match(request);
+    const networkPromise = fetch(request).then((response) => {
+      if (response.ok && response.type === 'basic') {
+        cache.put(request, response.clone()).catch(() => {});
+      }
+      return response;
+    });
+
+    if (cachedResponse) {
+      event.waitUntil(networkPromise.catch(() => {}));
+      return cachedResponse;
+    }
+
+    try {
+      return await networkPromise;
+    } catch (error) {
+      if (request.mode === 'navigate') {
+        const appShell = await cache.match('./index.html');
+        if (appShell) return appShell;
+      }
+      return new Response('Offline: this resource is not available in the local cache.', {
+        status: 503,
+        statusText: 'Service Unavailable',
+        headers: { 'Content-Type': 'text/plain; charset=utf-8' }
       });
-
-      return cachedResponse || fetchPromise;
-    })
-  );
+    }
+  })());
 });
